@@ -2,9 +2,12 @@ import { toast, ToastOptions } from 'react-toastify';
 import React from 'react';
 import styles from './toast.module.scss';
 
-export const showToast = (message: string,
+export const showToast = (
+  message: string,
   type: 'info' | 'success' | 'warning' | 'error' | 'default' | 'dark' | undefined,
-  handleAction?: () => void, handleClose?: () => void): void => {
+  handleAction?: () => void,
+  handleClose?: () => void,
+): void => {
   let bool = false;
   const options: ToastOptions = {
     position: 'top-right',

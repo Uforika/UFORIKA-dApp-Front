@@ -26,9 +26,11 @@ const Button = ({
     return (
       <Link href={href}>
         <a
-          className={cn(
-            styles.button, { [styles[defaultStyle || '']]: defaultStyle, [styles[size || '']]: size, [styles.loading]: loading }, className,
-          )}
+          className={cn(styles.button, {
+            [styles[defaultStyle || '']]: defaultStyle,
+            [styles[size || '']]: size,
+            [styles.loading]: loading,
+          }, className)}
           onClick={onClick}
           {...props}
         >
@@ -42,9 +44,11 @@ const Button = ({
   }
   return (
     <button
-      className={cn(
-        styles.button, { [styles[defaultStyle || '']]: defaultStyle, [styles[size || '']]: size, [styles.loading]: loading }, className,
-      )}
+      className={cn(styles.button, {
+        [styles[defaultStyle || '']]: defaultStyle,
+        [styles[size || '']]: size,
+        [styles.loading]: loading,
+      }, className)}
       onClick={onClick}
       disabled={disabled}
       {...props}
