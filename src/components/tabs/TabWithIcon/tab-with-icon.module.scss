@@ -1,0 +1,64 @@
+@import '../../../assets/scss/helpers/variables';
+
+.item {
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 82px;
+  outline: 0;
+  padding: 5px;
+  transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
+  width: 132px;
+
+  &[disabled] {
+    opacity: 0.5;
+  }
+
+  &:global(.focus-visible) {
+    border-color: rgba(107, 119, 140, 0.5);
+  }
+
+  &.activeItem {
+    background-color: $white;
+    box-shadow: 0 2px 6px rgba(0, 24, 71, 0.08);
+  }
+
+
+  &:hover:not([disabled]) {
+    .label {
+      color: $blue;
+    }
+  }
+}
+
+.activeItem {
+  path {
+    fill: $blue;
+  }
+
+  .label {
+    color: $blue;
+  }
+}
+
+.iconWrapper {
+  margin-bottom: 8px;
+  max-width: 100%;
+  object-fit: contain;
+
+  path {
+    transition: fill 0.3s, stroke 0.3s;
+  }
+}
+
+.label {
+  color: $gray;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.3s;
+}

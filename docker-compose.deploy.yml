@@ -1,0 +1,12 @@
+version: '3.4'
+x-restart-policy: &restart_policy
+  restart: unless-stopped
+
+services:
+  front:
+    image: $IMAGE
+    << : *restart_policy
+    environment:
+      - NODE_CONFIG_ENV
+    ports:
+      - "${WEB_PORT}:3000"

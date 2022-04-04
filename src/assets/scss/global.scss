@@ -1,0 +1,29 @@
+/* stylelint-disable selector-max-id */
+@import './vendors/normalize';
+@import './helpers/fonts';
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+body,
+button {
+  font-family: 'Inter';
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  padding: 0;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+p {
+  margin: 0;
+}

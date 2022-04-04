@@ -1,0 +1,21 @@
+@mixin buttonL {
+  color: var(--dark);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 133%;
+}
+
+@mixin buttonM {
+  color: var(--dark);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 129%;
+}
+
+@mixin buttonS {
+  color: var(--dark);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 14px;
+}

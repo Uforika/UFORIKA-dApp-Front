@@ -1,0 +1,5 @@
+{
+  "API_URL": "https://718-green-admin.pixelplex-test.by/api/v1/manager",
+  "IS_PROD": false,
+  "REDUX_DEBUG": false
+}

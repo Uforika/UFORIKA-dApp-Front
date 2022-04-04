@@ -1,0 +1,332 @@
+/* stylelint-disable max-nesting-depth */
+@import '../../assets/scss/helpers/variables';
+@import '../../assets/scss/helpers/typography';
+
+@mixin after() {
+  bottom: 0;
+  content: '';
+  display: block;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@mixin colorButton($bg) {
+  background-color: $bg;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  position: relative;
+  transition: border 0.3s, box-shadow 0.3s;
+
+  &:hover:not(:disabled) {
+    border: 2px solid $blueLight;
+  }
+
+  &:active:not(:disabled) {
+    border: 2px solid $blueLight;
+    box-shadow: initial;
+
+    .content {
+      opacity: 0.7;
+    }
+  }
+
+  &::after {
+    content: '';
+    transition: border 0.3s;
+  }
+
+  &:global(.focus-visible) {
+    border: 2px solid $white;
+
+    &::after {
+      @include after();
+      border: 1px solid $bg;
+      border-radius: 8px;
+      margin: -3px;
+    }
+  }
+
+  .content {
+    color: $white;
+  }
+}
+
+.button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 6px;
+  transition: opacity 0.3s;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &[disabled] {
+    opacity: 0.3;
+  }
+
+  .content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    transition: opacity 0.3s;
+
+    .loading {
+      opacity: 0.5;
+    }
+  }
+
+  &.icon {
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    display: inline-flex;
+    height: 32px;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s ease-out;
+    width: 32px;
+
+    &:not(:active):not(:hover) {
+      &:global(.focus-visible) {
+        background: transparent;
+        border: 1px solid rgba(107, 119, 140, 0.5);
+      }
+    }
+
+    &:hover {
+      background: rgba(75, 108, 173, 0.1);
+    }
+
+    &:active {
+      .content {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  &.loading {
+    pointer-events: none;
+
+    &::after {
+      background-color: rgba(255, 255, 255, 0.5);
+      display: block;
+      height: calc(100% + 100px);
+      left: -10px;
+      position: absolute;
+      top: -10px;
+      width: calc(100% + 100%);
+      z-index: 10;
+    }
+
+    &.transparent,
+    &.withoutBorder {
+      border: 1px solid rgba(107, 119, 140, 0.3);
+    }
+  }
+
+  &.blueDark {
+    @include colorButton($blueDark);
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 8px 16px rgba(0, 24, 71, 0.16);
+    }
+
+    &:active:not(:disabled) {
+      box-shadow: initial;
+    }
+  }
+
+  &.blue {
+    @include colorButton($blue);
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 8px 16px rgba(78, 135, 247, 0.16);
+    }
+
+    &:active:not(:disabled) {
+      box-shadow: initial;
+    }
+  }
+
+  &.red {
+    @include colorButton($red);
+
+    &:hover:not(:disabled) {
+      border: 2px solid #CACCD1;
+      box-shadow: 0 8px 16px rgba(247, 78, 108, 0.16);
+    }
+
+    &:active:not(:disabled) {
+      border: 2px solid rgba(75, 108, 173, 0.2);
+      box-shadow: initial;
+    }
+
+    &:global(.focus-visible)::after {
+      border: 1px solid rgba(107, 119, 140, 0.5);
+    }
+  }
+
+  &.gray {
+    @include colorButton($gray);
+
+    &:hover:not(:disabled) {
+      border: 2px solid #CACCD1;
+      box-shadow: 0 6px 12px rgba(107, 119, 140, 0.16);
+    }
+
+    &:active:not(:disabled) {
+      border: 2px solid rgba(107, 119, 140, 0.2);
+      box-shadow: initial;
+    }
+
+    &:global(.focus-visible)::after {
+      @include after();
+      border: 1px solid rgba(107, 119, 140, 0.5);
+      border-radius: 6px;
+      margin: -2px;
+    }
+  }
+
+  &.transparent {
+    background-color: transparent;
+    border: 1px solid $gray;
+    border-radius: 6px;
+    position: relative;
+    transition: background-color 0.3s;
+
+    &:hover:not(:disabled),
+    &:active:not(:disabled) {
+      background-color: rgba(107, 119, 140, 0.1);
+    }
+
+    &:active:not(:disabled) {
+      .content {
+        opacity: 0.7;
+      }
+    }
+
+    &:global(.focus-visible) {
+      &::after {
+        @include after();
+        border: 2px solid $white;
+        border-radius: 8px;
+        margin: -3px;
+      }
+
+      &::before {
+        @include after();
+        border: 1px solid rgba(107, 119, 140, 0.5);
+        border-radius: 8px;
+        margin: -3px;
+        z-index: 1;
+      }
+    }
+
+    .content {
+      color: $gray;
+    }
+
+    .loader {
+      border-color: $gray;
+      border-top-color: transparent;
+      opacity: 1;
+    }
+  }
+
+  &.withoutBorder {
+    border: 1px solid transparent;
+    border-radius: 6px;
+    transition: background-color 0.3s, border 0.3s;
+
+    &:hover:not(:disabled) {
+      background-color: rgba(107, 119, 140, 0.1);
+    }
+
+    &:active:not(:disabled) {
+      .content {
+        opacity: 0.7;
+      }
+    }
+
+    &:global(.focus-visible) {
+      border: 1px solid rgba(107, 119, 140, 0.5);
+    }
+
+    .content {
+      color: $gray;
+    }
+
+    .loader {
+      border-color: $gray;
+      border-top-color: transparent;
+      opacity: 1;
+    }
+  }
+
+
+  &.sizeL {
+    padding: 8px 16px;
+
+    .content {
+      @include buttonL();
+    }
+
+    .loader {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  &.sizeM {
+    padding: 4px 14px;
+
+    .content {
+      @include buttonM();
+    }
+
+    .loader {
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  &.sizeS {
+    padding: 4px 6px;
+
+    .content {
+      @include buttonS();
+    }
+
+    .loader {
+      height: 12px;
+      width: 12px;
+    }
+  }
+}
+
+.loader {
+  animation: spin 0.5s linear 0s infinite;
+  background-color: transparent;
+  border: 2px solid $white;
+  border-radius: 50%;
+  border-top-color: transparent;
+  height: 16px;
+  margin-right: 8px;
+  opacity: 1;
+  width: 16px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

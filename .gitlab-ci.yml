@@ -1,0 +1,165 @@
+variables:
+  REVIEW_CONTAINER_NAME: review-${CI_COMMIT_REF_SLUG}-${CI_PROJECT_ROOT_NAMESPACE}
+  REVIEW_DOMAIN: ${CI_PROJECT_ROOT_NAMESPACE}.review.pixelplex-test.by
+
+stages:
+  - 🚦 test
+  - 📦 package
+  - 👀 review
+  - 🚀 staging
+  - 🚀 production
+  - 🛀 cleanup
+
+.docker_login:
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+.cache:
+  cache:
+    paths:
+      - node_modules/
+
+##############################
+#         🚦 TEST 🚦         #
+##############################
+
+.test:
+  stage: 🚦 test
+  extends:
+    - .cache
+  before_script:
+    - yarn install --frozen-lockfile
+  tags:
+    - pp-shell
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /master/
+      when: always
+    - if: $CI_COMMIT_REF_NAME =~ /develop/
+      when: always
+    - when: manual
+
+🚦 audit:
+  extends: .test
+  script:
+    - yarn run audit
+    - yarn lint
+
+##############################
+#       📦 PACKAGE 📦        #
+##############################
+
+build:
+  stage: 📦 package
+  extends:
+    - .docker_login
+  script: &build
+    - docker pull $CI_REGISTRY_IMAGE:$(git rev-parse  HEAD^ | cut -c1-8) || true
+    - docker pull $CI_REGISTRY_IMAGE:${CI_COMMIT_BEFORE_SHA:0:8} || true
+    - docker pull $CI_REGISTRY_IMAGE:${CI_COMMIT_SHORT_SHA} || true
+    - docker pull $CI_REGISTRY_IMAGE:${CI_DEFAULT_BRANCH} || true
+    - docker pull $CI_REGISTRY_IMAGE:${CI_COMMIT_REF_NAME} || true
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME .
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+  tags:
+    - pp-builder
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /master/
+      when: always
+    - if: $CI_COMMIT_REF_NAME =~ /develop/
+      when: always
+    #    - if: $CI_MERGE_REQUEST_ID
+    #      when: manual
+    - when: never
+
+
+###############################
+##       👀 REVIEW 👀        ##
+###############################
+
+👀 review:
+  stage: 👀 review
+  extends:
+    - .docker_login
+  environment:
+    name: review/${CI_COMMIT_REF_SLUG}
+    url: $ENVIRONMENT_URL
+    on_stop: stop_review
+    auto_stop_in: 1 hour
+  script:
+    - ENVIRONMENT_URL=http://${CI_COMMIT_REF_SLUG}--${REVIEW_DOMAIN}
+    - echo domain $ENVIRONMENT_URL
+    - echo target branch ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}
+    - *build
+    - docker stop ${REVIEW_CONTAINER_NAME} || true
+    - docker rm -f ${REVIEW_CONTAINER_NAME} || true
+    - echo ${REVIEW_CONTAINER_NAME}
+    - docker run -d -it --name ${REVIEW_CONTAINER_NAME}
+      -e NODE_CONFIG_ENV=${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}
+      -e VIRTUAL_HOST=${CI_COMMIT_REF_SLUG}--${REVIEW_DOMAIN}
+      $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    - echo "ENVIRONMENT_URL=$ENVIRONMENT_URL" >> deploy.env
+  artifacts:
+    reports:
+      dotenv: deploy.env
+  tags:
+    - pp-new-develop
+  when: manual
+  only:
+    - merge_requests
+
+stop_review:
+  stage: 🛀 cleanup
+  extends:
+    - .docker_login
+  script:
+    - docker stop ${REVIEW_CONTAINER_NAME} || true
+    - docker rm -f ${REVIEW_CONTAINER_NAME}
+  when: manual
+  tags:
+    - pp-new-develop
+  environment:
+    name: review/${CI_COMMIT_REF_SLUG}
+    action: stop
+  only:
+    - merge_requests
+
+
+###############################
+##       🚀 DEPLOY 🚀        ##
+###############################
+
+.deploy:
+  extends:
+    - .docker_login
+  variables:
+    IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    NODE_CONFIG_ENV: $CI_ENVIRONMENT_NAME
+  script:
+    - export WEB_PORT=2${CI_PROJECT_ROOT_NAMESPACE:0:3}0
+    - docker-compose -p ${CI_PROJECT_ROOT_NAMESPACE}-frontend -f docker-compose.deploy.yml pull
+    - docker-compose -p ${CI_PROJECT_ROOT_NAMESPACE}-frontend -f docker-compose.deploy.yml up -d
+
+🚀 develop:
+  extends: .deploy
+  stage: 🚀 staging
+  environment:
+    name: develop
+    url: https://${CI_PROJECT_ROOT_NAMESPACE}.pixelplex-test.by
+  tags:
+    - pp-new-develop
+  only:
+    - develop
+
+🚀 master:
+  extends: .deploy
+  stage: 🚀 staging
+  environment:
+    name: master
+    url: https://${CI_PROJECT_ROOT_NAMESPACE}.pixelplexlabs.com
+  tags:
+    - pp-projects
+  only:
+    - master

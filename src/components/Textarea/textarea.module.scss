@@ -1,0 +1,56 @@
+/* stylelint-disable property-no-vendor-prefix */
+
+@import '../../assets/scss/helpers/variables';
+
+.textarea {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 0 1px rgba(107, 119, 140, 0.3);
+  box-shadow: 0 0 0 1px rgba(107, 119, 140, 0.3);
+  color: $dark;
+  font-size: 16px;
+  font-weight: 400;
+  height: 128px;
+  outline: 0;
+  padding: 10px 12px;
+  position: relative;
+  resize: none;
+  transition: color 0.3s, box-shadow 0.3s, border 0.3s;
+  width: 544px;
+
+  &.error {
+    border-color: $red;
+    box-shadow: 0 0 0 1px $red;
+  }
+
+  &.textareaResize {
+    resize: initial;
+  }
+
+  &::placeholder {
+    color: $gray;
+  }
+
+  &:hover:not([disabled]):not(:focus):not(.error) {
+    border: 1px solid rgba(107, 119, 140, 0.5);
+    box-shadow: 0 0 0 1px rgba(107, 119, 140, 0.5);
+  }
+
+  &:focus:not([disabled]) {
+    border-color: $blue;
+    box-shadow: 0 0 0 1px $blue;
+  }
+
+  &[disabled] {
+    background-color: rgba(107, 119, 140, 0.06);
+    border: 1px solid rgba(107, 119, 140, 0.06);
+    color: $gray;
+  }
+}
+
+.textError {
+  color: $red;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 4px;
+}

@@ -1,0 +1,25 @@
+@import '../../../assets/scss/helpers/typography';
+
+.modal {
+  background-color: #000 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.24), 0 20px 60px rgba(0, 0, 0, 0.2) !important;
+  color: #FFF;
+  max-width: 416px;
+  padding: 48px;
+  position: relative;
+}
+
+.header {
+  h3 {
+    margin: 0 0 32px;
+  }
+
+  .closeButton {
+    height: 24px;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 24px;
+  }
+}
