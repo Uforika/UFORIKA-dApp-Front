@@ -1,5 +1,5 @@
 const {
-  API_URL, IS_PROD, REDUX_DEBUG,
+  API_URL, IS_PROD, REDUX_DEBUG, CLIENT_ID, NETWORK
 } = require('config');
 
 module.exports = {
@@ -7,6 +7,8 @@ module.exports = {
     API_URL,
     IS_PROD,
     REDUX_DEBUG,
+    CLIENT_ID,
+    NETWORK
   },
   trailingSlash: true,
 };

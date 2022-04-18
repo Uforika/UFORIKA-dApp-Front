@@ -5,10 +5,16 @@ import { CONFIG } from '@constants/config.constants';
 const executeSendRequest = (method: 'post' | 'patch' | 'put') => <T>(
   urlPath: string,
   body?: Record<string, unknown>,
+  headers?: Record<string, string>,
 ) => {
   const url = `${CONFIG.API_URL}${urlPath}`;
-  return axios[method]<T>(url, body ? { ...body } : undefined, { withCredentials: true }).then(({ data }) => data);
+
+  return axios[method]<T>(url, body ? { ...body } : undefined, {
+    withCredentials: true,
+    headers,
+  }).then(({ data }) => data);
 };
+
 const executeGetRequest = (method: 'get' | 'delete') => <T>(
   urlPath: string,
   query?: Record<string, unknown> | null,
@@ -29,3 +35,10 @@ export const get = executeGetRequest('get');
 export const del = executeGetRequest('delete');
 
 axios.interceptors.request.use((config) => config, (error) => Promise.reject(error));
+
+export const getAxiosErrorMessage = (error: unknown) => {
+  if (axios.isAxiosError(error)) {
+    return error.message;
+  }
+  return undefined;
+};

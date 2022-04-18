@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'semantic-ui-css/semantic.min.css';
 import { AppProps } from 'next/app';
 import { ModalProvider } from '@contexts/modals.context';
+import { AuthProvider } from '@contexts/auth.context';
+import { WalletProvider } from '@contexts/wallet.context';
 
 ReactModal.setAppElement('#__next');
 
@@ -23,20 +25,24 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         revalidateOnFocus: false,
       }}
     >
-      <ModalProvider>
-        <Component {...pageProps} />
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-      </ModalProvider>
+      <WalletProvider>
+        <AuthProvider>
+          <ModalProvider>
+            <Component {...pageProps} />
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+          </ModalProvider>
+        </AuthProvider>
+      </WalletProvider>
     </SWRConfig>
   );
 };
