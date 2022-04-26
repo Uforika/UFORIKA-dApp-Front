@@ -6,7 +6,6 @@ import { DEFAULT_CRITERIA_MODE, DEFAULT_REVALIDATE_MODE, FIELD_NAMES } from '@co
 import { apiAuthLogin } from '@services/api/auth.api';
 import { PATH_INDEX } from '@constants/routes.constants';
 import Input from '@components/Input';
-import { AttentionIcon } from '@constants/icons.constants';
 import Button from '@components/Button';
 import { showToast } from '@components/Toast';
 import { TOAST_WARNING } from '@constants/toast.constants';
@@ -66,7 +65,6 @@ const AuthPage: FC<Props> = () => {
           name={FIELD_NAMES.EMAIL}
           error={errors[FIELD_NAMES.EMAIL]?.message || ''}
           label="Email *"
-          leftContent={AttentionIcon}
           placeholder="Email"
         />
         <Input
@@ -87,7 +85,6 @@ const AuthPage: FC<Props> = () => {
           name={FIELD_NAMES.MIN_NUM}
           error={errors[FIELD_NAMES.MIN_NUM]?.message || ''}
           label="minNum *"
-          rightContent={AttentionIcon}
           placeholder="minNum"
         />
         <Input

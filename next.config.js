@@ -1,8 +1,16 @@
 const {
   API_URL, IS_PROD, REDUX_DEBUG, CLIENT_ID, NETWORK
 } = require('config');
+const { withPlugins } = require('next-compose-plugins');
+const withSvgr = require('@newhighsco/next-plugin-svgr')
 
-module.exports = {
+const withSvgrConfig = {
+  svgrOptions: {
+    typescript: true
+  }
+}
+
+const runtimeConfig= {
   publicRuntimeConfig: {
     API_URL,
     IS_PROD,
@@ -12,3 +20,8 @@ module.exports = {
   },
   trailingSlash: true,
 };
+
+module.exports = withPlugins([
+  runtimeConfig,
+  [withSvgr, withSvgrConfig]
+]);

@@ -1,4 +1,4 @@
-@import '../../assets/scss/helpers/variables';
+@import '../../assets/scss/helpers/all';
 
 .container {
   align-items: center;
@@ -10,7 +10,7 @@
   position: relative;
 
   &:focus-within:not([disabled]) {
-    border: 1px solid rgba(107, 119, 140, 0.5);
+    border: 1px solid rgba($white, 0.3);
     border-radius: 6px;
   }
 
@@ -24,7 +24,7 @@
   }
 
   &.checked > .icon {
-    border: 5px solid $blue;
+    border: 5px solid $primary;
   }
 }
 
@@ -35,8 +35,16 @@
   top: 0;
 
   &:hover:not(:disabled) {
-    &:checked + .icon {
-      opacity: 0.8;
+    &:checked + .icon::after {
+      background-color: rgba($white, 0.2);
+      bottom: -5px;
+      height: auto;
+      left: -5px;
+      position: absolute;
+      right: -5px;
+      top: -5px;
+      transform: scale(1);
+      width: auto;
     }
 
     &:not(:checked) + .icon::after {
@@ -47,7 +55,7 @@
 }
 
 .icon {
-  border: 2px solid rgba(107, 119, 140, 0.5);
+  border: 2px solid rgba($white, 0.5);
   border-radius: 50%;
   display: inline-block;
   height: 14px;
@@ -58,7 +66,7 @@
   width: 14px;
 
   &::after {
-    background: rgba(107, 119, 140, 0.5);
+    background-color: rgba($gray, 0.5);
     border-radius: 50%;
     content: '';
     height: 4px;
@@ -68,9 +76,24 @@
     transform: scale(0);
     width: 4px;
   }
+
+  &::before {
+    background-color: $white;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    bottom: 0;
+    content: '';
+    display: block;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }
 
 .children {
+  @include body-m();
   display: inline;
   padding-left: 10px;
 }

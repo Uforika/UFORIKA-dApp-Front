@@ -1,10 +1,9 @@
-/* eslint-disable max-len */
 import React, {
-  useRef, useState, ReactNode, MouseEvent,
+  useRef, useState, ReactNode,
 } from 'react';
 import 'focus-visible/dist/focus-visible.js';
 import cn from 'classnames';
-import { DropdownArrow, DropdownSmallArrow } from '@constants/icons.constants';
+import { DropdownArrow } from '@constants/icons.constants';
 import DropdownMenu from './DropdownMenu';
 import styles from './dropdown.module.scss';
 
@@ -13,29 +12,17 @@ type Props = {
   selection?: boolean,
   disabled?: boolean,
   label?: string,
-  options?: [
-    {
-      value: string,
-      content: string | ReactNode,
-    }
-  ],
+  options?: { value: string, content: string | ReactNode, }[],
   value?: string | ReactNode,
   placeholder?: string,
-  position?: 'top' | 'right' | 'left' | 'bottom',
   hint?: string,
-  error?: boolean,
-  children?: ReactNode,
-  onChange: (e: MouseEvent) => void,
-  inline?: boolean,
+  error?: string, children?: ReactNode,
+  onChange?: (value: string) => void,
+  infoPositionAbsolute?: boolean,
 }
 
 type RenderValueTypes = {
-  options?: [
-    {
-      value: string,
-      content: string | ReactNode,
-    }
-  ],
+  options?: { value: string, content: string | ReactNode, }[],
   value?: string | ReactNode,
   selection?: boolean,
   placeholder?: string,
@@ -60,7 +47,7 @@ const renderValue = ({
 
 const Dropdown = ({
   className, selection, disabled, label, options, value, placeholder,
-  position, hint, error, children, onChange, inline,
+  hint, error = '', children, onChange = () => null, infoPositionAbsolute = false,
 }: Props): JSX.Element => {
   const triggerRef = useRef(null);
   const [open, toggleOpen] = useState(false);
@@ -77,8 +64,7 @@ const Dropdown = ({
           value={value}
           onClose={() => toggleOpen(false)}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-unsafe-argument
-          onChange={(e: any) => onChange(e)}
-          position={position}
+          onChange={(e: string) => onChange(e)}
           options={options}
           selection={selection}
         >
@@ -98,7 +84,7 @@ const Dropdown = ({
   };
 
   return (
-    <div className={cn(styles.container, className, { [styles.error]: error, [styles.inline]: inline })}>
+    <div className={cn(styles.container, className, { [styles.error]: error })}>
       {label && <div className={styles.label}>{label}</div>}
       <div className={styles.buttonContainer}>
         <button
@@ -114,12 +100,21 @@ const Dropdown = ({
             })}
           </div>
           <div className={styles.arrow}>
-            {inline ? DropdownSmallArrow : DropdownArrow}
+            {DropdownArrow}
           </div>
         </button>
         {open && renderContent()}
       </div>
-      {hint && <div className={styles.hint}>{hint}</div>}
+      {(error || hint) && (
+        <div className={cn(styles.infoBlock, { [styles.infoPositionAbsolute]: infoPositionAbsolute })}>
+          {error && (
+            <p className={styles.textError}>
+              {error}
+            </p>
+          )}
+          {hint && !error && <p className={styles.hint}>{hint}</p>}
+        </div>
+      )}
     </div>
   );
 };
@@ -132,11 +127,11 @@ Dropdown.defaultProps = {
   options: [],
   value: '',
   placeholder: 'Choose item',
-  position: 'left',
   hint: '',
-  error: false,
+  error: '',
   children: null,
-  inline: false,
+  infoPositionAbsolute: false,
+  onChange: () => null,
 };
 
 export default Dropdown;

@@ -19,7 +19,7 @@ const TabWithIcon = ({
     onClick={() => onClick()}
     disabled={disabled}
   >
-    <div className={cn(styles.imgWrapper, { 'px-tabWithIconIconWrapper': active })}>{img}</div>
+    <div className={cn(styles.iconWrapper, { 'px-tabWithIconIconWrapper': active })}>{img}</div>
     <p className={styles.label}>{label}</p>
   </button>
 );

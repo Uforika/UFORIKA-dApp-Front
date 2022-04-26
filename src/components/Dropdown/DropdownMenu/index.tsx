@@ -7,22 +7,20 @@ import styles from './dropdown-menu.module.scss';
 
 type Props = {
   className?: string,
-  onClose: () => void,
+  onClose?: () => void,
   value?: string | ReactNode,
-  position?: 'top' | 'right' | 'left' | 'bottom',
-  options?: [{
-    value: string,
-    content: string | ReactNode,
-  }],
+  options?: { value: string, content: string | ReactNode, }[],
   selection?: boolean,
-  onChange: (value: string) => void,
+  onChange?: (value: string) => void,
   children?: ReactNode,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   triggerRef: any,
 }
 
 const DropdownMenu = ({
-  className, onClose, triggerRef, value, position, options, selection, onChange, children,
+  className,
+  onClose = () => null,
+  triggerRef, value, options, selection, onChange = () => null, children,
 }: Props): JSX.Element => {
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -43,7 +41,7 @@ const DropdownMenu = ({
   }, [handleClick]);
 
   return (
-    <div ref={menuRef} className={cn(styles.container, className, styles[position || ''])}>
+    <div ref={menuRef} className={cn(styles.container, className)}>
       {selection ? options?.map((item) => (
         <DropdownItem
           key={item.value}
@@ -73,10 +71,11 @@ const DropdownMenu = ({
 
 DropdownMenu.defaultProps = {
   className: '',
-  position: 'left',
   selection: false,
   value: '',
   children: null,
+  onClose: () => null,
+  onChange: () => null,
   options: [],
 };
 

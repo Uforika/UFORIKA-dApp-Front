@@ -1,0 +1,30 @@
+@import '../../../assets/scss/helpers/all';
+
+.item {
+  @include body-m($black);
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  color: $black;
+  display: flex;
+  outline: none;
+  padding: 10px 20px;
+  text-align: left;
+  width: 100%;
+
+  &.active {
+    color: $gray;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  &:hover {
+    background-color: rgba($gray, 0.3);
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 1px;
+  }
+}

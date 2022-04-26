@@ -5,20 +5,20 @@ import cn from 'classnames';
 import { RegisterOptions, UseFormMethods } from 'react-hook-form';
 import styles from './input.module.scss';
 
-interface TInputProps extends Partial<Pick<UseFormMethods, 'register'>> {
+export interface TInputProps extends Partial<Pick<UseFormMethods, 'register'>> {
   className?: string,
-  value?: string | number | null,
+  value?: string | number,
   label?: ReactNode | string,
   error?: string,
   rules?: RegisterOptions;
   name: string,
   placeholder?: string,
   disabled?: boolean,
-  errorPositionAbsolute?: boolean,
+  infoPositionAbsolute?: boolean,
   rightContent?: ReactNode,
-  leftContent?: ReactNode,
   onChange?: (value: string) => void
   type?: string,
+  hint?: {text: string, list: string[]},
   readonly?: boolean,
 }
 
@@ -33,11 +33,11 @@ const Input: FC<TInputProps> = ({
   disabled = false,
   error = '',
   placeholder = '',
-  leftContent = null,
   rightContent = null,
-  errorPositionAbsolute = false,
+  infoPositionAbsolute = false,
   type = 'text',
   readonly = false,
+  hint,
 }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -55,7 +55,6 @@ const Input: FC<TInputProps> = ({
         className={cn(styles.inputWrapper, className, { [styles.error]: error, [styles.readonly]: readonly })}
         data-disabled={disabled}
       >
-        {leftContent && <div className={styles.leftContent}>{leftContent}</div>}
         <input
           ref={initRegister}
           id={name}
@@ -66,6 +65,7 @@ const Input: FC<TInputProps> = ({
           disabled={disabled}
           readOnly={readonly}
           type={type}
+          value={value}
           {...(readonly ? {
             value: value?.toString(),
             tabIndex: -1,
@@ -73,25 +73,42 @@ const Input: FC<TInputProps> = ({
         />
         {rightContent && <div className={styles.rightContent}>{rightContent}</div>}
       </div>
-      {error && <div className={cn(styles.textError, { [styles.errorPositionAbsolute]: errorPositionAbsolute })}>{error}</div>}
+      {(error || hint) && (
+        <div className={cn(styles.infoBlock, { [styles.infoPositionAbsolute]: infoPositionAbsolute })}>
+          {error && (
+            <div
+              className={styles.textError}
+            >
+              {error}
+            </div>
+          )}
+          {hint && !error && (
+            <div className={styles.hint}>
+              <p>{hint.text}</p>
+              <ul>
+                {hint.list.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
 
 Input.defaultProps = {
   className: '',
-  value: null,
+  value: undefined,
   label: '',
   error: '',
   rules: undefined,
   placeholder: '',
   disabled: false,
-  errorPositionAbsolute: false,
+  infoPositionAbsolute: false,
   rightContent: undefined,
-  leftContent: undefined,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: () => {},
+  onChange: undefined,
   type: undefined,
+  hint: undefined,
   readonly: false,
 };
 

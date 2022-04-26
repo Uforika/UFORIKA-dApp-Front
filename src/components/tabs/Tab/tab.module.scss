@@ -1,21 +1,18 @@
-@import '../../../assets/scss/helpers/variables';
+@import '../../../assets/scss/helpers/all';
 
 
 .item {
+  @include body-l-semi-bold($gray);
   background-color: transparent;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  color: $gray;
-  font-weight: 600;
-  line-height: 130%;
   outline: 0;
+  padding-bottom: 4px;
   padding-left: 4px;
   padding-right: 4px;
   position: relative;
   transition: border-color 0.3s, color 0.3s;
 
   &::after {
-    background-color: $lightGray;
+    background-color: transparent;
     content: '';
     display: block;
     height: 2px;
@@ -27,29 +24,34 @@
     width: 100%;
   }
 
-  &:hover:not([disabled]) {
-    color: $blue;
+  &:hover:not([disabled]),
+  &:global(.focus-visible) {
+    color: $white;
+
+    &::after {
+      background-color: $white;
+    }
   }
 
   &.activeItem {
-    &:hover {
-      color: $blue;
-    }
+    color: $primary;
 
     &::after {
-      background-color: $blue;
+      background-color: $primary;
     }
   }
 
   &[disabled] {
-    opacity: 0.5;
-  }
-
-  &:global(.focus-visible) {
-    border-color: rgba(107, 119, 140, 0.5);
+    color: rgba($white, 0.3);
   }
 
   &:focus {
     outline: 0;
   }
+}
+
+.label {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 0 4px;
 }

@@ -1,0 +1,168 @@
+@import '../../assets/scss/helpers/all';
+
+.large {
+  @include subtitle1();
+  padding: 16px 24px;
+
+  .iconLeft {
+    margin-right: 8px;
+  }
+
+  .iconRight {
+    margin-left: 8px;
+  }
+
+  .loader {
+    height: 20px;
+    width: 20px;
+
+    &::before,
+    &::after {
+      height: 20px;
+      width: 20px;
+    }
+  }
+}
+
+.medium {
+  @include body-m-semi-bold();
+  line-height: 18px;
+  padding: 12px 20px;
+
+  .iconLeft {
+    margin-right: 4px;
+  }
+
+  .iconRight {
+    margin-left: 4px;
+  }
+
+  .loader {
+    height: 16px;
+    width: 16px;
+
+    &::before,
+    &::after {
+      height: 16px;
+      width: 16px;
+    }
+  }
+}
+
+.button {
+  align-items: center;
+  background-color: transparent;
+  border-radius: 120px;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  position: relative;
+  transition: 0.3s;
+  width: 100%;
+
+  &::before {
+    border: 2px solid transparent;
+    border-radius: 120px;
+    bottom: -2px;
+    content: '';
+    left: -2px;
+    position: absolute;
+    right: -2px;
+    top: -2px;
+    transition: border 0.3s;
+  }
+
+  .children {
+    align-items: center;
+    display: flex;
+  }
+
+  .iconLeft,
+  .iconRight, {
+    display: flex;
+    position: relative;
+  }
+
+  &:disabled {
+    opacity: 0.3 !important;
+  }
+
+  .loader {
+    position: static;
+    transform: unset;
+
+    &::before,
+    &::after {
+      border-width: 1.5px !important;
+      left: 0;
+      margin: 0 !important;
+    }
+  }
+}
+
+.secondary {
+  border: 1px solid $gray;
+  color: $white;
+
+  &:hover:not([disabled]) {
+    background-color: rgba($primary, 0.3);
+  }
+
+  &:active:not([disabled]) {
+    color: rgba($white, 0.7);
+  }
+
+  &:focus {
+    &::before {
+      border: 1px solid $gray;
+      bottom: -3px;
+      left: -3px;
+      right: -3px;
+      top: -3px;
+    }
+  }
+
+  .loader {
+    &::before {
+      border-color: rgba($white, 0.3);
+    }
+
+    &::after {
+      border-color: $white transparent transparent;
+    }
+  }
+}
+
+.primary {
+  background-color: $primary;
+  border: unset;
+  color: $black;
+
+  &:hover:not([disabled]) {
+    box-shadow: 0 8px 16px rgba(0, 77, 20, 0.16);
+
+    &::before {
+      border-color: $primaryLight;
+    }
+  }
+
+  &:active:not([disabled]) {
+    color: rgba($black, 0.6);
+  }
+
+  &:focus:not([disabled]) {
+    &::before {
+      border: 1px solid $primary;
+    }
+  }
+
+  .loader {
+    &::before {
+      border-color: rgba($black, 0.3);
+    }
+
+    &::after {
+      border-color: rgba($black, 0.6);
+    }
+  }
+}

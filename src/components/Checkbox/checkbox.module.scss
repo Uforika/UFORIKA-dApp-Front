@@ -1,5 +1,5 @@
 /* stylelint-disable max-nesting-depth */
-@import '../../assets/scss/helpers/variables';
+@import '../../assets/scss/helpers/all';
 
 .wrapper {
   align-items: center;
@@ -9,32 +9,50 @@
   display: inline-flex;
   min-height: 22px;
   outline: 0;
-  padding: 0 5px 0 3px;
+  padding: 0 3px;
   position: relative;
   width: auto;
 
   &:hover:not(.disabled) {
     .checkbox {
-      + .icon {
-        border: 2px solid rgba(107, 119, 140, 0.5);
+      &:not(:checked) {
+        + .icon {
+          border-color: rgba($white, 0.3);
 
-        &::before {
-          background-image: url('../../assets/images/icons/check.svg');
+          &::before {
+            background-image: url('../../assets/images/icons/check.svg');
+          }
         }
       }
 
       &:checked + .icon {
-        border: 2px solid $blue;
-
         &::before {
           background-image: url('../../assets/images/icons/check-white.svg');
+        }
+
+        &::after {
+          background-color: rgba($white, 0.2);
+          border-radius: 4px;
+          bottom: -2px;
+          content: '';
+          display: block;
+          left: -2px;
+          position: absolute;
+          right: -2px;
+          top: -2px;
         }
       }
     }
   }
 
   &:global(.focus-visible) {
-    border: 1px solid rgba(107, 119, 140, 0.5);
+    border: 1px solid rgba($white, 0.3);
+
+    &:not(:checked) {
+      .icon {
+        border-color: rgba($white, 0.3);
+      }
+    }
   }
 
   &.disabled {
@@ -52,23 +70,20 @@
   position: absolute;
 
   &:checked + .icon {
-    background-color: $blue;
-    border: 2px solid $blue;
+    background-color: $primary;
+    border-color: $primary;
 
     &::before {
+      background-color: $primary;
       background-image: url('../../assets/images/icons/check-white.svg');
-    }
-
-    &:hover {
-      opacity: 0.8;
     }
   }
 }
 
 
 .icon {
-  border: 2px solid rgba(107, 119, 140, 0.3);
-  border-radius: 2px;
+  border: 2px solid rgba($gray, 0.3);
+  border-radius: 4px;
   display: block;
   height: 16px;
   min-width: 16px;
@@ -76,8 +91,10 @@
   width: 16px;
 
   &::before {
+    background-color: $white;
     background-position: center;
     background-repeat: no-repeat;
+    border-radius: 2px;
     bottom: 0;
     content: '';
     display: block;
@@ -89,8 +106,6 @@
 }
 
 .labelArea {
-  color: $dark;
-  font-size: 14px;
-  line-height: 140%;
+  @include body-m();
   margin-left: 8px;
 }

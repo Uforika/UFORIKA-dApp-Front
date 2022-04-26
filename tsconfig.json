@@ -70,6 +70,7 @@
   ],
   "include": [
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "custom.d.ts"
   ]
 }

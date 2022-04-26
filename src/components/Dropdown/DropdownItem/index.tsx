@@ -1,6 +1,6 @@
 import React, { memo, ReactNode } from 'react';
 import cn from 'classnames';
-import styles from '../dropdown.module.scss';
+import styles from './styles.module.scss';
 
 type Props = {
   className?: string,

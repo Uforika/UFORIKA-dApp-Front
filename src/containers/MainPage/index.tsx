@@ -1,5 +1,4 @@
 import React, { FC, memo } from 'react';
-import Link from 'next/link';
 import Button from '@components/Button';
 import { useAuth } from '@hooks/auth.hooks';
 import { AUTH_STATUS } from '@constants/auth.constants';
@@ -43,11 +42,6 @@ const MainPage: FC<Props> = ({ title }) => {
           <Button onClick={getProfile}>Get Profile</Button>
         </>
       ) : <Button onClick={walletAuth}>LOGIN</Button>}
-
-      <Link href="/second">To Second page</Link>
-      <br />
-      <br />
-
     </div>
   ) : <div>Loading</div>;
 };

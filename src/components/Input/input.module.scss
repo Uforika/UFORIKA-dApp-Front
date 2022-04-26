@@ -1,30 +1,29 @@
-@import '../../assets/scss/helpers/variables';
+@import '../../assets/scss/helpers/all';
 
 .containerWrapper {
   position: relative;
 }
 
-.textLabel {
-  color: $dark;
-  font-size: 14px;
-  font-weight: 600;
+.label {
+  @include body-m-semi-bold();
+  display: inline-block;
   margin-bottom: 4px;
 }
 
 .inputWrapper {
   align-items: center;
-  background: $white;
-  border: 1px solid rgba(107, 119, 140, 0.3);
-  border-radius: 4px;
+  background-color: $white;
+  border: 1px solid rgba($gray, 0.5);
+  border-radius: 60px;
   display: flex;
-  height: 44px;
+  height: 40px;
   outline: 0;
+  padding-right: 20px;
   position: relative;
   transition: color 0.3s, box-shadow 0.3s, border 0.3s;
 
   &.error {
-    border-color: $red;
-    box-shadow: 0 0 0 1px $red;
+    border: 2px solid $secondary;
   }
 
   &.readonly {
@@ -34,29 +33,25 @@
   }
 
   &:focus-within:not(.readonly) {
-    border-color: $blue;
-    box-shadow: 0 0 0 1px $blue;
+    border: 2px solid $primary;
   }
 
-  &:hover:not([data-disabled]):not(:focus-within):not(.error):not(.readonly) {
-    border: 1px solid rgba(107, 119, 140, 0.5);
-    box-shadow: 0 0 0 1px rgba(107, 119, 140, 0.5);
-  }
-
-  &[data-disabled] {
-    background-color: rgba(107, 119, 140, 0.06);
-    border: 1px solid rgba(107, 119, 140, 0.06);
+  &:hover:not([data-disabled='true']):not(:focus-within):not(.error):not(.readonly) {
+    border: 2px solid rgba($gray, 0.5);
     color: $gray;
+  }
+
+  &[data-disabled='true'] {
+    background-color: $grayDark;
+    border: 1px solid $gray;
   }
 }
 
 .input {
+  @include body-m($black);
   background-color: transparent;
   border: 0;
   border-radius: 4px;
-  color: $dark;
-  font-size: 16px;
-  font-weight: 400;
   height: 44px;
   max-height: 100%;
   outline: 0;
@@ -68,22 +63,32 @@
   }
 }
 
-.textError {
-  color: $red;
-  font-size: 12px;
-  font-weight: 400;
+.infoBlock {
   margin-top: 4px;
 
-  &.errorPositionAbsolute {
+  &.infoPositionAbsolute {
     position: absolute;
     top: 100%;
   }
+
+  p {
+    margin: 0;
+  }
 }
 
-.leftContent {
-  margin-right: 12px;
+.textError {
+  @include body-s($secondary);
+}
+
+.hint {
+  @include body-s($gray);
+
+  > ul {
+    list-style-type: disc;
+    padding-left: 12px;
+  }
 }
 
 .rightContent {
-  margin-left: 12px;
+  height: 100%;
 }
