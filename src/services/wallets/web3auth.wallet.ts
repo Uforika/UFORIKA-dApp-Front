@@ -5,7 +5,6 @@ import Web3 from 'web3';
 import { provider as ProviderType } from 'web3-core';
 import {
   ADAPTER_EVENTS, ADAPTER_STATUS, ADAPTER_STATUS_TYPE,
-  CONNECTED_EVENT_DATA,
   MULTI_CHAIN_ADAPTERS,
   SafeEventEmitterProvider,
   WALLET_ADAPTERS,
@@ -13,7 +12,7 @@ import {
 import { Web3Auth as Web3AuthType } from '@web3auth/web3auth';
 import { CONFIG } from '@constants/config.constants';
 import { CHAIN_CONFIG } from '@constants/network.constants';
-import { logError } from '@helpers/log.helper';
+import { logError, logInfo } from '@helpers/log.helper';
 
 type Web3AuthWalletType = {
   status: ADAPTER_STATUS_TYPE | undefined
@@ -36,18 +35,18 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
   };
 
   const subscribeAuthEvents = useCallback((web3auth: Web3AuthType) => {
-    web3auth.on(ADAPTER_EVENTS.CONNECTED, (data: CONNECTED_EVENT_DATA) => {
-      console.log('connected to wallet', data);
+    web3auth.on(ADAPTER_EVENTS.CONNECTED, () => {
+      logInfo('connected to wallet');
       initWeb3(web3auth.provider);
     });
 
     web3auth.on(ADAPTER_EVENTS.CONNECTING, () => {
-      console.log('connecting');
+      logInfo('connecting');
     });
 
     web3auth.on(ADAPTER_EVENTS.DISCONNECTED, () => {
       setStatus(ADAPTER_STATUS.DISCONNECTED);
-      console.log('disconnected');
+      logInfo('disconnected');
       setWeb3(undefined);
     });
 

@@ -12,3 +12,7 @@ export const logError = (error: unknown) => {
   }
   console.error(errorMessage);
 };
+
+export const logInfo = (message: string) => {
+  console.log(message);
+};

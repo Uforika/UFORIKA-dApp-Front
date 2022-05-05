@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@782-uforika/client-sdk@^0.2.1650288570":
-  version "0.2.1650617814"
-  resolved "https://gitlab.pixelplex.by/api/v4/projects/1741/packages/npm/@782-uforika/client-sdk/-/@782-uforika/client-sdk-0.2.1650617814.tgz#38b69b240e5d2c15ec5e6376e27d8fc951ea7409"
-  integrity sha1-OLabJA5dLBXsXmN24n2PyVHqdAk=
+"@782-uforika/client-sdk@^0.2.1651154864":
+  version "0.2.1651154864"
+  resolved "https://gitlab.pixelplex.by/api/v4/projects/1741/packages/npm/@782-uforika/client-sdk/-/@782-uforika/client-sdk-0.2.1651154864.tgz#20662996d7ea95045ac4fdea8395bde47240d9e1"
+  integrity sha1-IGYpltfqlQRaxP3qg5W95HJA2eE=
 
 "@ampproject/remapping@^2.1.0":
   version "2.1.2"

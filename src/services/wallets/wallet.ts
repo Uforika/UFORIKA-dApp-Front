@@ -12,7 +12,7 @@ import useWeb3Auth from '@services/wallets/web3auth.wallet';
    walletStatus: ADAPTER_STATUS_TYPE | undefined,
  }
 
-const useWallet: () => WalletType = () => {
+const useWalletService: () => WalletType = () => {
   const {
     status,
     getAccounts,
@@ -36,4 +36,4 @@ const useWallet: () => WalletType = () => {
 
 };
 
-export default useWallet;
+export default useWalletService;

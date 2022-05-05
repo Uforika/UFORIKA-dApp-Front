@@ -2,7 +2,7 @@ import React, {
   createContext, FC, useCallback, useEffect, useMemo, useState,
 } from 'react';
 import { ADAPTER_STATUS_TYPE } from '@web3auth/base';
-import useWallet from '@services/wallets/wallet';
+import useWalletService from '@services/wallets/wallet';
 
 export type WalletContextType = {
   address: string | null,
@@ -36,7 +36,7 @@ const WalletProvider: FC = ({ children }) => {
     logout,
     connect,
     walletStatus,
-  } = useWallet();
+  } = useWalletService();
 
   const [address, setAddress] = useState<string | null>(null);
   const [chainId, setChainId] = useState<number | null>(null);

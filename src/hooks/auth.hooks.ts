@@ -3,9 +3,9 @@ import { AuthContext } from '@contexts/auth.context';
 
 export const useAuth = () => {
   const {
-    authStatus, userProfile,
+    userProfile,
   } = useContext(AuthContext);
   return {
-    authStatus, userProfile,
+    userProfile,
   };
 };
