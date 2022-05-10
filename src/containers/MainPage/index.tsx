@@ -38,11 +38,12 @@ const MainPage: FC<Props> = ({ title }) => {
       <br />
       { userProfile !== null ? (
         <>
-          <Button onClick={walletLogout}>LOGOUT</Button>
-          <Button onClick={getData}>Get Info</Button>
+          <Button primary onClick={walletLogout}>LOGOUT</Button>
+          <Button secondary onClick={getData}>Get Info</Button>
           <Button onClick={getProfile}>Get Profile</Button>
         </>
-      ) : <Button onClick={walletAuth}>LOGIN</Button>}
+      ) : <Button primary onClick={walletAuth} size="large">LOGIN</Button>}
+      <Button secondary>LOGIN</Button>
     </div>
   ) : <div>Loading</div>;
 };
