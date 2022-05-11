@@ -30,15 +30,3 @@ export const DropdownArrow = (
     <path d="M4 6L8 10L12 6" stroke="#6B778C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
-
-export const DropdownSmallArrow = (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path fillRule="evenodd" clipRule="evenodd" d="M3 4.5L6 7.5L9 4.5" fill="#6B778C" />
-  </svg>
-);
-
-export const CloseIcon = (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M13.3 0.7102C13.1131 0.522948 12.8595 0.417715 12.595 0.417715C12.3305 0.417715 12.0768 0.522948 11.89 0.7102L6.99997 5.5902L2.10997 0.7002C1.92314 0.512948 1.66949 0.407715 1.40497 0.407715C1.14045 0.407715 0.886802 0.512948 0.699971 0.7002C0.309971 1.0902 0.309971 1.7202 0.699971 2.1102L5.58997 7.0002L0.699971 11.8902C0.309971 12.2802 0.309971 12.9102 0.699971 13.3002C1.08997 13.6902 1.71997 13.6902 2.10997 13.3002L6.99997 8.4102L11.89 13.3002C12.28 13.6902 12.91 13.6902 13.3 13.3002C13.69 12.9102 13.69 12.2802 13.3 11.8902L8.40997 7.0002L13.3 2.1102C13.68 1.7302 13.68 1.0902 13.3 0.7102Z" fill="#EBEBF5" fillOpacity="0.3" />
-  </svg>
-);

@@ -1,43 +1,22 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { memo, ReactNode } from 'react';
+import React, { memo } from 'react';
 import cn from 'classnames';
+import { Checkbox as UICheckbox, StrictCheckboxProps } from 'semantic-ui-react';
 import styles from './checkbox.module.scss';
 
-type Props = {
-  className?: string,
-  label?: string,
-  checked?: boolean,
-  disabled?: boolean,
-  children?: ReactNode,
-  onChange: () => void,
-}
+type Props = StrictCheckboxProps
 
 const Checkbox = ({
-  className, label, checked, disabled, children, onChange, ...props
+  className, disabled, label, ...props
 }: Props) => (
-  <label className={cn(styles.wrapper, { [styles.disabled]: disabled }, 'px-checkbox-wrapper')} tabIndex={0}>
-    <input
-      className={cn(styles.checkbox, className)}
-      checked={checked}
-      type="checkbox"
-      tabIndex={-1}
+  <div className={styles.checkboxContainer}>
+    <UICheckbox
+      className={cn(styles.wrapper, { [styles.withLabel]: label }, { [styles.disabled]: disabled }, className)}
+      label={label}
+      tabIndex={0}
       disabled={disabled}
-      onChange={() => onChange()}
       {...props}
     />
-    <span className={styles.icon} />
-    {label && <span className={styles.labelArea}>{label}</span> }
-    {children}
-  </label>
+  </div>
 );
-
-Checkbox.defaultProps = {
-  className: '',
-  label: '',
-  checked: false,
-  disabled: false,
-  children: null,
-};
 
 export default memo(Checkbox);
