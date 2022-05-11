@@ -100,7 +100,7 @@ const AuthPage: FC<Props> = () => {
         />
         <Button>Login</Button>
       </form>
-      <button onClick={() => showConfirmModal()}>Modal</button>
+      <button onClick={showConfirmModal}>Modal</button>
       <button onClick={() => {
         //  You can pass not required 4th param handleFailure
         //  Toast would be with close button with this handler

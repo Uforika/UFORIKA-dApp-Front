@@ -55,7 +55,7 @@ const ModalProvider: FC<Types> = ({ children }) => {
       .filter((key) => modalsState[key as MODAL_TYPES].show) as MODAL_TYPES[];
 
     return openedModals.map((modal) => {
-      const Component = MODAL_COMPONENTS[modal as MODAL_TYPES];
+      const Component = MODAL_COMPONENTS[modal];
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore

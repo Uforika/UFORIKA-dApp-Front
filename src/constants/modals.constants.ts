@@ -1,3 +1,5 @@
 export enum MODAL_TYPES {
   CONFIRM = 'CONFIRM',
+  SUCCESS = 'SUCCESS',
+  FAIL = 'FAIL'
 }

@@ -14,5 +14,6 @@ export const CHAIN_CONFIG = {
   [NETWORK.TESTNET_POLYGON]: {
     chainNamespace: CHAIN_NAMESPACES.EIP155,
     chainId: hexValue(80001),
+    rpcTarget: 'https://matic-mumbai.chainstacklabs.com/',
   },
 };
