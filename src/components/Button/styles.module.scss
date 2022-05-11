@@ -1,11 +1,11 @@
 @import '../../assets/scss/helpers/all';
 
-@mixin primary () {
+@mixin primary() {
   background-color: $primary;
   color: $black;
 }
 
-@mixin secondary () {
+@mixin secondary() {
   background-color: transparent;
   color: $white;
 }
@@ -38,19 +38,16 @@
       display: flex;
     }
 
-    .iconLeft,
-    .iconRight, {
-      display: flex;
-      position: relative;
-    }
-
     &:disabled {
       opacity: 0.3 !important;
     }
 
     .loader {
-      position: static;
-      transform: unset;
+      display: flex;
+      left: 0;
+      position: relative;
+      top: 0;
+      transform: translate(0);
 
       &::before,
       &::after {
@@ -66,16 +63,9 @@
         max-height: 56px;
         padding: 16px 24px;
 
-        .iconLeft {
-          margin-right: 8px;
-        }
-
-        .iconRight {
-          margin-left: 8px;
-        }
-
         .loader {
           height: 20px;
+          margin-right: 8px;
           width: 20px;
 
           &::before,
@@ -92,16 +82,10 @@
         max-height: 44px;
         padding: 12px 20px;
 
-        .iconLeft {
-          margin-right: 4px;
-        }
-
-        .iconRight {
-          margin-left: 4px;
-        }
-
         .loader {
+
           height: 16px;
+          margin-right: 4px;
           width: 16px;
 
           &::before,
@@ -118,6 +102,7 @@
 
         &:hover {
           @include secondary;
+          background-color: rgba($primary, 0.3);
           border: 1px solid $gray;
         }
 
@@ -180,10 +165,11 @@
           }
 
           &::after {
-            border-color: rgba($black, 0.6);
+            border-color: rgba($black, 0.6) transparent transparent;
           }
         }
       }
     }
   }
 }
+
