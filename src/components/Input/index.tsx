@@ -1,35 +1,29 @@
 import React, {
-  ReactNode, memo, FC, useRef,
+  ReactNode, memo, FC,
 } from 'react';
 import cn from 'classnames';
-import { RegisterOptions, UseFormMethods } from 'react-hook-form';
+import { Input as UIInput, StrictInputProps } from 'semantic-ui-react';
 import styles from './input.module.scss';
 
-export interface TInputProps extends Partial<Pick<UseFormMethods, 'register'>> {
-  className?: string,
+type PickedTypes = 'label' | 'className' | 'disabled' | 'type'| 'onChange'
+
+export type TInputProps = Pick<StrictInputProps, PickedTypes> & {
   value?: string | number,
-  label?: ReactNode | string,
   error?: string,
-  rules?: RegisterOptions;
   name: string,
   placeholder?: string,
-  disabled?: boolean,
   infoPositionAbsolute?: boolean,
   rightContent?: ReactNode,
-  onChange?: (value: string) => void
-  type?: string,
-  hint?: {text: string, list: string[]},
+  hint?: { text: string, list: string[] },
   readonly?: boolean,
 }
 
 const Input: FC<TInputProps> = ({
   className = '',
-  register = null,
-  rules = null,
-  value = '',
+  value,
   name,
   label = '',
-  onChange = null,
+  onChange,
   disabled = false,
   error = '',
   placeholder = '',
@@ -38,76 +32,54 @@ const Input: FC<TInputProps> = ({
   type = 'text',
   readonly = false,
   hint,
-}) => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const initRegister = (ref: HTMLInputElement | null) => {
-    if (!ref || !register) return;
-    if (rules) register(ref, rules);
-    else register(ref);
-    inputRef.current = ref;
-  };
-
-  return (
-    <div className={styles.containerWrapper}>
-      {label && <label htmlFor={name} className={styles.textLabel}>{label}</label>}
-      <div
-        className={cn(styles.inputWrapper, className, { [styles.error]: error, [styles.readonly]: readonly })}
-        data-disabled={disabled}
-      >
-        <input
-          ref={initRegister}
-          id={name}
-          name={name}
-          className={styles.input}
-          onChange={(e) => onChange && onChange(e.target.value)}
-          placeholder={placeholder}
-          disabled={disabled}
-          readOnly={readonly}
-          type={type}
-          value={value}
-          {...(readonly ? {
-            value: value?.toString(),
-            tabIndex: -1,
-          } : null)}
-        />
-        {rightContent && <div className={styles.rightContent}>{rightContent}</div>}
+  ...props
+}) => (
+  <div className={styles.container}>
+    {label && <label htmlFor={name} className={styles.textLabel}>{label}</label>}
+    <UIInput
+      id={name}
+      name={name}
+      className={cn(styles.inputContainer, className, { [styles.error]: error, [styles.readonly]: readonly })}
+      onChange={onChange}
+      placeholder={placeholder}
+      disabled={disabled}
+      readOnly={readonly}
+      type={type}
+      value={value}
+      data-disabled={disabled}
+      {...(readonly ? {
+        value: value?.toString(),
+        tabIndex: -1,
+      } : null)}
+      {...props}
+    />
+    {rightContent && <div className={styles.rightContent}>{rightContent}</div>}
+    {(error || hint) && (
+      <div className={cn(styles.infoBlock, { [styles.infoPositionAbsolute]: infoPositionAbsolute })}>
+        {error && (
+          <div className={styles.textError}>
+            {error}
+          </div>
+        )}
+        {hint && !error && (
+          <div className={styles.hint}>
+            <p>{hint.text}</p>
+            <ul>
+              {hint.list.map((item) => <li key={item}>{item}</li>)}
+            </ul>
+          </div>
+        )}
       </div>
-      {(error || hint) && (
-        <div className={cn(styles.infoBlock, { [styles.infoPositionAbsolute]: infoPositionAbsolute })}>
-          {error && (
-            <div
-              className={styles.textError}
-            >
-              {error}
-            </div>
-          )}
-          {hint && !error && (
-            <div className={styles.hint}>
-              <p>{hint.text}</p>
-              <ul>
-                {hint.list.map((item) => <li>{item}</li>)}
-              </ul>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-};
+    )}
+  </div>
+);
 
 Input.defaultProps = {
-  className: '',
   value: undefined,
-  label: '',
   error: '',
-  rules: undefined,
   placeholder: '',
-  disabled: false,
   infoPositionAbsolute: false,
   rightContent: undefined,
-  onChange: undefined,
-  type: undefined,
   hint: undefined,
   readonly: false,
 };

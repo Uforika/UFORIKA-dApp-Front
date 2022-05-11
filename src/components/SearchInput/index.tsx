@@ -1,6 +1,7 @@
 import React, {
   memo, FC, useCallback,
 } from 'react';
+import { InputOnChangeData } from 'semantic-ui-react';
 import Input from '@components/Input';
 import { ReactComponent as SearchIcon } from '@assets/images/icons/search.svg';
 import { ReactComponent as CancelIcon } from '@assets/images/icons/cancel.svg';
@@ -17,13 +18,13 @@ const SearchInput: FC<Props> = ({
   ...props
 }) => {
 
-  const handleChange = useCallback((newValue: string) => {
-    onChange(newValue);
+  const handleChange = useCallback((_, data: InputOnChangeData) => {
+    onChange(data.value);
   }, [onChange]);
 
   const handleClearInput = useCallback(() => {
-    handleChange('');
-  }, [handleChange]);
+    onChange('');
+  }, [onChange]);
 
   return (
     <div className={styles.searchContainer}>

@@ -1,5 +1,5 @@
 import React, {
-  ReactNode, memo, FC, useMemo, useCallback,
+  ReactNode, memo, FC, useCallback,
 } from 'react';
 import Input, { TInputProps } from '@components/Input';
 import CurrencyDropdown from '@components/CurrencyInput/CurrencyDropdown';
@@ -25,21 +25,24 @@ const CurrencyInput: FC<Props> = ({
   ...props
 }) => {
 
-  const totalAmountCurrentValue = useMemo(() => {
+  const handleSendAll = useCallback(() => {
     const currentOption = options.find((option) => option.value === selectedOptionItem);
-    if (!currentOption) return '';
-    return currentOption.totalAmount;
-  }, [options, selectedOptionItem]);
+    if (!currentOption) {
+      onChange('');
+      return;
+    }
+    onChange(currentOption.totalAmount);
+  }, [onChange, options, selectedOptionItem]);
 
-  const handleChange = useCallback((inputValue: string) => {
-    if ((/^[\d.,:]*$/.test(inputValue))) onChange(inputValue);
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    if ((/^[\d.,:]*$/.test(event.target.value))) onChange(event.target.value);
   }, [onChange]);
 
   return (
     <div>
       <div className={styles.topBlock}>
         {label && <label htmlFor={name} className={styles.label}>{label}</label>}
-        <LinkButton onClick={() => handleChange(totalAmountCurrentValue)}>Send all</LinkButton>
+        <LinkButton onClick={handleSendAll}>Send all</LinkButton>
       </div>
       <Input
         {...props}

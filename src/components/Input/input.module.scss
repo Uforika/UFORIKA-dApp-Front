@@ -1,94 +1,102 @@
 @import '../../assets/scss/helpers/all';
 
-.containerWrapper {
+.container {
   position: relative;
-}
 
-.label {
-  @include body-m-semi-bold();
-  display: inline-block;
-  margin-bottom: 4px;
-}
-
-.inputWrapper {
-  align-items: center;
-  background-color: $white;
-  border: 1px solid rgba($gray, 0.5);
-  border-radius: 60px;
-  display: flex;
-  height: 40px;
-  outline: 0;
-  padding-right: 20px;
-  position: relative;
-  transition: color 0.3s, box-shadow 0.3s, border 0.3s;
-
-  &.error {
-    border: 2px solid $secondary;
+  .textLabel {
+    @include body-m-semi-bold();
+    display: inline-block;
+    margin-bottom: 4px;
   }
 
-  &.readonly {
-    .input {
-      cursor: default;
+  .inputContainer {
+    align-items: center;
+    background-color: $white;
+    border: 1px solid rgba($gray, 0.5);
+    border-radius: 60px;
+    display: flex;
+    height: 40px;
+    max-height: 100%;
+    outline: 0;
+    padding-right: 20px;
+    position: relative;
+    transition: color $transitionSpeed, box-shadow $transitionSpeed, border $transitionSpeed;
+    width: 100%;
+
+
+    > input {
+      @include body-m($black);
+      background-color: transparent;
+      border: 0;
+      border-radius: 60px;
+      outline: 0;
+      padding: 10px 12px;
+
+      &::placeholder {
+        color: $gray;
+      }
+
+      &:focus {
+        background: transparent;
+        border-color: unset;
+        box-shadow: none;
+        color: $black;
+      }
+    }
+
+    &.error {
+      border: 2px solid $secondary;
+    }
+
+    &.readonly {
+      .inputContainer > input {
+        cursor: default;
+      }
+    }
+
+    &:focus-within:not(.readonly) {
+      border: 2px solid $primary;
+    }
+
+    &:hover:not([data-disabled='true']):not(:focus-within):not(.error):not(.readonly) {
+      border: 2px solid rgba($gray, 0.5);
+      color: $gray;
+    }
+
+    &[data-disabled='true'] {
+      background-color: $grayDark;
+      border: 1px solid $gray;
+      opacity: 1;
     }
   }
 
-  &:focus-within:not(.readonly) {
-    border: 2px solid $primary;
+  .infoBlock {
+    margin-top: 4px;
+
+    &.infoPositionAbsolute {
+      position: absolute;
+      top: 100%;
+    }
+
+    p {
+      margin: 0;
+    }
   }
 
-  &:hover:not([data-disabled='true']):not(:focus-within):not(.error):not(.readonly) {
-    border: 2px solid rgba($gray, 0.5);
-    color: $gray;
+  .textError {
+    @include body-s($secondary);
   }
 
-  &[data-disabled='true'] {
-    background-color: $grayDark;
-    border: 1px solid $gray;
-  }
-}
+  .hint {
+    @include body-s($gray);
 
-.input {
-  @include body-m($black);
-  background-color: transparent;
-  border: 0;
-  border-radius: 4px;
-  height: 44px;
-  max-height: 100%;
-  outline: 0;
-  padding: 10px 12px;
-  width: 100%;
-
-  &::placeholder {
-    color: $gray;
-  }
-}
-
-.infoBlock {
-  margin-top: 4px;
-
-  &.infoPositionAbsolute {
-    position: absolute;
-    top: 100%;
+    > ul {
+      list-style-type: disc;
+      padding-left: 12px;
+    }
   }
 
-  p {
-    margin: 0;
+  .rightContent {
+    height: 100%;
   }
-}
-
-.textError {
-  @include body-s($secondary);
-}
-
-.hint {
-  @include body-s($gray);
-
-  > ul {
-    list-style-type: disc;
-    padding-left: 12px;
-  }
-}
-
-.rightContent {
-  height: 100%;
 }

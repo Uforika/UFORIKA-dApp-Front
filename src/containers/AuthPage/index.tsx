@@ -45,7 +45,7 @@ const AuthPage: FC<Props> = () => {
   const [showConfirmModal] = useConfirmModal('Are you sure bla bla bla?', handleConfirmationSuccess, handleConfirmationFailure);
 
   const {
-    register, handleSubmit, errors,
+    handleSubmit, errors,
   } = useForm({
     resolver: yupResolver(schema),
     reValidateMode: DEFAULT_REVALIDATE_MODE,
@@ -61,14 +61,12 @@ const AuthPage: FC<Props> = () => {
     <div style={{ width: '100%', maxWidth: '800px', margin: '4rem auto' }}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          register={register}
           name={FIELD_NAMES.EMAIL}
           error={errors[FIELD_NAMES.EMAIL]?.message || ''}
           label="Email *"
           placeholder="Email"
         />
         <Input
-          register={register}
           name={FIELD_NAMES.MAX_NUM}
           error={errors[FIELD_NAMES.MIN_NUM]?.message || ''}
           label={<mark>Label node*</mark>}
@@ -81,14 +79,12 @@ const AuthPage: FC<Props> = () => {
           readonly
         />
         <Input
-          register={register}
           name={FIELD_NAMES.MIN_NUM}
           error={errors[FIELD_NAMES.MIN_NUM]?.message || ''}
           label="minNum *"
           placeholder="minNum"
         />
         <Input
-          register={register}
           name={FIELD_NAMES.PASSWORD}
           error={errors[FIELD_NAMES.PASSWORD]?.message || ''}
           label="Password *"
@@ -96,7 +92,6 @@ const AuthPage: FC<Props> = () => {
           placeholder="********"
         />
         <Input
-          register={register}
           name={FIELD_NAMES.PASSWORD_CONFIRM}
           error={errors[FIELD_NAMES.PASSWORD_CONFIRM]?.message || ''}
           label="Confirm password *"
