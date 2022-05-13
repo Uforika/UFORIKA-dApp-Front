@@ -90,8 +90,8 @@
               opacity: 0.5;
 
               &::before {
-                background-color: $gray !important;
-                border-color: $gray !important;
+                background-color: $dustyGray !important;
+                border-color: $dustyGray !important;
               }
 
               &::after {
@@ -128,7 +128,7 @@
 
             ~ label {
               &::after {
-                border: 2px solid rgba($gray, 0.3);
+                border: 2px solid rgba($dustyGray, 0.3);
                 height: 18px;
                 left: 2px;
                 width: 18px;
@@ -239,7 +239,7 @@
             width: 44px;
 
             &::before {
-              background-color: $gray !important;
+              background-color: $dustyGray !important;
               border: 0;
               height: 20px;
               left: 1px;
@@ -262,7 +262,7 @@
           > input {
             &:focus ~ label {
               &::before {
-                background-color: $gray;
+                background-color: $dustyGray;
               }
             }
           }

@@ -12,7 +12,7 @@
   .inputContainer {
     align-items: center;
     background-color: $white;
-    border: 1px solid rgba($gray, 0.5);
+    border: 1px solid rgba($dustyGray, 0.5);
     border-radius: 60px;
     display: flex;
     height: 40px;
@@ -23,7 +23,6 @@
     transition: color $transitionSpeed, box-shadow $transitionSpeed, border $transitionSpeed;
     width: 100%;
 
-
     > input {
       @include body-m($black);
       background-color: transparent;
@@ -33,7 +32,7 @@
       padding: 10px 12px;
 
       &::placeholder {
-        color: $gray;
+        color: $dustyGray;
       }
 
       &:focus {
@@ -66,13 +65,13 @@
     }
 
     &:hover:not([data-disabled='true']):not(:focus-within):not(.error):not(.readonly) {
-      border: 2px solid rgba($gray, 0.5);
-      color: $gray;
+      border: 2px solid rgba($dustyGray, 0.5);
+      color: $dustyGray;
     }
 
     &[data-disabled='true'] {
-      background-color: $grayDark;
-      border: 1px solid $gray;
+      background-color: $mineShaft;
+      border: 1px solid $dustyGray;
       opacity: 1;
     }
   }
@@ -95,7 +94,7 @@
   }
 
   .hint {
-    @include body-s($gray);
+    @include body-s($dustyGray);
 
     > ul {
       list-style-type: disc;

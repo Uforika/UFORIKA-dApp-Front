@@ -54,7 +54,7 @@
         "./src/models/*"
       ],
       "@modules/*": [
-        "./src/modules/*"
+        "src/Modules/*"
       ],
       "@redux/*": [
         "./src/redux/*"

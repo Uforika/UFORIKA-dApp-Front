@@ -1,7 +1,5 @@
 @import '../../assets/scss/helpers/all';
 
-
-
 .menuContainer :global {
   .ui.menu {
     border: 0;
@@ -30,7 +28,7 @@
 
       &:not(.pointing) {
         .item {
-          @include body-l-semi-bold($gray);
+          @include body-l-semi-bold($dustyGray);
           background-color: transparent;
           border: 0;
           outline: 0;

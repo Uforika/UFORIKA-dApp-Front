@@ -28,7 +28,7 @@
   }
 
   &::placeholder {
-    color: $gray;
+    color: $dustyGray;
   }
 
   &:hover:not([disabled]):not(:focus):not(.error) {
@@ -44,7 +44,7 @@
   &[disabled] {
     background-color: rgba(107, 119, 140, 0.06);
     border: 1px solid rgba(107, 119, 140, 0.06);
-    color: $gray;
+    color: $dustyGray;
   }
 }
 

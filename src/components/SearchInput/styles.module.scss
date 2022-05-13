@@ -13,7 +13,7 @@
     }
 
     &:hover:not([data-disabled='true']):not(:focus-within):not(.error):not(.readonly) {
-      border: 1px solid #9C9C9C;
+      border: 1px solid $dustyGray;
     }
 
     input {

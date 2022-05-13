@@ -1,0 +1,12 @@
+.dropdown {
+  width: 366px;
+
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+}
+
+.wrap {
+  color: #FFF;
+  margin-top: 40px;
+}

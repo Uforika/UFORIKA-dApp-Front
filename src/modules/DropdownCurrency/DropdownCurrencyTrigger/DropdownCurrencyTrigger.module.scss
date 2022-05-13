@@ -1,0 +1,39 @@
+@import '../../../assets/scss/helpers/all';
+
+.wrap {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.panel {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 12px;
+}
+
+.image {
+  display: flex;
+  height: 20px;
+  margin-right: 8px;
+  width: 20px;
+
+  :global {
+    svg {
+      height: inherit;
+      width: inherit;
+    }
+  }
+}
+
+.text,
+.value {
+  @include body-m($dustyGray);
+}
+
+.value {
+  display: flex;
+  margin-left: 8px;
+}

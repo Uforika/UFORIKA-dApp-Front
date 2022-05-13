@@ -1,7 +1,7 @@
 @import '../../assets/scss/helpers/all';
 
 .footer {
-  @include body-s($gray);
+  @include body-s($dustyGray);
   border-top: 0.5px solid rgba($white, 0.3);
   display: flex;
   justify-content: space-between;
@@ -9,14 +9,14 @@
   padding: 16px 20px;
 
   > p {
-    color: $gray;
+    color: $dustyGray;
     margin: 0;
   }
 }
 
 .footerLinks {
   > a {
-    @include body-s($gray);
+    @include body-s($dustyGray);
     cursor: pointer;
 
     &:not(:last-child) {

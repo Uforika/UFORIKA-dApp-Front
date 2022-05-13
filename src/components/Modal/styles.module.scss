@@ -1,0 +1,12 @@
+@import '../../assets/scss/helpers/all';
+
+.modal {
+  border-radius: 16px !important;
+  color: $white;
+  padding: 40px;
+  position: relative;
+}
+
+.tiny {
+  max-width: 320px;
+}

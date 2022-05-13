@@ -1,6 +1,6 @@
-import ModalConfirm from '@modules/modals/ModalConfirm';
-import ModalSuccess from '@modules/modals/ModalSuccess';
-import ModalFail from '@modules/modals/ModalFail';
+import ModalSuccess from 'src/modules/ModalSuccess';
+import ModalFail from 'src/modules/ModalFail';
+import ModalConfirm from 'src/modules/ModalConfirm';
 import { MODAL_TYPES } from '@constants/modals.constants';
 
 export const MODAL_COMPONENTS = {

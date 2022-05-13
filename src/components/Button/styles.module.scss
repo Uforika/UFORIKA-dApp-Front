@@ -83,7 +83,6 @@
         padding: 12px 20px;
 
         .loader {
-
           height: 16px;
           margin-right: 4px;
           width: 16px;
@@ -98,12 +97,12 @@
 
       &.secondary {
         @include secondary;
-        border: 1px solid $gray;
+        border: 1px solid $dustyGray;
 
         &:hover {
           @include secondary;
           background-color: rgba($primary, 0.3);
-          border: 1px solid $gray;
+          border: 1px solid $dustyGray;
         }
 
         &:active:not([disabled]) {
@@ -115,7 +114,7 @@
           @include secondary;
 
           &::before {
-            border: 1px solid $gray;
+            border: 1px solid;
             bottom: -3px;
             left: -3px;
             right: -3px;
@@ -172,4 +171,3 @@
     }
   }
 }
-

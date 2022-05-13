@@ -1,0 +1,25 @@
+@import '../../../assets/scss/helpers/all';
+
+.item {
+  align-items: center;
+  display: flex !important;
+}
+
+.active {
+  .text {
+    color: $dustyGray;
+  }
+}
+
+.value,
+.text {
+  margin-left: 8px;
+}
+
+.value {
+  @include body-m($dustyGray);
+}
+
+.text {
+  @include body-m($black);
+}
