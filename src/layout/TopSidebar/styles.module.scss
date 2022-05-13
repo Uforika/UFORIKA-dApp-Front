@@ -1,0 +1,22 @@
+@import '../../assets/scss/helpers/all';
+
+.topSidebar {
+  align-items: center;
+  background-color: transparent !important;
+  border-bottom: 0.5px solid rgba($white, 0.3) !important;
+  justify-content: space-between;
+  min-height: 64px !important;
+  padding: 16px 20px;
+
+  &::after {
+    content: none !important;
+  }
+}
+
+.logoContainer {
+  height: 40px;
+
+  svg {
+    height: 100%;
+  }
+}

@@ -1,10 +1,12 @@
 /* stylelint-disable selector-max-id */
 @import './vendors/normalize';
 @import './helpers/fonts';
+@import './helpers/variables';
 
 html,
 body,
 #__next {
+  background-color: $black;
   height: 100%;
 }
 

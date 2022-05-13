@@ -1,0 +1,37 @@
+@import '../../assets/scss/helpers/all';
+
+.pushable {
+  transform: none !important;
+}
+
+.backgroundImage {
+  background-image: url('../../assets/images/bg.png');
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(70px);
+  height: 100%;
+  left: 0;
+  max-height: 806px;
+  object-fit: cover;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+
+  &.offsetBg {
+    top: -35%;
+  }
+}
+
+.main {
+  display: flex;
+  margin: auto;
+  max-width: 1680px;
+  transform: none !important;
+}
+
+.mainPadding {
+  padding-left: 260px;
+  padding-top: 74px;
+}

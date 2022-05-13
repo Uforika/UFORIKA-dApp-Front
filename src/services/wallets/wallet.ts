@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { ADAPTER_STATUS_TYPE } from '@web3auth/base';
 import useWeb3Auth from '@services/wallets/web3auth.wallet';
+import { CONNECT_TYPE } from '@helpers/wallets.helper';
 
  type WalletType = {
    sign: (messages: string, address: string) => Promise<string>,
@@ -8,7 +9,7 @@ import useWeb3Auth from '@services/wallets/web3auth.wallet';
    getAccounts: () => Promise<string[]>,
    getChainId: () => Promise<number>,
    logout: () => Promise<void>,
-   connect: () => Promise<void>,
+   connect: CONNECT_TYPE,
    walletStatus: ADAPTER_STATUS_TYPE | undefined,
  }
 

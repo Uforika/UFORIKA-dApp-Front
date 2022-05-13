@@ -84,4 +84,4 @@ Input.defaultProps = {
   readonly: false,
 };
 
-export default memo<TInputProps>(Input);
+export default memo(Input);

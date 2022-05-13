@@ -3,13 +3,14 @@ import React, {
 } from 'react';
 import { ADAPTER_STATUS_TYPE } from '@web3auth/base';
 import useWalletService from '@services/wallets/wallet';
+import { CONNECT_TYPE } from '@helpers/wallets.helper';
 
 export type WalletContextType = {
   address: string | null,
   chainId: number | null,
   sign: (messages: string) => Promise<string>,
   getBalance: () => Promise<string>,
-  walletAuth: () => Promise<void>,
+  walletAuth: CONNECT_TYPE,
   walletLogout: () => Promise<void>,
   walletStatus: ADAPTER_STATUS_TYPE | undefined,
 }

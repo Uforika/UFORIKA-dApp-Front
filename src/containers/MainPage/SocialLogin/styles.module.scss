@@ -1,0 +1,24 @@
+@import '../../../assets/scss/helpers/all';
+
+.label {
+  @include body-m-semi-bold();
+  margin-bottom: 8px;
+}
+
+.container {
+  display: flex;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  margin-right: 15px;
+}
+
+.button {
+  border: 0 !important;
+  padding: 0 !important;
+}

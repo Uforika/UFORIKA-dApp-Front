@@ -19,10 +19,14 @@ import { AuthMeType } from '../types/auth.types';
 
 export type AuthContextType = {
   userProfile: AuthMeType | undefined | null,
+  isAuthorized: boolean,
+  isLoading: boolean,
 }
 
 const initialContextState = {
   userProfile: undefined,
+  isAuthorized: false,
+  isLoading: true,
 };
 
 export const AuthContext = createContext<AuthContextType>(initialContextState);
@@ -74,16 +78,20 @@ const AuthProvider: FC = ({ children }) => {
   }, [address, sign, walletLogout, userProfile, walletStatus]);
 
   useEffect(() => {
+    if (walletStatus === ADAPTER_STATUS.NOT_READY) return;
     if (meProfile === null) {
       setUserProfile(null);
       return;
     }
-    setUserProfile(meProfile);
-  }, [meProfile]);
+    if (walletStatus === ADAPTER_STATUS.CONNECTED && meProfile) setUserProfile(meProfile);
+
+  }, [meProfile, walletStatus]);
 
   const authProviderValue = useMemo(() => ({
     userProfile,
-  }), [userProfile]);
+    isAuthorized: !!userProfile || walletStatus === ADAPTER_STATUS.NOT_READY,
+    isLoading: userProfile === undefined,
+  }), [userProfile, walletStatus]);
 
   return (
     <AuthContext.Provider value={authProviderValue}>

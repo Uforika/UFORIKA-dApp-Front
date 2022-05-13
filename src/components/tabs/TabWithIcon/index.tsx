@@ -5,7 +5,7 @@ import styles from './tab-with-icon.module.scss';
 type Props = {
   className?: string,
   label?: string,
-  onClick: () => void,
+  onClick?: () => void,
   active?: boolean,
   disabled?: boolean,
   img?: ReactNode,
@@ -16,7 +16,7 @@ const TabWithIcon = ({
 }: Props) => (
   <button
     className={cn(styles.item, { [styles.activeItem]: active }, className)}
-    onClick={() => onClick()}
+    onClick={onClick}
     disabled={disabled}
   >
     <div className={cn(styles.iconWrapper, { 'px-tabWithIconIconWrapper': active })}>{img}</div>
@@ -30,6 +30,7 @@ TabWithIcon.defaultProps = {
   active: false,
   disabled: false,
   img: null,
+  onClick: undefined,
 };
 
 export default memo(TabWithIcon);

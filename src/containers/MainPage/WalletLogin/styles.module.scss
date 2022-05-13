@@ -1,0 +1,6 @@
+@import '../../../assets/scss/helpers/all';
+
+.label {
+  @include body-m-semi-bold();
+  margin-bottom: 8px;
+}

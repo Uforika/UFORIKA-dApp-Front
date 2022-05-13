@@ -1,0 +1,30 @@
+@import '../../assets/scss/helpers/all';
+
+.footer {
+  @include body-s($gray);
+  border-top: 0.5px solid rgba($white, 0.3);
+  display: flex;
+  justify-content: space-between;
+  margin-top: -51px;
+  padding: 16px 20px;
+
+  > p {
+    color: $gray;
+    margin: 0;
+  }
+}
+
+.footerLinks {
+  > a {
+    @include body-s($gray);
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

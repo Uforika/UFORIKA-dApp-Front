@@ -1,0 +1,20 @@
+@import '../../assets/scss/helpers/all';
+
+.leftSidebar {
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 105px 20px 0;
+}
+
+.menuList {
+  border-bottom: 0.5px solid rgba($white, 0.3);
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+
+  li {
+    &:not(:last-child) {
+      margin-bottom: 4px;
+    }
+  }
+}

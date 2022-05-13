@@ -6,13 +6,13 @@ import { provider as ProviderType } from 'web3-core';
 import {
   ADAPTER_EVENTS, ADAPTER_STATUS, ADAPTER_STATUS_TYPE,
   MULTI_CHAIN_ADAPTERS,
-  SafeEventEmitterProvider,
-  WALLET_ADAPTERS,
+  SafeEventEmitterProvider, WALLET_ADAPTERS,
 } from '@web3auth/base';
-import { Web3Auth as Web3AuthType } from '@web3auth/web3auth';
+import { Web3AuthCore as Web3AuthCoreType } from '@web3auth/core';
 import { CONFIG } from '@constants/config.constants';
 import { CHAIN_CONFIG } from '@constants/network.constants';
 import { logError, logInfo } from '@helpers/log.helper';
+import { CONNECT_TYPE, LOGIN_PROVIDER } from '@helpers/wallets.helper';
 
 type Web3AuthWalletType = {
   status: ADAPTER_STATUS_TYPE | undefined
@@ -20,13 +20,13 @@ type Web3AuthWalletType = {
   getChainId: () => Promise<number>
   getBalance: (address: string) => Promise<string>
   sign: (message: string, address: string) => Promise<string>
-  connect: () => Promise<void>
+  connect: CONNECT_TYPE,
   logout: () => Promise<void>
 }
 
 const useWeb3Auth: () => Web3AuthWalletType = () => {
   const [web3, setWeb3] = useState<Web3 | undefined>(undefined);
-  const [web3Auth, setWeb3Auth] = useState<Web3AuthType | undefined>(undefined);
+  const [web3Auth, setWeb3Auth] = useState<Web3AuthCoreType | undefined>(undefined);
   const [status, setStatus] = useState<ADAPTER_STATUS_TYPE | undefined>(ADAPTER_STATUS.NOT_READY);
 
   const initWeb3 = (provider: SafeEventEmitterProvider | ProviderType) => {
@@ -34,7 +34,7 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
     setWeb3(web3Instance);
   };
 
-  const subscribeAuthEvents = useCallback((web3auth: Web3AuthType) => {
+  const subscribeAuthEvents = useCallback((web3auth: Web3AuthCoreType) => {
     web3auth.on(ADAPTER_EVENTS.CONNECTED, () => {
       logInfo('connected to wallet');
       initWeb3(web3auth.provider);
@@ -63,36 +63,22 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
   const initWeb3Auth = useCallback(async () => {
     try {
       /** for fix problem https://github.com/Web3Auth/Web3Auth/issues/66 */
-      const { Web3Auth } = await import('@web3auth/web3auth');
+      const { Web3AuthCore } = await import('@web3auth/core');
+      const { OpenloginAdapter } = await import('@web3auth/openlogin-adapter');
+      const { MetamaskAdapter } = await import('@web3auth/metamask-adapter');
 
-      const web3AuthInstance = new Web3Auth({
+      const web3AuthInstance = new Web3AuthCore({
         chainConfig: CHAIN_CONFIG[CONFIG.NETWORK],
-        clientId: CONFIG.CLIENT_ID,
         storageKey: 'local',
       });
-
       subscribeAuthEvents(web3AuthInstance);
 
-      await web3AuthInstance.initModal({
-        modalConfig: {
-          [WALLET_ADAPTERS.METAMASK]: {
-            label: 'metamask',
-            showOnModal: true,
-          },
-          [WALLET_ADAPTERS.TORUS_EVM]: {
-            showOnModal: false,
-            showOnDesktop: false,
-            showOnMobile: false,
-            label: '',
-          },
-          [WALLET_ADAPTERS.WALLET_CONNECT_V1]: {
-            showOnModal: false,
-            showOnDesktop: false,
-            showOnMobile: false,
-            label: '',
-          },
-        },
-      });
+      const metamaskAdapter = new MetamaskAdapter();
+      const openLoginAdapter = new OpenloginAdapter({ adapterSettings: { network: 'testnet', clientId: CONFIG.CLIENT_ID } });
+      web3AuthInstance.configureAdapter(metamaskAdapter);
+      web3AuthInstance.configureAdapter(openLoginAdapter);
+      await web3AuthInstance.init();
+
       setWeb3Auth(web3AuthInstance);
     } catch (error) {
       logError(error);
@@ -158,9 +144,14 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
 
   }, [web3, web3Auth]);
 
-  const connect = useCallback(async (): Promise<void> => {
+  const connect: CONNECT_TYPE = useCallback(async (loginProvider, loginPayload) => {
     if (!web3Auth) return;
-    await web3Auth.connect();
+    if (loginProvider === LOGIN_PROVIDER.METAMASK) {
+      await web3Auth.connectTo(WALLET_ADAPTERS.METAMASK, { loginProvider, login_hint: loginPayload });
+      return;
+    }
+
+    await web3Auth.connectTo(WALLET_ADAPTERS.OPENLOGIN, { loginProvider, login_hint: loginPayload });
   }, [web3Auth]);
 
   const logout = useCallback(async (): Promise<void> => {
