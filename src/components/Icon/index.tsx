@@ -17,6 +17,8 @@ import { ReactComponent as IconLoginDiscordInactive } from './assets/loginDiscor
 import { ReactComponent as IconLoginFacebook } from './assets/loginFacebook.svg';
 import { ReactComponent as IconLoginRedditInactive } from './assets/loginRedditInactive.svg';
 import { ReactComponent as IconLoginMore } from './assets/loginMore.svg';
+import { ReactComponent as IconUforikaLogo } from './assets/uforikaLogo.svg';
+import { ReactComponent as IconForaCoin } from './assets/foraCoin.svg';
 
 import { ICONS } from './types';
 import styles from './styles.module.scss';
@@ -68,6 +70,10 @@ const Icon: FC<Props> = ({
         return <IconSidebarProfile />;
       case ICONS.SIDEBAR_LOGOUT:
         return <IconSidebarLogout />;
+      case ICONS.UFORIKA_LOGO:
+        return <IconUforikaLogo />;
+      case ICONS.UFORA_COIN:
+        return <IconForaCoin />;
 
       default:
         return null;

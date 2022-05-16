@@ -1,22 +1,37 @@
 @import '../../assets/scss/helpers/all';
 
 .header {
-  align-items: center;
   background-color: transparent !important;
   border-bottom: 0.5px solid rgba($white, 0.3) !important;
   justify-content: space-between;
   min-height: 64px !important;
   padding: 16px 20px;
+  z-index: 2 !important;
 
   &::after {
     content: none !important;
   }
 }
 
-.logoContainer {
-  height: 40px;
+.leftContainer {
+  align-items: center;
+  display: flex;
+}
 
-  svg {
-    height: 100%;
-  }
+.logoContainer {
+  margin-right: 40px;
+}
+
+.rightContainer {
+  display: flex;
+}
+
+.userAvatar {
+  background-color: $black;
+  border: 2px solid $white;
+  border-radius: 50%;
+  height: 40px;
+  overflow: hidden;
+  padding: 8px 0 0 7px;
+  width: 40px;
 }

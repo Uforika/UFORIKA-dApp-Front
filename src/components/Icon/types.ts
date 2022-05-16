@@ -15,5 +15,7 @@ export enum ICONS {
   SIDEBAR_PROFILE = 'sidebarProfile',
   SIDEBAR_TRANSFER = 'sidebarTransfer',
   SIDEBAR_HISTORY = 'sidebarHistory',
-  SIDEBAR_LOGOUT = 'sidebarLogout'
+  SIDEBAR_LOGOUT = 'sidebarLogout',
+  UFORIKA_LOGO = 'uforikaLogo',
+  UFORA_COIN = 'uforaCoin',
 }

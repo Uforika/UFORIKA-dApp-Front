@@ -167,15 +167,15 @@
           > input {
             &:focus ~ label {
               &::before {
-                background-color: $primary;
-                border-color: $primary;
+                background-color: $malachite;
+                border-color: $malachite;
               }
             }
 
             ~ label {
               &::before {
-                background-color: $primary;
-                border-color: $primary;
+                background-color: $malachite;
+                border-color: $malachite;
               }
 
               &:hover {
@@ -272,13 +272,13 @@
           > input {
             &:focus ~ label {
               &::before {
-                background-color: $primary !important;
+                background-color: $malachite !important;
               }
             }
 
             ~ label {
               &::before {
-                background-color: $primary !important;
+                background-color: $malachite !important;
               }
 
               &::after {

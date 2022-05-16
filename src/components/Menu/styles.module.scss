@@ -1,5 +1,6 @@
 @import '../../assets/scss/helpers/all';
 
+
 .menuContainer :global {
   .ui.menu {
     border: 0;
@@ -16,6 +17,7 @@
 
       .item {
         cursor: pointer !important;
+        outline: 0;
 
         &.disabled {
           color: rgba($white, 0.3) !important;
@@ -32,8 +34,8 @@
           @include body-l-semi-bold($dustyGray);
           background-color: transparent;
           border: 0;
-          outline: 0;
-          padding: 0 4px 4px;
+          margin-left: 0;
+          padding: 0;
           position: relative;
           transition: border-color $transitionSpeed, color $transitionSpeed;
 
@@ -42,7 +44,7 @@
             content: '';
             display: block;
             height: 2px;
-            margin-left: -4px;
+            margin-left: 0;
             margin-top: 1px;
             position: absolute;
             top: 100%;
@@ -58,18 +60,15 @@
             }
           }
 
-          &:focus {
-            outline: 0;
-          }
 
           &.active {
             border: 0;
-            color: $primary;
+            color: $malachite;
             margin-bottom: 0;
             margin-top: 0;
 
             &::after {
-              background-color: $primary;
+              background-color: $malachite;
             }
 
             &:hover:not(.disabled) {
@@ -94,7 +93,6 @@
           display: flex;
           justify-content: flex-start;
           min-height: 48px;
-          outline: 0;
           padding: 14px 20px;
           transition: border-color $transitionSpeed, background-color $transitionSpeed, box-shadow $transitionSpeed;
           width: 220px;
@@ -106,7 +104,7 @@
           }
 
           &:hover:not(.disabled):not(.active),
-          &:global(.focus-visible) {
+          &:global(:focus) {
             border-color: rgba($white, 0.6);
             color: $white;
           }

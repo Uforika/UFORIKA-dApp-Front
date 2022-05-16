@@ -1,7 +1,7 @@
 import { ICONS } from '@components/Icon/types';
 import { PATH_HISTORY, PATH_PROFILE, PATH_TRANSFER } from '@constants/routes.constants';
 
-export const MENU_LIST_AUTH = [
+export const LEFT_MENU_LIST = [
   {
     label: 'Profile',
     href: PATH_PROFILE,

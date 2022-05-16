@@ -51,7 +51,7 @@
     }
 
     &.error {
-      border: 2px solid $secondary;
+      border: 2px solid $radicalRed;
     }
 
     &.readonly {
@@ -61,7 +61,7 @@
     }
 
     &:focus-within:not(.readonly) {
-      border: 2px solid $primary;
+      border: 2px solid $malachite;
     }
 
     &:hover:not([data-disabled='true']):not(:focus-within):not(.error):not(.readonly) {
@@ -90,7 +90,7 @@
   }
 
   .textError {
-    @include body-s($secondary);
+    @include body-s($radicalRed);
   }
 
   .hint {

@@ -1,7 +1,7 @@
 @import '../../assets/scss/helpers/all';
 
 .button {
-  @include body-m($primary);
+  @include body-m($malachite);
   align-items: center;
   background-color: transparent;
   border: 1px solid transparent;
@@ -32,7 +32,7 @@
   }
 
   &:focus:not([disabled]) {
-    border: 1px solid $primary;
+    border: 1px solid $malachite;
     text-decoration: underline;
   }
 

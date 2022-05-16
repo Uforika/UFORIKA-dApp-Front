@@ -3,9 +3,10 @@ import { useRouter } from 'next/router';
 import { MenuItem, Sidebar as UISidebar } from 'semantic-ui-react';
 import useWallet from '@hooks/wallet';
 import Menu from '@components/Menu';
+import Link from '@components/Link';
 import Icon from '@components/Icon';
 import { ICONS } from '@components/Icon/types';
-import { MENU_LIST_AUTH } from './constants';
+import { LEFT_MENU_LIST } from './constants';
 import styles from './styles.module.scss';
 
 const Sidebar = () => {
@@ -28,19 +29,21 @@ const Sidebar = () => {
       className={styles.sidebar}
     >
       <ul className={styles.menuList}>
-        {MENU_LIST_AUTH.map(({ href, label, icon }) => (
-          <MenuItem
-            onClick={handleMenuItem(href)}
-            key={label}
-            active={isActiveTab(href)}
-          >
-            <span className={styles.icon}>
-              <Icon width={20} type={icon} />
-            </span> {label}
-          </MenuItem>
+        {LEFT_MENU_LIST.map(({ href, label, icon }) => (
+          <Link key={label} href={href}>
+            <MenuItem
+              key={label}
+              onClick={handleMenuItem(href)}
+              active={isActiveTab(href)}
+              href={href}
+            >
+              <span className={styles.icon}>
+                <Icon width={20} type={icon} />
+              </span> {label}
+            </MenuItem>
+          </Link>
         ))}
       </ul>
-
       <MenuItem onClick={walletLogout}>
         <span className={styles.icon}>
           <Icon width={20} type={ICONS.SIDEBAR_LOGOUT} />

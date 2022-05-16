@@ -1,0 +1,21 @@
+@import '../../../assets/scss/helpers/all';
+
+.container {
+  align-items: center;
+  display: flex;
+  margin-right: 32px;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.balance {
+  @include body-m-semi-bold();
+  margin: 0;
+}
+
+.balanceUsd {
+  @include body-s($dustyGray);
+  margin: 0;
+}

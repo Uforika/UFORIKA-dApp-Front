@@ -1,12 +1,35 @@
 import React, { memo } from 'react';
-import { Menu } from 'semantic-ui-react';
-import { ReactComponent as LogoIcon } from '@assets/images/logo.svg';
+import { MenuItem } from 'semantic-ui-react';
+import Link from 'next/link';
+import Menu from '@components/Menu';
+import Icon from '@components/Icon';
+import { ICONS } from '@components/Icon/types';
+import { TOP_MENU_LIST } from './constants';
+import Balance from './Balance';
 import styles from './styles.module.scss';
 
 const Header = () => (
   <Menu className={styles.header}>
-    <div className={styles.logoContainer}>
-      <LogoIcon viewBox="0 0 158 44" />
+    <div className={styles.leftContainer}>
+      <Icon
+        width={143}
+        height={40}
+        className={styles.logoContainer}
+        type={ICONS.UFORIKA_LOGO}
+      />
+      {TOP_MENU_LIST.map(({ href, label, disabled }) => (
+        <Link key={label} href={href}>
+          <MenuItem disabled={disabled}>
+            {label}
+          </MenuItem>
+        </Link>
+      ))}
+    </div>
+    <div className={styles.rightContainer}>
+      <Balance />
+      <div className={styles.userAvatar}>
+        <img src="/images/user/user-image.png" alt="user avatar" />
+      </div>
     </div>
   </Menu>
 );

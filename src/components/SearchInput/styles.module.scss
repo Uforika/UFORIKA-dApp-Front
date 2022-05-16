@@ -9,7 +9,7 @@
     height: 28px;
 
     &:focus-within:not(.readonly) {
-      border: 1px solid $primary;
+      border: 1px solid $malachite;
     }
 
     &:hover:not([data-disabled='true']):not(:focus-within):not(.error):not(.readonly) {

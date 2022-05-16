@@ -1,6 +1,6 @@
 @import '../../assets/scss/helpers/all';
 
-.wrap {
+.pushableWrapper {
   display: grid;
   grid-auto-rows: minmax(100px, auto);
   grid-template-areas:
@@ -9,6 +9,7 @@
     'footer footer';
   grid-template-columns: 240px auto;
   grid-template-rows: 72px auto 50px;
+  overflow: hidden;
   transform: none !important;
 
   &.isHomePage {
@@ -41,7 +42,6 @@
 }
 
 .backgroundImage {
-  background-image: url('../../assets/images/bg.png');
   background-position: top center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -58,6 +58,11 @@
   &.offsetBg {
     top: -35%;
   }
+
+  img {
+    height: 98%;
+    width: 100%;
+  }
 }
 
 .main {
@@ -66,4 +71,5 @@
   margin: auto;
   max-width: 1680px;
   transform: none !important;
+  z-index: 0 !important;
 }

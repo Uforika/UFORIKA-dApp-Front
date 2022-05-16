@@ -2,7 +2,7 @@
 import React, { memo } from 'react';
 import cn from 'classnames';
 import 'focus-visible/dist/focus-visible.js';
-import Link from 'next/link';
+import Link from '@components/Link';
 import styles from './logo.module.scss';
 
 type Props = {

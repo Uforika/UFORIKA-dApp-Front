@@ -1,7 +1,7 @@
 @import '../../assets/scss/helpers/all';
 
 @mixin primary() {
-  background-color: $primary;
+  background-color: $malachite;
   color: $black;
 }
 
@@ -106,7 +106,7 @@
 
         &:hover {
           @include secondary;
-          background-color: rgba($primary, 0.3);
+          background-color: rgba($malachite, 0.3);
           border: 1px solid $dustyGray;
         }
 
@@ -146,7 +146,7 @@
           @include primary;
 
           &::before {
-            border-color: $primaryLight;
+            border-color: $magicMint;
           }
         }
 
@@ -159,7 +159,7 @@
           @include primary;
 
           &::before {
-            border: 1px solid $primary;
+            border: 1px solid $malachite;
           }
         }
 
