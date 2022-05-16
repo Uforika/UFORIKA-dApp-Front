@@ -1,12 +1,27 @@
-/* stylelint-disable block-no-empty */
-.toastContainer {
-
-}
+@import '../../assets/scss/helpers/all';
 
 .toastBody {
+  align-items: center;
+  display: flex;
+  padding: 8px 12px;
 
+  p {
+    margin: 0;
+  }
 }
 
-.toastProgress {
+.icon {
+  margin-right: 12px;
+}
 
+.type {
+  @include body-l-semi-bold()
+;
+  margin-right: 12px;}
+
+.message {
+  @include body-m(); }
+
+.toastProgress {
+  background-color: rgba($white, 0.3) !important;
 }

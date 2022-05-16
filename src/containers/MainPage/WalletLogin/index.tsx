@@ -22,7 +22,7 @@ const WalletLogin: FC = () => {
         secondary
       >
         Connect with Metamask
-        <span className={styles.icon}><Icon type={ICONS.LOGIN_METAMASK} /></span>
+        <span className={styles.icon}><Icon width={20} type={ICONS.LOGIN_METAMASK} /></span>
       </Button>
     </div>
   );

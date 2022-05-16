@@ -1,14 +1,14 @@
-import { toast, ToastOptions } from 'react-toastify';
 import React from 'react';
+import { toast, ToastOptions } from 'react-toastify';
+import Icon from '@components/Icon';
+import { ICONS } from '@components/Icon/types';
 import styles from './styles.module.scss';
 
 export const showToast = (
   message: string,
-  type: 'info' | 'success' | 'warning' | 'error' | 'default' | 'dark' | undefined,
+  type: 'success' | 'error'| 'warning',
   handleAction?: () => void,
-  handleClose?: () => void,
 ): void => {
-  let bool = false;
   const options: ToastOptions = {
     position: 'top-right',
     autoClose: 3500,
@@ -18,26 +18,29 @@ export const showToast = (
     pauseOnFocusLoss: true,
     draggable: true,
     //  Here you can override Toast container, body and progress:
-    bodyClassName: styles.toastBody, // <==
-    className: styles.toastBody, // <==
-    progressClassName: styles.toastBody, // <==
-    type,
+    bodyClassName: styles.toastBody,
+    progressClassName: styles.toastProgress,
+    type: 'dark',
     onClose: () => {
-      if (!bool) {
-        if (handleAction) {
-          handleAction();
-        }
+      if (handleAction) {
+        handleAction();
       }
     },
-    closeButton: !handleClose ? false : (
-      <button
-        onClick={() => {
-          handleClose();
-          bool = true;
-        }}
-      >CLOSE
-      </button>
-    ),
   };
-  toast(message, options);
+
+  const toastTitle = type === 'success' ? 'Success' : 'Error';
+
+  const toastContent = () => (
+    <>
+      <Icon className={styles.icon} width={40} type={type === 'success' ? ICONS.SUCCESS : ICONS.FAIL} />
+      <div>
+        <p className={styles.type}>
+          {toastTitle}
+        </p>
+        <p className={styles.message}>{message}</p>
+      </div>
+    </>
+  );
+
+  toast(toastContent(), options);
 };

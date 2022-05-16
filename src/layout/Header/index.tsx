@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Menu from '@components/Menu';
 import Icon from '@components/Icon';
 import { ICONS } from '@components/Icon/types';
+import Popup from '@components/Popup';
 import { TOP_MENU_LIST } from './constants';
 import Balance from './Balance';
 import styles from './styles.module.scss';
@@ -18,11 +19,24 @@ const Header = () => (
         type={ICONS.UFORIKA_LOGO}
       />
       {TOP_MENU_LIST.map(({ href, label, disabled }) => (
-        <Link key={label} href={href}>
-          <MenuItem disabled={disabled}>
-            {label}
-          </MenuItem>
-        </Link>
+        disabled
+          ? (
+            <Popup
+              trigger={(
+                <MenuItem disabled={disabled}>
+                  {label}
+                </MenuItem>
+              )}
+              position="bottom left"
+              content="Soon"
+            />
+          ) : (
+            <Link key={label} href={href}>
+              <MenuItem>
+                {label}
+              </MenuItem>
+            </Link>
+          )
       ))}
     </div>
     <div className={styles.rightContainer}>

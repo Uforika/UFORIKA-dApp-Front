@@ -1,6 +1,6 @@
 @import '../../assets/scss/helpers/all';
 
-.pushableWrapper {
+.wrap {
   display: grid;
   grid-auto-rows: minmax(100px, auto);
   grid-template-areas:
@@ -17,6 +17,10 @@
       'main main'
       'main main'
       'footer  footer';
+  }
+
+  &::-webkit-scrollbar {
+    width: 0;
   }
 }
 
@@ -61,6 +65,7 @@
 
   img {
     height: 98%;
+    object-fit: cover;
     width: 100%;
   }
 }

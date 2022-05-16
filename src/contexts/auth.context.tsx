@@ -9,6 +9,9 @@ import {
   useAuthControllerGetSignMessage,
   useAuthControllerSignIn, useAuthControllerSignOut,
 } from '@782-uforika/client-sdk/services/AuthService';
+import { showToast } from '@components/Toast';
+import { TOAST_MASSAGE_ERRORS } from '@constants/messages.constants';
+import { TOAST_ERROR } from '@constants/toast.constants';
 import { AuthMeType } from '../types/auth.types';
 
 /**
@@ -69,6 +72,7 @@ const AuthProvider: FC = ({ children }) => {
         await mutateProfile();
 
       } catch (error) {
+        showToast(TOAST_MASSAGE_ERRORS.AUTH_ERROR, TOAST_ERROR);
         logError(error);
         await walletLogout();
       }

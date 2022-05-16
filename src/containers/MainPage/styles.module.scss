@@ -1,13 +1,22 @@
 @import '../../assets/scss/helpers/all';
 
 .wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
   margin: auto;
   max-width: 1270px;
-  padding: 0 20px 0 40px;
+  padding: 0 20px;
   width: 100%;
+
+  @include media-breakpoint-down($breakpointLg) {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
 }
 
 .imageContainer {
+  margin: auto;
   max-width: 647px;
 
   img {
@@ -37,8 +46,16 @@
   border: 0.5px solid rgba($white, 0.3);
   border-radius: 12px;
   margin-left: auto;
-  max-width: 408px;
   padding: 32px 31px;
+  width: 408px;
+
+  @include media-breakpoint-down($breakpointLg) {
+    margin: auto;
+  }
+
+  @include media-breakpoint-down($breakpointSm) {
+    width: 100%;
+  }
 }
 
 .grid {
@@ -67,5 +84,13 @@
     &:hover {
       text-decoration: none;
     }
+  }
+}
+
+.secured {
+  text-align: right;
+
+  p {
+    margin-bottom: 8px;
   }
 }

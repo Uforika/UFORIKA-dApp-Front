@@ -7,6 +7,9 @@ import { DEFAULT_CRITERIA_MODE, DEFAULT_REVALIDATE_MODE, FIELD_NAMES } from '@co
 import * as yup from 'yup';
 import useWallet from '@hooks/wallet';
 import { LOGIN_PROVIDER } from '@helpers/wallets.helper';
+import { showToast } from '@components/Toast';
+import { TOAST_MASSAGE_ERRORS } from '@constants/messages.constants';
+import { TOAST_ERROR } from '@constants/toast.constants';
 import { emailYup } from './validators';
 import styles from './styles.module.scss';
 
@@ -27,10 +30,16 @@ const EmailLogin: FC = () => {
     resolver: yupResolver(schema),
     reValidateMode: DEFAULT_REVALIDATE_MODE,
     criteriaMode: DEFAULT_CRITERIA_MODE,
+    defaultValues: { [FIELD_NAMES.EMAIL]: '' },
   });
-  const onSubmit = (data: Form) => {
-    walletAuth(LOGIN_PROVIDER.EMAIL_PASSWORDLESS, data.email).catch(() => null);
+  const onSubmit = async (data: Form) => {
+    try {
+      await walletAuth(LOGIN_PROVIDER.EMAIL_PASSWORDLESS, data.email);
+    } catch (error) {
+      showToast(TOAST_MASSAGE_ERRORS.CLOSE_MODAL, TOAST_ERROR);
+    }
   };
+
   return (
     <div className={styles.wrapper}>
       <p className={styles.label}>Wallet</p>
@@ -51,7 +60,6 @@ const EmailLogin: FC = () => {
               />
             )}
           />
-
         </div>
         <Button
           size="medium"

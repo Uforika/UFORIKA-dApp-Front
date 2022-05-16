@@ -46,7 +46,7 @@ const WalletProvider: FC = ({ children }) => {
     try {
       const userAddress = (await getAccounts())[0];
       setAddress(userAddress);
-    } catch (e) {
+    } catch (error) {
       setAddress(null);
     }
 
@@ -56,7 +56,7 @@ const WalletProvider: FC = ({ children }) => {
     try {
       const currentChainId = await getChainId();
       setChainId(currentChainId);
-    } catch (e) {
+    } catch (error) {
       setChainId(null);
     }
 

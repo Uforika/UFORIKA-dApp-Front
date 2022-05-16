@@ -22,7 +22,7 @@ const Layout: FC<Props> = ({ children }) => {
   const { isAuthorized } = useAuth();
 
   return (
-    <UISidebar.Pushable className={cn(styles.pushableWrapper, { [styles.isHomePage]: isHomePage })}>
+    <UISidebar.Pushable className={cn(styles.wrap, { [styles.isHomePage]: isHomePage })}>
       <div className={cn(styles.backgroundImage, { [styles.offsetBg]: isHomePage })}>
         <img src="/images/bg.png" alt="background" />
       </div>
