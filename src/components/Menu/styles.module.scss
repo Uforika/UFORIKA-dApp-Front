@@ -3,6 +3,7 @@
 .menuContainer :global {
   .ui.menu {
     border: 0;
+    width: 100%;
 
     &.secondary {
       &.vertical .item:not(:last-child) {
@@ -80,6 +81,7 @@
 
       &.pointing {
         background-color: unset;
+        border: 0;
         margin: 0;
 
         .item {

@@ -1,7 +1,43 @@
 @import '../../assets/scss/helpers/all';
 
-.pushable {
+.pushableWrapper {
+  display: grid;
+  grid-auto-rows: minmax(100px, auto);
+  grid-template-areas:
+    'header  header '
+    'sidebar  main '
+    'footer footer ';
+  grid-template-columns: 250px auto;
+  grid-template-rows: 72px auto 50px;
   transform: none !important;
+
+  &.isHomePage {
+    grid-template-areas:
+      ' main main'
+      ' main main'
+      'footer  footer';
+  }
+}
+
+.headerWrapper {
+  grid-area: header;
+  z-index: 1;
+}
+
+.footerWrapper {
+  grid-area: footer;
+  z-index: 1;
+}
+
+.contentWrapper {
+  grid-area: main;
+  overflow: auto;
+  z-index: 1;
+}
+
+.sidebarWrapper {
+  grid-area: sidebar;
+  z-index: 1;
 }
 
 .backgroundImage {
@@ -26,12 +62,9 @@
 
 .main {
   display: flex;
+  height: 100%;
   margin: auto;
   max-width: 1680px;
   transform: none !important;
 }
 
-.mainPadding {
-  padding-left: 260px;
-  padding-top: 74px;
-}

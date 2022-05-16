@@ -2,13 +2,13 @@ import React, {
   FC, memo, useMemo,
 } from 'react';
 import { useRouter } from 'next/router';
-import { Sidebar } from 'semantic-ui-react';
+import { Sidebar as UISidebar } from 'semantic-ui-react';
 import cn from 'classnames';
 import { PATH_INDEX } from '@constants/routes.constants';
 import { useAuth } from '@hooks/auth.hooks';
 import Footer from '../Footer';
-import LeftSidebar from '../LeftSidebar';
-import TopSidebar from '../TopSidebar';
+import Sidebar from '../Sidebar';
+import Header from '../Header';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -22,17 +22,29 @@ const Layout: FC<Props> = ({ children }) => {
   const { isAuthorized } = useAuth();
 
   return (
-    <Sidebar.Pushable className={styles.pushable}>
+    <UISidebar.Pushable className={cn(styles.pushableWrapper, { [styles.isHomePage]: isHomePage })}>
       <div className={cn(styles.backgroundImage, { [styles.offsetBg]: isHomePage })} />
-      {!isHomePage && isAuthorized && <TopSidebar />}
-      {!isHomePage && isAuthorized && (<LeftSidebar />)}
+      {!isHomePage && isAuthorized && (
+        <div className={styles.headerWrapper}>
+          <Header />
+        </div>
+      ) }
+      {!isHomePage && isAuthorized && (
+        <div className={styles.sidebarWrapper}>
+          <Sidebar />
+        </div>
+      )}
 
-      <Sidebar.Pusher className={cn(styles.main, { [styles.mainPadding]: !isHomePage })}>
-        {children}
-      </Sidebar.Pusher>
+      <div className={styles.contentWrapper}>
+        <UISidebar.Pusher className={styles.main}>
+          {children}
+        </UISidebar.Pusher>
+      </div>
 
-      <Footer />
-    </Sidebar.Pushable>
+      <div className={styles.footerWrapper}>
+        <Footer />
+      </div>
+    </UISidebar.Pushable>
   );
 };
 
