@@ -3,45 +3,54 @@
 .searchContainer {
   position: relative;
 
-  .inputWrapper {
-    background-color: transparent;
-    border: 1px solid transparent;
-    height: 28px;
+  :global {
+    .ui.input {
+      width: 100%;
 
-    &:focus-within:not(.readonly) {
-      border: 1px solid $malachite;
-    }
-
-    &:hover:not([data-disabled='true']):not(:focus-within):not(.error):not(.readonly) {
-      border: 1px solid $dustyGray;
-    }
-
-    input {
-      color: $white;
-      padding-left: 32px;
-
-      &::placeholder {
-        color: $white;
+      svg {
+        left: 8px;
+        pointer-events: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
       }
 
-      &:focus {
+      > input {
+        background-color: transparent;
+        border: 1px solid transparent;
         color: $white;
+        height: 28px;
+        padding-left: 32px;
+
+        &:focus-within:not(.readonly) {
+          border: 1px solid $malachite;
+        }
+
+        &:hover:not([data-disabled='true']):not(:focus-within):not(.error):not(.readonly) {
+          border: 1px solid $dustyGray;
+        }
+
+        input {
+          color: $white;
+          padding-left: 32px;
+
+          &::placeholder {
+            color: $white;
+          }
+
+          &:focus {
+            color: $white;
+          }
+        }
       }
     }
-  }
 
-  .searchIcon {
-    left: 8px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .cancelButton {
-    display: inline-flex;
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
+    .cancelButton {
+      display: inline-flex;
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
 }
