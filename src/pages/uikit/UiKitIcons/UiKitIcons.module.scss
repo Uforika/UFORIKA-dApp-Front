@@ -1,0 +1,12 @@
+.wrap {
+  background-color: #FFF;
+  border-radius: 6px;
+  margin-top: 60px;
+  padding: 20px 30px;
+}
+
+.grid {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(8, 1fr);
+}

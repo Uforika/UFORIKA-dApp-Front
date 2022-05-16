@@ -1,8 +1,9 @@
 import React, { FC, memo } from 'react';
 import Button from '@components/Button';
-import { ReactComponent as MetamaskIcon } from '@assets/images/icons/wallet/metamask.svg';
 import useWallet from '@hooks/wallet';
 import { LOGIN_PROVIDER } from '@helpers/wallets.helper';
+import Icon from '@components/Icon';
+import { ICONS } from '@components/Icon/types';
 import styles from './styles.module.scss';
 
 const WalletLogin: FC = () => {
@@ -20,7 +21,8 @@ const WalletLogin: FC = () => {
         size="medium"
         secondary
       >
-        Connect with Metamask <MetamaskIcon />
+        Connect with Metamask
+        <span className={styles.icon}><Icon type={ICONS.LOGIN_METAMASK} /></span>
       </Button>
     </div>
   );

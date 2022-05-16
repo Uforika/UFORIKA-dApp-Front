@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import cn from 'classnames';
 import { Checkbox as UICheckbox, StrictCheckboxProps } from 'semantic-ui-react';
-import styles from './checkbox.module.scss';
+import styles from './styles.module.scss';
 
 type Props = StrictCheckboxProps
 

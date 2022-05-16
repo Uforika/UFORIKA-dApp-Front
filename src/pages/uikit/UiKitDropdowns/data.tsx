@@ -1,10 +1,6 @@
 import React from 'react';
-import { ReactComponent as IconUsdt } from '@assets/images/currency/usdt24.svg';
-import { ReactComponent as IconRfuel } from '@assets/images/currency/rfuel24.svg';
-import { ReactComponent as IconBtc } from '@assets/images/currency/btc24.svg';
-import { ReactComponent as IconUsdtSmall } from '@assets/images/currency/usdt20.svg';
-import { ReactComponent as IconRfuelSmall } from '@assets/images/currency/rfuel20.svg';
-import { ReactComponent as IconBtcSmall } from '@assets/images/currency/btc20.svg';
+import Icon from '@components/Icon';
+import { ICONS } from '@components/Icon/types';
 
 export const options = [
   { text: 'One', value: 'one' },
@@ -16,22 +12,22 @@ export const currencyOptions = [
   {
     text: 'USDT',
     value: '0.00',
-    image: <IconUsdt />,
-    imageSmall: <IconUsdtSmall />,
+    image: <Icon type={ICONS.DROPDOWN_CURRENCY_USDT} />,
+    imageSmall: <Icon width={20} type={ICONS.DROPDOWN_CURRENCY_USDT} />,
     id: 'usdt',
   },
   {
     text: 'RFUEL',
     value: '10,000.001',
-    image: <IconRfuel />,
-    imageSmall: <IconRfuelSmall />,
+    image: <Icon type={ICONS.DROPDOWN_CURRENCY_RFUEL} />,
+    imageSmall: <Icon width={20} type={ICONS.DROPDOWN_CURRENCY_RFUEL} />,
     id: 'rfuel',
   },
   {
     text: 'BTC',
     value: '0.08',
-    image: <IconBtc />,
-    imageSmall: <IconBtcSmall />,
+    image: <Icon type={ICONS.DROPDOWN_CURRENCY_BTC} />,
+    imageSmall: <Icon width={20} type={ICONS.DROPDOWN_CURRENCY_BTC} />,
     id: 'btc',
   },
 ];

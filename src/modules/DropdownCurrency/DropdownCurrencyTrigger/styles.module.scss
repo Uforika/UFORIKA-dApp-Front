@@ -2,9 +2,9 @@
 
 .wrap {
   align-items: center;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+  position: absolute;
+  right: 30px;
+  z-index: 2;
 }
 
 .panel {
@@ -29,11 +29,15 @@
 }
 
 .text,
-.value {
+.input {
   @include body-m($dustyGray);
 }
 
-.value {
+.input {
+  background-color: transparent;
+  border: 0;
   display: flex;
-  margin-left: 8px;
+  margin-right: 10px;
+  outline: none;
+  width: 100%;
 }

@@ -1,12 +1,13 @@
-import React, { FC, memo } from 'react';
-import { DropdownCurrencyItemType } from '../types';
-import styles from './DropdownCurrencyTrigger.module.scss';
+import React, { FC, ReactNode, memo } from 'react';
+import styles from './styles.module.scss';
 
-type Props = Pick<DropdownCurrencyItemType, 'image' | 'text' | 'value'>
+type Props = {
+  text: ReactNode
+  image: ReactNode
+}
 
-const DropdownCurrencyTrigger: FC<Props> = ({ text, image, value }) => (
+const DropdownInput: FC<Props> = ({ image, text }) => (
   <div className={styles.wrap}>
-    <span className={styles.value}>{value}</span>
     <div className={styles.panel}>
       <span className={styles.image}>{image}</span>
       <span className={styles.text}>{text}</span>
@@ -14,4 +15,4 @@ const DropdownCurrencyTrigger: FC<Props> = ({ text, image, value }) => (
   </div>
 );
 
-export default memo(DropdownCurrencyTrigger);
+export default memo(DropdownInput);

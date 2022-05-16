@@ -1,7 +1,9 @@
 import React, { FC, memo } from 'react';
 import { Dropdown as UIDropdown, StrictDropdownProps } from 'semantic-ui-react';
-import { ReactComponent as IconChevron } from './assets/chevron.svg';
-import styles from './Dropdown.module.scss';
+import cn from 'classnames';
+import Icon from '@components/Icon';
+import { ICONS } from '@components/Icon/types';
+import styles from './styles.module.scss';
 
 type Props = StrictDropdownProps & {
   selectOnBlur?: boolean;
@@ -13,16 +15,22 @@ type Props = StrictDropdownProps & {
 }
 
 const Dropdown: FC<Props> = ({
-  selectOnBlur, selectOnNavigation, fluid, label, name, errorMessage, ...props
+  selectOnBlur, selectOnNavigation, fluid, label, name, errorMessage, className, ...props
 }) => (
-  <div className={styles.wrap}>
+  <div className={cn(styles.wrap, className)}>
     {label && <label className={styles.label} htmlFor={name}>{label}</label>}
     <UIDropdown
       fluid={fluid}
       selectOnNavigation={selectOnNavigation}
       selectOnBlur={selectOnBlur}
       className={styles.dropdown}
-      icon={<IconChevron className={styles.icon} />}
+      icon={(
+        <Icon
+          className="dropdownIcon"
+          type={ICONS.DROPDOWN_CHEVRON}
+          width={16}
+        />
+      )}
       id={name}
       {...props}
     />

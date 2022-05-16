@@ -22,7 +22,6 @@ const Modal: FC<Props> = ({
     onClose={onClose}
     {...props}
   >
-
     <div className={styles.content}>{children}</div>
   </UIModal>
 );

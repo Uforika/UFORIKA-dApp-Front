@@ -95,6 +95,11 @@
         }
       }
 
+      &.small {
+        max-height: 32px;
+        padding: 4px;
+      }
+
       &.secondary {
         @include secondary;
         border: 1px solid $dustyGray;
@@ -167,6 +172,19 @@
             border-color: rgba($black, 0.6) transparent transparent;
           }
         }
+      }
+    }
+
+    &.icon {
+      background-color: transparent;
+      border-radius: 6px;
+
+      &::before {
+        display: none;
+      }
+
+      &:hover {
+        background-color: rgba($sanMarino, 0.1);
       }
     }
   }

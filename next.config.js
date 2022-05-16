@@ -6,7 +6,8 @@ const withSvgr = require('@newhighsco/next-plugin-svgr')
 
 const withSvgrConfig = {
   svgrOptions: {
-    typescript: true
+    typescript: true,
+    dimensions: false
   }
 }
 

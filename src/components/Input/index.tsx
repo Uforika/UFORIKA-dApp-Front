@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 import { Input as UIInput, StrictInputProps } from 'semantic-ui-react';
-import styles from './input.module.scss';
+import styles from './styles.module.scss';
 
 type PickedTypes = 'label' | 'className' | 'disabled' | 'type'| 'onChange'
 

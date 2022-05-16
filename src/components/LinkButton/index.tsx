@@ -17,10 +17,7 @@ const LinkButton: React.FC<Props> = ({
   ...props
 }) => (
   <button
-    className={cn(
-      styles.button,
-      className,
-    )}
+    className={cn(styles.button, className)}
     disabled={disabled || isLoading}
     type="button"
     {...props}

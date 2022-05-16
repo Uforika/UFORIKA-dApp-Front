@@ -2,7 +2,7 @@ import React, { FC, memo } from 'react';
 import classNames from 'classnames';
 import { Dropdown as UIDropdown } from 'semantic-ui-react';
 import { DropdownCurrencyItemType } from '../types';
-import styles from './DropdownCurrencyItem.module.scss';
+import styles from './styles.module.scss';
 
 type Props = Omit<DropdownCurrencyItemType, 'imageSmall'>
 

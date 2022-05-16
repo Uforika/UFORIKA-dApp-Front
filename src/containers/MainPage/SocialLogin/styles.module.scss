@@ -18,7 +18,25 @@
   margin-right: 15px;
 }
 
+.button,
+.buttonMore {
+  border: 1px solid $dustyGray !important;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: rgba($dustyGray, 0.2) !important;
+  }
+}
+
 .button {
-  border: 0 !important;
-  padding: 0 !important;
+  padding: 9px !important;
+}
+
+.buttonMore {
+  align-items: center;
+  display: flex;
+  height: 44px;
+  justify-content: center;
+  padding: 5px;
+  width: 44px;
 }

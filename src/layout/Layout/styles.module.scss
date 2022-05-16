@@ -1,20 +1,20 @@
 @import '../../assets/scss/helpers/all';
 
-.pushableWrapper {
+.wrap {
   display: grid;
   grid-auto-rows: minmax(100px, auto);
   grid-template-areas:
-    'header  header '
-    'sidebar  main '
-    'footer footer ';
-  grid-template-columns: 250px auto;
+    'header  header'
+    'sidebar  main'
+    'footer footer';
+  grid-template-columns: 240px auto;
   grid-template-rows: 72px auto 50px;
   transform: none !important;
 
   &.isHomePage {
     grid-template-areas:
-      ' main main'
-      ' main main'
+      'main main'
+      'main main'
       'footer  footer';
   }
 }
@@ -67,4 +67,3 @@
   max-width: 1680px;
   transform: none !important;
 }
-

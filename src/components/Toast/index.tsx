@@ -1,6 +1,6 @@
 import { toast, ToastOptions } from 'react-toastify';
 import React from 'react';
-import styles from './toast.module.scss';
+import styles from './styles.module.scss';
 
 export const showToast = (
   message: string,

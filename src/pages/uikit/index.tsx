@@ -3,16 +3,20 @@ import Link from 'next/link';
 import { Page } from '../../types/next.types';
 import UiKitModals from './UiKitModals';
 import UiKitDropdowns from './UiKitDropdowns';
+import UiKitIcons from './UiKitIcons';
 import styles from './uikit.module.scss';
 
 const UiKitPage: Page = () => (
   <div className={styles.page}>
     <div className={styles.wrap}>
-      <Link href="/">⬅️ To Index</Link>
+      <div className={styles.link}>
+        <Link href="/">⬅️ To Index</Link>
+      </div>
       <br />
       <br />
       <UiKitModals />
       <UiKitDropdowns />
+      <UiKitIcons />
     </div>
   </div>
 );

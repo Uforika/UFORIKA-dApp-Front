@@ -90,7 +90,7 @@
       display: none;
     }
 
-    .dropdown.active > svg {
+    .dropdown.active > .dropdownIcon svg {
       transform: rotate(180deg);
     }
 

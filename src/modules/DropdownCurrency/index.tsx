@@ -1,19 +1,25 @@
-import React, { FC, memo, useMemo } from 'react';
+import React, {
+  ChangeEvent, FC, memo, useCallback, useMemo,
+} from 'react';
 import { StrictDropdownProps } from 'semantic-ui-react';
 import Dropdown from '@components/Dropdown';
 import DropdownCurrencyTrigger from './DropdownCurrencyTrigger';
 import DropdownCurrencyMenu from './DropdownCurrencyMenu';
-import { DropdownCurrencyItemType } from './types';
 import useActiveSelection from './hooks/useActiveSelection';
+import { DropdownCurrencyItemType } from './types';
+import styles from './styles.module.scss';
 
-type Props = StrictDropdownProps & {
+type Props = Omit<StrictDropdownProps, 'onChange' | 'value'> & {
   options: DropdownCurrencyItemType[],
-  label?: string
   name: string
+  onChange?: (value: string) => void
+  value?: string | number
+  label?: string
+  panelText?: string
 }
 
 const DropdownCurrency: FC<Props> = ({
-  options, label, name, placeholder,
+  options, name, placeholder, value, label, onChange, panelText,
 }) => {
   const { activeOptionId, handleSelectOption } = useActiveSelection(options);
 
@@ -28,29 +34,62 @@ const DropdownCurrency: FC<Props> = ({
       <DropdownCurrencyTrigger
         text={activeOption.text}
         image={activeOption.imageSmall}
-        value={activeOption.value}
       />
     );
   }, [activeOption]);
 
+  const handleChangeCurrencyValue = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    onChange?.(event.target.value);
+  }, [onChange]);
+
+  const handleSetCurrencyValue = useCallback(() => {
+    if (activeOption) {
+      onChange?.(activeOption.value as string);
+    }
+  }, [onChange, activeOption]);
+
   return (
-    <Dropdown
-      label={label}
-      name={name}
-      placeholder={placeholder}
-      trigger={activeTrigger}
-    >
-      <DropdownCurrencyMenu
-        activeItemId={activeOptionId}
-        onSelect={handleSelectOption}
-        options={options}
-      />
-    </Dropdown>
+    <>
+      <div className={styles.panel}>
+        {label && (
+          <label className={styles.label} htmlFor={name}>
+            {label}
+          </label>
+        )}
+        {panelText && (
+          <button
+            onClick={handleSetCurrencyValue}
+            className={styles.panelText}
+          >{panelText}
+          </button>
+        )}
+      </div>
+      <div className={styles.wrap}>
+        <input
+          placeholder={placeholder}
+          className={styles.input}
+          value={value}
+          name={name}
+          id={name}
+          onChange={handleChangeCurrencyValue}
+        />
+        <Dropdown className={styles.dropdown} name={name} trigger={activeTrigger}>
+          <DropdownCurrencyMenu
+            activeItemId={activeOptionId}
+            onSelect={handleSelectOption}
+            options={options}
+          />
+        </Dropdown>
+      </div>
+    </>
   );
 };
 
 DropdownCurrency.defaultProps = {
-  label: '',
+  value: undefined,
+  onChange: undefined,
+  label: undefined,
+  panelText: undefined,
 };
 
 export default memo(DropdownCurrency);
