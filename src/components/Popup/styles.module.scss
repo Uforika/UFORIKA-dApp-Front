@@ -1,0 +1,16 @@
+@import '../../assets/scss/helpers/all';
+
+.wrap {
+  &:global.ui {
+    @include body-m();
+    background-color: rgba($black, 0.6);
+    border: 1px solid rgba($white, 0.3);
+    border-radius: 6px;
+    box-shadow: none;
+    padding: 8px 10px;
+
+    &::before {
+      display: none;
+    }
+  }
+}

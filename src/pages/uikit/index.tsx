@@ -4,7 +4,8 @@ import { Page } from '../../types/next.types';
 import UiKitModals from './UiKitModals';
 import UiKitDropdowns from './UiKitDropdowns';
 import UiKitIcons from './UiKitIcons';
-import styles from './uikit.module.scss';
+import UiKitPopups from './UiKitPopups';
+import styles from './styles.module.scss';
 
 const UiKitPage: Page = () => (
   <div className={styles.page}>
@@ -17,6 +18,7 @@ const UiKitPage: Page = () => (
       <UiKitModals />
       <UiKitDropdowns />
       <UiKitIcons />
+      <UiKitPopups />
     </div>
   </div>
 );

@@ -72,7 +72,7 @@ const Icon: FC<Props> = ({
         return <IconSidebarLogout />;
       case ICONS.UFORIKA_LOGO:
         return <IconUforikaLogo />;
-      case ICONS.UFORA_COIN:
+      case ICONS.FORA_COIN:
         return <IconForaCoin />;
 
       default:
@@ -92,7 +92,7 @@ const Icon: FC<Props> = ({
 };
 
 Icon.defaultProps = {
-  width: 24,
+  width: undefined,
   height: undefined,
   className: undefined,
 };

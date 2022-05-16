@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { useFailModal, useSuccessModal } from '@hooks/modals.hooks';
-import styles from './UiKitModals.module.scss';
+import styles from './styles.module.scss';
 
 const UiKitModals = () => {
   const [showSuccessModal] = useSuccessModal('TEST', () => null);

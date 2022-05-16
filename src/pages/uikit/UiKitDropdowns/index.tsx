@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react';
 import Dropdown from '@components/Dropdown';
 import DropdownCurrency from 'src/modules/DropdownCurrency';
 import { currencyOptions, options } from './data';
-import styles from './UiKitDropdowns.module.scss';
+import styles from './styles.module.scss';
 
 const UiKitDropdowns = () => {
   const [currencyValue, setCurrencyValue] = useState<string>();

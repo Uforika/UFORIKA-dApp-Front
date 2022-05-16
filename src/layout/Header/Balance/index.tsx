@@ -9,7 +9,7 @@ const Balance = () => {
 
   return (
     <div className={styles.container}>
-      <Icon className={styles.icon} width={24} type={ICONS.UFORA_COIN} />
+      <Icon className={styles.icon} width={24} type={ICONS.FORA_COIN} />
       <div>
         <p className={styles.balance}>{formatNumber(USER_BALANCE)} $FORA </p>
         <p className={styles.balanceUsd}>${formatNumber(balanceToUSD)}</p>

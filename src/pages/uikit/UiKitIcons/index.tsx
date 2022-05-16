@@ -1,8 +1,7 @@
+import React, { memo } from 'react';
 import ButtonIcon from '@components/ButtonIcon';
 import { ICONS } from '@components/Icon/types';
-import React, { memo } from 'react';
-
-import styles from './UiKitIcons.module.scss';
+import styles from './styles.module.scss';
 
 const UiKitIcons = () => (
   <div className={styles.wrap}>
