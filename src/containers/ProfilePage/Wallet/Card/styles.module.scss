@@ -1,0 +1,22 @@
+@import '../../../../assets/scss/helpers/all';
+
+.card {
+  border-right: 1px solid $tundora;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 32px;
+}
+
+.count {
+  @include h3();
+  margin: 0;
+}
+
+.name {
+  @include body-l-semi-bold();
+  margin-bottom: 8px;
+}
+
+.usdPrice {
+  @include body-m($dustyGray);
+}

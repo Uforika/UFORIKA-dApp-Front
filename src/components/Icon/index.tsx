@@ -27,7 +27,13 @@ import { ReactComponent as IconLoginWechat } from './assets/loginWechat.svg';
 import { ReactComponent as IconLoginMore } from './assets/loginMore.svg';
 import { ReactComponent as IconUforikaLogo } from './assets/uforikaLogo.svg';
 import { ReactComponent as IconWeb3AuthLogo } from './assets/web3AuthLogo.svg';
-import { ReactComponent as IconForaCoin } from './assets/foraCoin.svg';
+import { ReactComponent as IconForaCoinLogo } from './assets/foraCoinLogo.svg';
+import { ReactComponent as IconMaticCoinLogo } from './assets/maticCoinLogo.svg';
+import { ReactComponent as IconProfileQrCode } from './assets/profileQrCode.svg';
+import { ReactComponent as IconProfileCopy } from './assets/profileCopy.svg';
+import { ReactComponent as IconCloseQrCodeModal } from './assets/closeQrCodeModal.svg';
+import { ReactComponent as IconProfileShield } from './assets/profileShield.svg';
+import { ReactComponent as IconProfileUfoship } from './assets/profileUfoship.svg';
 
 import { ICONS } from './types';
 import styles from './styles.module.scss';
@@ -97,10 +103,22 @@ const Icon: FC<Props> = ({
         return <IconSidebarLogout />;
       case ICONS.UFORIKA_LOGO:
         return <IconUforikaLogo />;
-      case ICONS.FORA_COIN:
-        return <IconForaCoin />;
+      case ICONS.FORA_COIN_LOGO:
+        return <IconForaCoinLogo />;
+      case ICONS.MATIC_COIN_LOGO:
+        return <IconMaticCoinLogo />;
       case ICONS.WEB3_AUTH_LOGO:
         return <IconWeb3AuthLogo />;
+      case ICONS.PROFILE_QR_CODE:
+        return <IconProfileQrCode />;
+      case ICONS.PROFILE_COPY:
+        return <IconProfileCopy />;
+      case ICONS.CLOSE_QR_CODE_MODAL:
+        return <IconCloseQrCodeModal />;
+      case ICONS.PROFILE_SHIELD:
+        return <IconProfileShield />;
+      case ICONS.PROFILE_UFOSHIP:
+        return <IconProfileUfoship />;
 
       default:
         return null;

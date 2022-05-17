@@ -1,0 +1,54 @@
+@import '../../../../assets/scss/helpers/all';
+
+.card {
+  background: $black;
+  border: 0.5px solid rgba($white, 0.3);
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba($stratos, 0.08);
+  min-height: 220px;
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+}
+
+.backgroundImg {
+  border-radius: 6px;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  margin-bottom: 8px;
+
+  p {
+    @include overline-label($black);
+    background-color: $malachite;
+    border-radius: 3px;
+    margin-left: 10px;
+    padding: 2px 8px;
+    text-transform: uppercase;
+  }
+}
+
+.title {
+  @include h4();
+  margin: 0;
+}
+
+.description {
+  @include body-l();
+  max-width: 280px;
+}

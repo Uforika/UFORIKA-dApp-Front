@@ -1,0 +1,15 @@
+@import '../../assets/scss/helpers/all';
+
+.wrapper {
+  max-width: 1224px;
+  padding: 40px 15px 0 48px;
+  width: 100%;
+}
+
+.title {
+  @include h1();
+}
+
+.subtitle {
+  @include body-l();
+}

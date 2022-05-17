@@ -5,9 +5,9 @@ import styles from './styles.module.scss';
 
 type PickedTypes = 'primary' | 'secondary' | 'children' | 'onClick'| 'loading' | 'className' | 'disabled' | 'size' | 'icon'
 
-type Props = Pick<StrictButtonProps, PickedTypes>
+export type ButtonProps = Pick<StrictButtonProps, PickedTypes>
 
-const Button: React.FC<Props> = ({
+const Button: React.FC<ButtonProps> = ({
   className,
   children,
   loading,

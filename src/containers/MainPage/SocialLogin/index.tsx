@@ -11,7 +11,7 @@ import { ICONS } from '@components/Icon/types';
 import { showToast } from '@components/Toast';
 import { TOAST_ERROR } from '@constants/toast.constants';
 import { TOAST_MASSAGE_ERRORS } from '@constants/messages.constants';
-import { SOCIAL_LOGIN } from './constants';
+import { MAX_ICON_WIDTH, SOCIAL_LOGIN } from './constants';
 import styles from './styles.module.scss';
 
 const SocialLogin: FC = () => {
@@ -33,10 +33,10 @@ const SocialLogin: FC = () => {
     const newArray = [];
     let checkedSum = 0;
 
-    for (let index = 0; index < listItemArray.length; index + 1) {
+    for (let index = 0; index < listItemArray.length; index += 1) {
       checkedSum += listItemArray[index].clientWidth;
 
-      if (checkedSum > (parentElementList.clientWidth - 45)) {
+      if (checkedSum > (parentElementList.clientWidth - MAX_ICON_WIDTH)) {
         newArray.push(index);
       }
     }

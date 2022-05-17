@@ -52,3 +52,15 @@ export const useFailModal = (text: string, onSuccess: () => void): [() => void, 
 
   return [handleShowModal, handleHide];
 };
+
+export const useQrCodeModal = (address: string | null): [() => void, () => void] => {
+  const { showModal, hideModal } = useModals();
+
+  const handleShowModal = useCallback(() => showModal(MODAL_TYPES.QR_CODE, {
+    address,
+  }), [address, showModal]);
+
+  const handleHide = useCallback(() => hideModal(MODAL_TYPES.QR_CODE), [hideModal]);
+
+  return [handleShowModal, handleHide];
+};

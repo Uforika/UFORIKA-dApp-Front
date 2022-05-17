@@ -19,6 +19,7 @@ export const showToast = (
     draggable: true,
     //  Here you can override Toast container, body and progress:
     bodyClassName: styles.toastBody,
+    className: styles.container,
     progressClassName: styles.toastProgress,
     type: 'dark',
     onClose: () => {

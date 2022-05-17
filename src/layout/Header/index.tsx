@@ -22,6 +22,7 @@ const Header = () => (
         disabled
           ? (
             <Popup
+              key={label}
               trigger={(
                 <MenuItem disabled={disabled}>
                   {label}

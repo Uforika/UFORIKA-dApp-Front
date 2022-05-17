@@ -1,0 +1,53 @@
+@import '../../assets/scss/helpers/all';
+
+.closeIcon {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 2;
+}
+
+.shadow {
+  background: $gradient1;
+  bottom: 0;
+  filter: blur(120px);
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.background {
+  background-color: $black;
+  border-radius: 12px;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+.title {
+  @include h3();
+  margin: 0 auto 24px;
+  max-width: 129px;
+}
+
+.qrCodeContainer {
+  background-color: $white;
+  border-radius: 6px;
+  margin: 0 auto 24px;
+  max-width: 192px;
+  padding: 16px;
+}
+
+.button {
+  margin: auto;
+}

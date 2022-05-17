@@ -55,3 +55,5 @@ export const SOCIAL_LOGIN = [
     icon: ICONS.LOGIN_WECHAT,
   },
 ];
+
+export const MAX_ICON_WIDTH = 44;

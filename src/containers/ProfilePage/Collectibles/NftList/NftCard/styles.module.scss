@@ -1,0 +1,31 @@
+@import '../../../../../assets/scss/helpers/all';
+
+.nftImage {
+  background: $codGray;
+  border: 0.5px solid rgba($white, 0.3);
+  border-radius: 6px;
+  margin-bottom: 20px;
+  min-height: 216px;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    border-radius: 6px;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.name {
+  @include h4();
+  margin-bottom: 5px;
+}
+
+.type {
+  @include body-m(rgba($whisper, 0.6));
+}

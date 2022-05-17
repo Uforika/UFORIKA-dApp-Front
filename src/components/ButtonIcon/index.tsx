@@ -1,16 +1,18 @@
 import React, { FC, memo } from 'react';
-import Button from '@components/Button';
+import Button, { ButtonProps } from '@components/Button';
 import Icon from '@components/Icon';
 import { ICONS } from '@components/Icon/types';
 import styles from './styles.module.scss';
 
-type Props = {
+type Props = ButtonProps & {
   type: ICONS,
   width?: number,
   height?: number,
 }
 
-const ButtonIcon: FC<Props> = ({ width, height, type }) => (
+const ButtonIcon: FC<Props> = ({
+  width, height, type, ...props
+}) => (
   <div className={styles.wrap}>
     <Button
       icon={(
@@ -21,6 +23,7 @@ const ButtonIcon: FC<Props> = ({ width, height, type }) => (
         />
       )}
       size="small"
+      {...props}
     />
   </div>
 );

@@ -26,7 +26,7 @@
 
 .headerWrapper {
   grid-area: header;
-  z-index: 1;
+  z-index: 2;
 }
 
 .footerWrapper {
@@ -36,6 +36,7 @@
 
 .contentWrapper {
   grid-area: main;
+  margin-bottom: 15px;
   overflow: auto;
   z-index: 1;
 }
@@ -43,6 +44,11 @@
 .sidebarWrapper {
   grid-area: sidebar;
   z-index: 1;
+
+  &::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+  }
 }
 
 .backgroundImage {

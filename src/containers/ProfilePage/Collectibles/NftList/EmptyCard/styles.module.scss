@@ -1,0 +1,27 @@
+@import '../../../../../assets/scss/helpers/all';
+
+.wrapper {
+  align-items: center;
+  background: $black;
+  border: 0.5px solid rgba($white, 0.3);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  min-height: 244px;
+  padding: 42px;
+}
+
+.icon {
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  @include body-l-semi-bold();
+  margin-bottom: 16px;
+}
+
+.description {
+  @include body-l($dustyGray);
+  max-width: 360px;
+  text-align: center;
+}

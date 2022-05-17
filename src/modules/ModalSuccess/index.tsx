@@ -26,7 +26,7 @@ const ModalSuccess: FC<Props> = ({
       <div className={styles.background} />
       <div className={styles.content}>
         <span className={styles.icon}>
-          <Icon type={ICONS.SUCCESS} />
+          <Icon type={ICONS.SUCCESS} width={52} />
         </span>
         <h2 className={styles.text}>{text}</h2>
         <div className={styles.panel}>

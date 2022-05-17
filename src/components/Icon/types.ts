@@ -25,6 +25,12 @@ export enum ICONS {
   SIDEBAR_HISTORY = 'sidebarHistory',
   SIDEBAR_LOGOUT = 'sidebarLogout',
   UFORIKA_LOGO = 'uforikaLogo',
-  FORA_COIN = 'foraCoin',
+  FORA_COIN_LOGO = 'foraCoinLogo',
+  MATIC_COIN_LOGO = 'maticCoinLogo',
   WEB3_AUTH_LOGO = 'web3AuthLogo',
+  PROFILE_QR_CODE = 'profileQrCode',
+  PROFILE_COPY = 'profileCopy',
+  CLOSE_QR_CODE_MODAL = 'closeQrCodeModal',
+  PROFILE_SHIELD = 'profileShield',
+  PROFILE_UFOSHIP = 'profileUfoship',
 }

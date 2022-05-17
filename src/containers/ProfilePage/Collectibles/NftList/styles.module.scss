@@ -1,0 +1,11 @@
+@import '../../../../assets/scss/helpers/all';
+
+.list {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.dropdown {
+  margin-bottom: 24px;
+}

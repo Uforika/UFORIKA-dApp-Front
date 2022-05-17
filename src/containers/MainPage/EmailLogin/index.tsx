@@ -42,7 +42,7 @@ const EmailLogin: FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.label}>Wallet</p>
+      <p className={styles.label}>Email</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputWrapper}>
           <Controller
