@@ -2,7 +2,7 @@ FROM node:16-alpine as base
 
 WORKDIR /app/
 
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock .npmrc ./
 RUN yarn install --frozen-lockfile --production
 
 
