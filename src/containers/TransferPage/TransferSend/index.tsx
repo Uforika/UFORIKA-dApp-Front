@@ -6,7 +6,7 @@ import { ICONS } from '@components/Icon/types';
 import Input from '@components/Input';
 import DropdownCurrency from 'src/modules/DropdownCurrency';
 // TODO: remove and use real data
-import { currencyOptions } from 'src/pages/uikit/UiKitDropdowns/data';
+import { currencyOptions } from '@containers/UiKitPage/UiKitDropdowns/data';
 import styles from './styles.module.scss';
 
 type Props = {
