@@ -9,17 +9,18 @@ import useActiveSelection from './hooks/useActiveSelection';
 import { DropdownCurrencyItemType } from './types';
 import styles from './styles.module.scss';
 
-type Props = Omit<StrictDropdownProps, 'onChange' | 'value'> & {
+type Props = Omit<StrictDropdownProps, 'onChange' | 'value' | 'options'> & {
   options: DropdownCurrencyItemType[],
   name: string
   onChange?: (value: string) => void
   value?: string | number
   label?: string
   panelText?: string
+  size?: 'small' | 'big'
 }
 
 const DropdownCurrency: FC<Props> = ({
-  options, name, placeholder, value, label, onChange, panelText,
+  options, name, placeholder, value, label, onChange, panelText, size,
 }) => {
   const { activeOptionId, handleSelectOption } = useActiveSelection(options);
 
@@ -33,7 +34,7 @@ const DropdownCurrency: FC<Props> = ({
     return (
       <DropdownCurrencyTrigger
         text={activeOption.text}
-        image={activeOption.imageSmall}
+        image={activeOption.image}
       />
     );
   }, [activeOption]);
@@ -73,7 +74,7 @@ const DropdownCurrency: FC<Props> = ({
           id={name}
           onChange={handleChangeCurrencyValue}
         />
-        <Dropdown className={styles.dropdown} name={name} trigger={activeTrigger}>
+        <Dropdown className={styles.dropdown} size={size} name={name} trigger={activeTrigger}>
           <DropdownCurrencyMenu
             activeItemId={activeOptionId}
             onSelect={handleSelectOption}
@@ -90,6 +91,7 @@ DropdownCurrency.defaultProps = {
   onChange: undefined,
   label: undefined,
   panelText: undefined,
+  size: undefined,
 };
 
 export default memo(DropdownCurrency);

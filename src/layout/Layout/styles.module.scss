@@ -35,8 +35,8 @@
 }
 
 .contentWrapper {
+  display: grid;
   grid-area: main;
-  margin-bottom: 15px;
   overflow: auto;
   z-index: 1;
 }
@@ -82,5 +82,6 @@
   margin: auto;
   max-width: 1680px;
   transform: none !important;
+  width: 100%;
   z-index: 0 !important;
 }

@@ -1,10 +1,11 @@
 import React, { FC, memo } from 'react';
 import classNames from 'classnames';
 import { Dropdown as UIDropdown } from 'semantic-ui-react';
+import Icon from '@components/Icon';
 import { DropdownCurrencyItemType } from '../types';
 import styles from './styles.module.scss';
 
-type Props = Omit<DropdownCurrencyItemType, 'imageSmall'>
+type Props = DropdownCurrencyItemType
 
 const DropdownCurrencyItem: FC<Props> = ({
   image, text, value, active, ...props
@@ -14,7 +15,7 @@ const DropdownCurrencyItem: FC<Props> = ({
     active={active}
     {...props}
   >
-    <span className={styles.image}>{image}</span>
+    <Icon width={24} type={image} />
     <span className={styles.text}>{text}</span>
     <span className={styles.value}>{value}</span>
   </UIDropdown.Item>

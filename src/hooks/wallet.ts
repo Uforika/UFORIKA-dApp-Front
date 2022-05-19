@@ -5,6 +5,7 @@ const useWallet = () => {
   const {
     address, sign, chainId, getBalance, walletAuth, walletLogout, walletStatus,
   } = useContext(WalletContext);
+
   return {
     address, sign, chainId, getBalance, walletAuth, walletLogout, walletStatus,
   };

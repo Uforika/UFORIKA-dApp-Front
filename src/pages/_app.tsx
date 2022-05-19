@@ -1,6 +1,5 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
-import ReactModal from 'react-modal';
 import { useSocket } from '@hooks/socket.hooks';
 import '@assets/scss/global.scss';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,8 +12,6 @@ import { SDKConfig } from '@782-uforika/client-sdk';
 import { TSDKConfig } from '@782-uforika/client-sdk/core/ConfigContext';
 import { CONFIG } from '@constants/config.constants';
 import { SDK_PATH_TO_JWT, SDK_REFRESH_TOKEN_REQUEST, SDK_SIGN_IN_PATHS } from '@constants/sdk.constants';
-
-ReactModal.setAppElement('#__next');
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const socket = useSocket(true);

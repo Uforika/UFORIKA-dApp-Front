@@ -1,10 +1,10 @@
 import React, { FC, memo } from 'react';
 import Modal from '@components/Modal';
-import { QRCodeCanvas } from 'qrcode.react';
 import LinkButton from '@components/LinkButton';
 import Icon from '@components/Icon';
 import { ICONS } from '@components/Icon/types';
 import { downloadQRCode } from '@helpers/qrCode.helper';
+import QrCode from '@components/QrCode';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -27,10 +27,11 @@ const ModalQrCode: FC<Props> = ({ address, onClose, ...props }) => {
         <div className={styles.background} />
         <div className={styles.shadow} />
         <div className={styles.content}>
-
           <h3 className={styles.title}>Your wallet address</h3>
           <div className={styles.qrCodeContainer}>
-            <QRCodeCanvas id="qrCodeEl" size={160} value={address} />
+            <div className={styles.qrCode}>
+              <QrCode id="qrCodeEl" size={160} value={address} />
+            </div>
           </div>
           <LinkButton onClick={handleDownloadQrCode} className={styles.button}>
             Download QR

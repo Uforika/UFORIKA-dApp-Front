@@ -1,0 +1,17 @@
+@import '../../assets/scss/helpers/all';
+
+.root {
+  :global {
+    h1.ui.header {
+      @include h1();
+    }
+
+    h3.ui.header {
+      @include h3();
+    }
+
+    .ui.header:first-child {
+      margin-top: 0;
+    }
+  }
+}

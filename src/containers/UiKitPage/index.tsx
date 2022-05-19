@@ -9,7 +9,6 @@ import styles from './styles.module.scss';
 
 const UiKitPage: Page = () => (
   <div className={styles.page}>
-    <UiKitPopups />
     <div className={styles.wrap}>
       <div className={styles.link}>
         <Link href="/">⬅️ To Index</Link>
@@ -17,6 +16,7 @@ const UiKitPage: Page = () => (
       <br />
       <br />
       <UiKitModals />
+      <UiKitPopups />
       <UiKitDropdowns />
       <UiKitIcons />
     </div>

@@ -32,9 +32,8 @@ import { ReactComponent as IconMaticCoinLogo } from './assets/maticCoinLogo.svg'
 import { ReactComponent as IconProfileQrCode } from './assets/profileQrCode.svg';
 import { ReactComponent as IconProfileCopy } from './assets/profileCopy.svg';
 import { ReactComponent as IconCloseQrCodeModal } from './assets/closeQrCodeModal.svg';
-import { ReactComponent as IconProfileShield } from './assets/profileShield.svg';
+import { ReactComponent as IconPolygonPowered } from './assets/polygonPowered.svg';
 import { ReactComponent as IconProfileUfoship } from './assets/profileUfoship.svg';
-
 import { ICONS } from './types';
 import styles from './styles.module.scss';
 
@@ -115,11 +114,10 @@ const Icon: FC<Props> = ({
         return <IconProfileCopy />;
       case ICONS.CLOSE_QR_CODE_MODAL:
         return <IconCloseQrCodeModal />;
-      case ICONS.PROFILE_SHIELD:
-        return <IconProfileShield />;
+      case ICONS.PROFILE_POLYGON_POWERED:
+        return <IconPolygonPowered />;
       case ICONS.PROFILE_UFOSHIP:
         return <IconProfileUfoship />;
-
       default:
         return null;
     }

@@ -1,12 +1,10 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useCallback } from 'react';
 import useWallet from '@hooks/wallet';
 import { useQrCodeModal } from '@hooks/modals.hooks';
 import Popup from '@components/Popup';
 import Icon from '@components/Icon';
 import { ICONS } from '@components/Icon/types';
-import { TOAST_SUCCESS } from '@constants/toast.constants';
-import { TOAST_MASSAGE_SUCCESS } from '@constants/messages.constants';
-import { showToast } from '@components/Toast';
+import { copy } from '@helpers/copy.helper';
 import styles from './styles.module.scss';
 
 const Address: FC = () => {
@@ -14,12 +12,9 @@ const Address: FC = () => {
 
   const [showModal] = useQrCodeModal(address);
 
-  const handelCopy = () => {
-    if (!address) return;
-    navigator?.clipboard.writeText(address).then(() => {
-      showToast(TOAST_MASSAGE_SUCCESS.COPY, TOAST_SUCCESS);
-    }).catch(() => null);
-  };
+  const handelCopy = useCallback(() => {
+    copy(address);
+  }, [address]);
 
   return (
     <div className={styles.card}>

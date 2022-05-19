@@ -21,6 +21,10 @@
     transition: $transitionSpeed;
     width: 100%;
 
+    &:active {
+      opacity: 0.7;
+    }
+
     &::before {
       border: 2px solid transparent;
       border-radius: 120px;

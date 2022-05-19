@@ -15,6 +15,7 @@ const Wallet: FC = () => {
   const handleButtonLink = (href: string) => () => {
     router?.push(href);
   };
+
   return (
     <div className={styles.wrapper}>
       <h3 className={styles.title}>My wallet</h3>
@@ -34,7 +35,7 @@ const Wallet: FC = () => {
             </div>
           </div>
           <div className={styles.supported}>
-            <Icon width={16} type={ICONS.PROFILE_SHIELD} /> Supported by Polygon<span>Benefits</span>
+            <Icon width={16} type={ICONS.PROFILE_POLYGON_POWERED} /> Supported by Polygon<span>Benefits</span>
           </div>
         </div>
       </div>

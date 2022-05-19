@@ -31,6 +31,6 @@ export enum ICONS {
   PROFILE_QR_CODE = 'profileQrCode',
   PROFILE_COPY = 'profileCopy',
   CLOSE_QR_CODE_MODAL = 'closeQrCodeModal',
-  PROFILE_SHIELD = 'profileShield',
+  PROFILE_POLYGON_POWERED = 'polygonPowered',
   PROFILE_UFOSHIP = 'profileUfoship',
 }

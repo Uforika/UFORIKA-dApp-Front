@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import cn from 'classnames';
+import Header from '@components/Header';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -9,20 +10,20 @@ type Props = {
   children: React.ReactNode
 }
 
-const Wrapper = ({
+const PageWrapper = ({
   className, children, title, subtitle,
 }: Props) => (
   <div className={cn(styles.wrapper, className)}>
-    {title && <h1 className={styles.title}>{title}</h1>}
+    {title && <Header as="h1">{title}</Header>}
     {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
     {children}
   </div>
 );
 
-Wrapper.defaultProps = {
+PageWrapper.defaultProps = {
   className: '',
   title: '',
   subtitle: '',
 };
 
-export default memo(Wrapper);
+export default memo(PageWrapper);

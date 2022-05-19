@@ -13,6 +13,14 @@
   padding-left: 12px;
   padding-right: 12px;
 
+  &.big {
+    height: 56px;
+
+    input {
+      height: 56px;
+    }
+  }
+
   &::before {
     border: 1px solid $dustyGray;
     border-radius: 60px;

@@ -12,10 +12,12 @@ type Props = StrictDropdownProps & {
   label?: string
   name: string
   errorMessage?: string
+  size?: 'big' | 'small'
 }
 
 const Dropdown: FC<Props> = ({
-  selectOnBlur, selectOnNavigation, fluid, label, name, errorMessage, className, ...props
+  selectOnBlur, selectOnNavigation, fluid, label,
+  name, errorMessage, className, size, ...props
 }) => (
   <div className={cn(styles.wrap, className)}>
     {label && <label className={styles.label} htmlFor={name}>{label}</label>}
@@ -23,7 +25,7 @@ const Dropdown: FC<Props> = ({
       fluid={fluid}
       selectOnNavigation={selectOnNavigation}
       selectOnBlur={selectOnBlur}
-      className={styles.dropdown}
+      className={cn(styles.dropdown, size ? styles[size] : null)}
       icon={(
         <Icon
           className="dropdownIcon"
@@ -44,6 +46,7 @@ Dropdown.defaultProps = {
   fluid: true,
   label: '',
   errorMessage: '',
+  size: undefined,
 };
 
 export default memo(Dropdown);

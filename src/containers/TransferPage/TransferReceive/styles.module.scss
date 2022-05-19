@@ -1,0 +1,45 @@
+@import '../../../assets/scss/helpers/all';
+
+.root {
+  background-color: rgba($black, 0.6);
+  border: 0.5px solid rgba($white, 0.3);
+  border-radius: 6px;
+  max-width: 378px;
+  padding: 40px;
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+}
+
+.button {
+  margin: 35px auto 0;
+}
+
+.qrWrap {
+  background-color: $white;
+  border-radius: 6px;
+  border-radius: 6px;
+  display: flex;
+  margin: 0 auto;
+  margin: auto;
+  margin-top: 32px;
+  max-width: 192px;
+  overflow: hidden;
+  padding: 16px;
+}
+
+.addressWrap {
+  align-items: center;
+  border-bottom: 0.5px solid rgba($white, 0.3);
+  display: flex;
+  margin-top: 32px;
+  padding-bottom: 20px;
+}
+
+.address {
+  @include body-m($dustyGray);
+  margin-right: 16px;
+  word-break: break-word;
+}

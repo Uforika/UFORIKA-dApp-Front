@@ -68,15 +68,19 @@ const WalletProvider: FC = ({ children }) => {
   }, [setCurrentChainId, setUserAddress]);
 
   const getCurrentBalance = useCallback((): Promise<string> => {
-    if (!address) throw new Error('Not loaded web3');
-    return getBalance(address);
+    if (!address) {
+      throw new Error('Not loaded web3');
+    }
 
+    return getBalance(address);
   }, [address, getBalance]);
 
   const getSign = useCallback((message: string): Promise<string> => {
-    if (!address) throw new Error('Not loaded web3');
-    return sign(message, address);
+    if (!address) {
+      throw new Error('Not loaded web3');
+    }
 
+    return sign(message, address);
   }, [address, sign]);
 
   const walletProviderValue = useMemo(() => ({

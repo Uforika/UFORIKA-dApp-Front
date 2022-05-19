@@ -16,6 +16,7 @@ export type TInputProps = Pick<StrictInputProps, PickedTypes> & {
   rightContent?: ReactNode,
   hint?: { text: string, list: string[] },
   readonly?: boolean,
+  size?: 'small' | 'big'
 }
 
 const Input: FC<TInputProps> = ({
@@ -32,6 +33,7 @@ const Input: FC<TInputProps> = ({
   type = 'text',
   readonly = false,
   hint,
+  size,
   ...props
 }) => (
   <div className={styles.container}>
@@ -39,7 +41,15 @@ const Input: FC<TInputProps> = ({
     <UIInput
       id={name}
       name={name}
-      className={cn(styles.inputContainer, className, { [styles.error]: error, [styles.readonly]: readonly })}
+      className={cn(
+        styles.inputContainer,
+        className,
+        size ? styles[size] : null,
+        {
+          [styles.error]: error,
+          [styles.readonly]: readonly,
+        },
+      )}
       onChange={onChange}
       placeholder={placeholder}
       disabled={disabled}
@@ -82,6 +92,7 @@ Input.defaultProps = {
   rightContent: undefined,
   hint: undefined,
   readonly: false,
+  size: undefined,
 };
 
 export default memo(Input);

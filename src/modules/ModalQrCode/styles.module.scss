@@ -42,10 +42,13 @@
 
 .qrCodeContainer {
   background-color: $white;
-  border-radius: 6px;
   margin: 0 auto 24px;
   max-width: 192px;
-  padding: 16px;
+}
+
+.qrCode {
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .button {

@@ -23,6 +23,14 @@
     transition: color $transitionSpeed, box-shadow $transitionSpeed, border $transitionSpeed;
     width: 100%;
 
+    &.big {
+      height: 56px;
+
+      input {
+        height: 56px;
+      }
+    }
+
     > input {
       @include body-m($black);
       background-color: transparent;
