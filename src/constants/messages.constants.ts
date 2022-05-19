@@ -6,8 +6,8 @@ export const FORM_FIELDS_ERRORS: MESSAGES_MAP = {
 };
 
 export const TOAST_MASSAGE_ERRORS: MESSAGES_MAP = {
-  CLOSE_MODAL: 'You haven\'t completed the authorisation. Please try again',
-  AUTH_ERROR: 'The authorisation failed. Please try again',
+  CLOSE_MODAL: 'You haven\'t completed the authorization. Please try again',
+  AUTH_ERROR: 'The authorization failed. Please try again',
 };
 
 export const TOAST_MASSAGE_SUCCESS: MESSAGES_MAP = {

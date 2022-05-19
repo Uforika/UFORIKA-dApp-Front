@@ -29,9 +29,7 @@ const ModalQrCode: FC<Props> = ({ address, onClose, ...props }) => {
         <div className={styles.content}>
           <h3 className={styles.title}>Your wallet address</h3>
           <div className={styles.qrCodeContainer}>
-            <div className={styles.qrCode}>
-              <QrCode id="qrCodeEl" size={160} value={address} />
-            </div>
+            <QrCode id="qrCodeEl" size={160} value={address} />
           </div>
           <LinkButton onClick={handleDownloadQrCode} className={styles.button}>
             Download QR

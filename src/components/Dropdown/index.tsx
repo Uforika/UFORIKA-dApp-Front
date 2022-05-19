@@ -12,14 +12,15 @@ type Props = StrictDropdownProps & {
   label?: string
   name: string
   errorMessage?: string
-  size?: 'big' | 'small'
+  size?: 'big' | 'small',
+  isInlineView?: boolean
 }
 
 const Dropdown: FC<Props> = ({
   selectOnBlur, selectOnNavigation, fluid, label,
-  name, errorMessage, className, size, ...props
+  name, errorMessage, className, size, isInlineView, ...props
 }) => (
-  <div className={cn(styles.wrap, className)}>
+  <div className={cn(styles.wrap, className, { [styles.inline]: isInlineView })}>
     {label && <label className={styles.label} htmlFor={name}>{label}</label>}
     <UIDropdown
       fluid={fluid}
@@ -47,6 +48,7 @@ Dropdown.defaultProps = {
   label: '',
   errorMessage: '',
   size: undefined,
+  isInlineView: false,
 };
 
 export default memo(Dropdown);

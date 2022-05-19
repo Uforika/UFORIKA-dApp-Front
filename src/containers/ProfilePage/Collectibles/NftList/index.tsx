@@ -1,5 +1,5 @@
 import React, {
-  FC, memo, useMemo, useState,
+  FC, memo, useMemo, useState, SyntheticEvent,
 } from 'react';
 import Dropdown from '@components/Dropdown';
 import { DropdownProps } from 'semantic-ui-react';
@@ -14,35 +14,41 @@ type Props = {
 
 const NftList: FC<Props> = ({ nftList, typeNftOptionList }) => {
   const [filterValue, setFilterValue] = useState('all');
-  const handleFilterChange = (_: React.SyntheticEvent<HTMLElement>, data: DropdownProps) => {
 
-    if (typeof data.value === 'string') setFilterValue(data.value);
+  const handleFilterChange = (_: SyntheticEvent<HTMLElement>, data: DropdownProps) => {
+    if (typeof data.value === 'string') {
+      setFilterValue(data.value);
+    }
   };
 
   const filteredNftList = useMemo(() => {
-    if (filterValue === 'all') return nftList;
+    if (filterValue === 'all') {
+      return nftList;
+    }
+
     return nftList.filter((nftItem) => nftItem.type === filterValue);
   }, [filterValue, nftList]);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.root}>
       {!nftList.length ? <EmptyCard /> : (
         <>
           <Dropdown
-            label="Default"
-            name="Filter:"
+            label="Filter:"
+            name="NftFilterDropdown"
             placeholder="Choose item"
             options={typeNftOptionList}
             onChange={handleFilterChange}
             value={filterValue}
             className={styles.dropdown}
+            isInlineView
+            fluid={false}
           />
           <ul className={styles.list}>
             {filteredNftList.map((nftItem) => <NftCard key={nftItem.name} {...nftItem} />)}
           </ul>
         </>
       )}
-
     </div>
   );
 };

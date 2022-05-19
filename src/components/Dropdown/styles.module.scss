@@ -125,3 +125,27 @@
   position: absolute;
   top: calc(100% + 4px);
 }
+
+.wrap.inline {
+  align-items: center;
+  display: flex;
+
+  .dropdown {
+    background-color: transparent;
+    height: auto;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  :global {
+    .dropdownIcon {
+      margin-left: 8px;
+    }
+
+    .divider.text {
+      @include body-l-semi-bold($white);
+    }
+  }
+}

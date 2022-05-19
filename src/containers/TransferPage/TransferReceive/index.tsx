@@ -7,6 +7,7 @@ import ButtonIcon from '@components/ButtonIcon';
 import { ICONS } from '@components/Icon/types';
 import useWallet from '@hooks/wallet';
 import { copy } from '@helpers/copy.helper';
+import Popup from '@components/Popup';
 import styles from './styles.module.scss';
 
 const TransferReceive: FC = () => {
@@ -28,7 +29,12 @@ const TransferReceive: FC = () => {
       </div>
       <div className={styles.addressWrap}>
         <span className={styles.address}>{address}</span>
-        <ButtonIcon onClick={handleCopy} type={ICONS.PROFILE_COPY} />
+        <Popup
+          content="Copy"
+          position="bottom left"
+          trigger={<ButtonIcon onClick={handleCopy} type={ICONS.PROFILE_COPY} />}
+        />
+
       </div>
       <LinkButton onClick={handleDownloadQrCode} className={styles.button}>
         Download QR

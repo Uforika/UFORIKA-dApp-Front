@@ -12,7 +12,7 @@ const Address: FC = () => {
 
   const [showModal] = useQrCodeModal(address);
 
-  const handelCopy = useCallback(() => {
+  const handleCopy = useCallback(() => {
     copy(address);
   }, [address]);
 
@@ -24,11 +24,11 @@ const Address: FC = () => {
       <div>
         <Popup
           trigger={(
-            <button onClick={handelCopy} className={styles.button}>
+            <button onClick={handleCopy} className={styles.button}>
               <Icon width={24} type={ICONS.PROFILE_COPY} />
             </button>
           )}
-          content="Copied"
+          content="Copy"
           position="bottom left"
         />
         <Popup

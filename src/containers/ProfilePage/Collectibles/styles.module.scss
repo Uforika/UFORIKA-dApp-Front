@@ -1,7 +1,7 @@
 @import '../../../assets/scss/helpers/all';
 
 .title {
-  @include h3();
+  display: flex;
   margin-bottom: 24px;
 }
 
