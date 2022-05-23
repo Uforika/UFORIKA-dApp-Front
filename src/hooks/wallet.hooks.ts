@@ -5,11 +5,11 @@ import BigNumber from 'bignumber.js';
 
 export const useWallet = () => {
   const {
-    address, sign, chainId, getBalance, walletAuth, walletLogout, walletStatus,
+    address, sign, chainId, getBalance, walletAuth, walletLogout, walletStatus, getTransactionHistory,
   } = useContext(WalletContext);
 
   return {
-    address, sign, chainId, getBalance, walletAuth, walletLogout, walletStatus,
+    address, sign, chainId, getBalance, walletAuth, walletLogout, walletStatus, getTransactionHistory,
   };
 };
 
