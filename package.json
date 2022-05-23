@@ -33,6 +33,7 @@
     "@web3auth/web3auth": "^0.9.3",
     "async-mutex": "^0.3.2",
     "axios": "^0.26.1",
+    "bignumber.js": "^9.0.2",
     "classnames": "^2.2.6",
     "config": "^3.3.7",
     "focus-visible": "^5.2.0",

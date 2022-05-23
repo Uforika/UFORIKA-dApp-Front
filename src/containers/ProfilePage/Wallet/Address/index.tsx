@@ -1,5 +1,5 @@
 import React, { FC, memo, useCallback } from 'react';
-import useWallet from '@hooks/wallet';
+import { useWallet } from '@hooks/wallet.hooks';
 import { useQrCodeModal } from '@hooks/modals.hooks';
 import Popup from '@components/Popup';
 import Icon from '@components/Icon';

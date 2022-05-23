@@ -3,7 +3,7 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { LOGIN_PROVIDER } from '@helpers/wallets.helper';
-import useWallet from '@hooks/wallet';
+import { useWallet } from '@hooks/wallet.hooks';
 import Button from '@components/Button';
 import Input from '@components/Input';
 import { showToast } from '@components/Toast';

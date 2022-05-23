@@ -1,7 +1,6 @@
 import React, { FC, memo } from 'react';
 import { FORA_NAME, MATIC_NAME } from '@constants/global.constants';
 import { ICONS } from '@components/Icon/types';
-// import useWallet from '@hooks/wallet';
 import Address from '@containers/ProfilePage/Wallet/Address';
 import Button from '@components/Button';
 import { PATH_HISTORY, PATH_TRANSFER } from '@constants/routes.constants';

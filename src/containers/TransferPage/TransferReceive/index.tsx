@@ -5,7 +5,7 @@ import QrCode from '@components/QrCode';
 import LinkButton from '@components/LinkButton';
 import ButtonIcon from '@components/ButtonIcon';
 import { ICONS } from '@components/Icon/types';
-import useWallet from '@hooks/wallet';
+import { useWallet } from '@hooks/wallet.hooks';
 import { copy } from '@helpers/copy.helper';
 import Popup from '@components/Popup';
 import styles from './styles.module.scss';

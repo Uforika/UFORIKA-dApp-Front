@@ -2,7 +2,7 @@ import React, {
   createContext, FC, useEffect, useMemo, useState,
 } from 'react';
 import { ADAPTER_STATUS } from '@web3auth/base';
-import useWallet from '@hooks/wallet';
+import { useWallet } from '@hooks/wallet.hooks';
 import { logError } from '@helpers/log.helper';
 import {
   useAuthControllerGetMeSWR,

@@ -2,9 +2,9 @@ import React, {
   FC, memo, useEffect, useRef, useState,
 } from 'react';
 import cn from 'classnames';
-import useWallet from '@hooks/wallet';
+import { useWallet } from '@hooks/wallet.hooks';
+import useWindowSize from '@hooks/window-size.hooks';
 import Button from '@components/Button';
-import useWindowSize from '@hooks/window-size';
 import { LOGIN_PROVIDER } from '@helpers/wallets.helper';
 import Icon from '@components/Icon';
 import { ICONS } from '@components/Icon/types';

@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { MenuItem, Sidebar as UISidebar } from 'semantic-ui-react';
-import useWallet from '@hooks/wallet';
+import { useWallet } from '@hooks/wallet.hooks';
 import Menu from '@components/Menu';
 import Link from '@components/Link';
 import Icon from '@components/Icon';
