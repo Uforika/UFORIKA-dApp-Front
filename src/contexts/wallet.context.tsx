@@ -4,9 +4,11 @@ import React, {
 import { ADAPTER_STATUS_TYPE } from '@web3auth/base';
 import useWalletService from '@services/wallets/wallet';
 import { getTransactionHistoryFromLocalStorage, setTransactionHistoryInLocalStorage } from '@helpers/transaction.helper';
-import { mergeTransactionHistory } from '@constants/wallets.constants';
+import { DEFAULT_BALANCE_VALUE, mergeTransactionHistory } from '@constants/wallets.constants';
+import { TOKEN } from '@constants/token.constants';
+import BigNumber from 'bignumber.js';
+import { ConnectType, TransferMethodType } from '../types/wallets.types';
 import { TransactionFromHistoryType } from '../types/transaction.types';
-import { ConnectType, GetBalanceType, TransferMethodType } from '../types/wallets.types';
 
 export type WalletContextType = {
   address: string | null,
@@ -15,7 +17,7 @@ export type WalletContextType = {
   walletAuth: ConnectType,
   walletLogout: () => Promise<void>,
   walletStatus: ADAPTER_STATUS_TYPE | undefined,
-  getBalance: GetBalanceType
+  getBalance: (token: TOKEN) => BigNumber,
   getTransactionHistory: () => Promise<TransactionFromHistoryType[]>,
   transferMethod: TransferMethodType
 }
@@ -28,7 +30,7 @@ const initialContextState = {
   walletAuth: () => Promise.resolve(),
   walletLogout: () => Promise.resolve(),
   walletStatus: undefined,
-  getBalance: () => undefined,
+  getBalance: () => DEFAULT_BALANCE_VALUE,
   getTransactionHistory: () => Promise.resolve([]),
   transferMethod: () => Promise.resolve(undefined),
 };
@@ -50,6 +52,7 @@ const WalletProvider: FC = ({ children }) => {
 
   const [address, setAddress] = useState<string | null>(null);
   const [chainId, setChainId] = useState<number | null>(null);
+  const [balance, setBalance] = useState<{ [key: string]: BigNumber } | undefined>(undefined);
 
   const setUserAddress = useCallback(async () => {
     try {
@@ -83,6 +86,20 @@ const WalletProvider: FC = ({ children }) => {
 
     return sign(message, address);
   }, [address, sign]);
+
+  const getCurrentBalance = useCallback((token: TOKEN): BigNumber => {
+    if (balance && balance[token]) {
+      return balance[token];
+    }
+    const setValue = (value: BigNumber) => {
+      setBalance((currentBalance) => ({
+        ...currentBalance,
+        [token]: value,
+      }));
+    };
+    getBalance(address, token, setValue);
+    return DEFAULT_BALANCE_VALUE;
+  }, [address, balance, getBalance]);
 
   const getTransactionHistory = useCallback(async () => {
     if (!address) {
@@ -118,10 +135,10 @@ const WalletProvider: FC = ({ children }) => {
     walletAuth: connect,
     walletLogout: logout,
     walletStatus,
-    getBalance,
+    getBalance: getCurrentBalance,
     getTransactionHistory,
     transferMethod,
-  }), [address, chainId, getSign, connect, logout, walletStatus, getBalance, getTransactionHistory, transferMethod]);
+  }), [address, chainId, getSign, connect, logout, walletStatus, getCurrentBalance, getTransactionHistory, transferMethod]);
 
   return (
     <WalletContext.Provider value={walletProviderValue}>
