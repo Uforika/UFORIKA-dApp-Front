@@ -1,4 +1,5 @@
 {
   "API_URL": "https://....",
-  "IS_PROD": true
+  "IS_PROD": true,
+  "POLYGON_SCAN_API_URL": "https://api.polygonscan.com/api"
 }

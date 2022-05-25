@@ -8,6 +8,7 @@ import { CONFIG } from '@constants/config.constants';
 import { AbiItem } from 'web3-utils';
 import { DEFAULT_BALANCE_VALUE } from '@constants/wallets.constants';
 import { GAS_PRICE } from '@constants/transaction.constants';
+import { getTransactionListFromAccount, TransactionListFromAccountType } from '@services/wallets/polygon-scan.wallet';
 import erc20AbiJson from '../../abi/erc20AbiJson.json';
 import { TransferEventType } from '../../types/contract.types';
 import { ConnectType, GetBalanceType, TransferMethodType } from '../../types/wallets.types';
@@ -19,8 +20,9 @@ import { ConnectType, GetBalanceType, TransferMethodType } from '../../types/wal
    logout: () => Promise<void>,
    connect: ConnectType,
    walletStatus: ADAPTER_STATUS_TYPE | undefined,
-   getBalance: GetBalanceType,
-   transferMethod: TransferMethodType,
+   getBalance: GetBalanceType
+   transferMethod: TransferMethodType
+   getHistory: (address: string, startBlock: number | undefined) => Promise<TransactionListFromAccountType[]>
  }
 
 const useWalletService: () => WalletType = () => {
@@ -45,6 +47,18 @@ const useWalletService: () => WalletType = () => {
     const transaction = (await contract.methods.transfer(...data)[method]({ from }) as T);
     return transaction;
   }, [web3]);
+
+  const getHistory = (address: string, startBlock: number | undefined) => Promise.all([
+    getTransactionListFromAccount('txlist', address, startBlock),
+    getTransactionListFromAccount('txlistinternal', address, startBlock),
+    ...(Object.keys(TOKEN) as Array<keyof typeof TOKEN>)
+      .map((tokenName) => getTransactionListFromAccount(
+        'tokentx',
+        address,
+        startBlock,
+        TOKEN_CONFIG[CONFIG.NETWORK][tokenName].address,
+      )),
+  ]);
 
   const getBalance: GetBalanceType = useCallback((address, tokenName, setBalance) => {
     if (!web3WS || !address) {
@@ -86,6 +100,7 @@ const useWalletService: () => WalletType = () => {
     walletStatus: status,
     getBalance,
     transferMethod,
+    getHistory,
   }), [sign, getChainId, getAccounts, logout, connect, status, getBalance, transferMethod]);
 
 };

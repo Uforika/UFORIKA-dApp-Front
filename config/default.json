@@ -4,5 +4,7 @@
   "IS_PROD": false,
   "REDUX_DEBUG": false,
   "NETWORK": "TESTNET_POLYGON",
-  "COIN_GECKO_API_URL": "https://api.coingecko.com/api/v3"
+  "COIN_GECKO_API_URL": "https://api.coingecko.com/api/v3",
+  "POLYGON_SCAN_API_URL": "https://api-testnet.polygonscan.com/api",
+  "API_POLYGON_SCAN_KEY": "8AEWIPNAY8UD6888CIQQB5TJ21EVUZK7NV"
 }

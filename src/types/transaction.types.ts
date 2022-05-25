@@ -26,6 +26,8 @@ export type TransactionFromHistoryType = {
   value: string
 }
 
+export type TransactionHistoryObjectType = { lastBlockNumber: string, transactionHistory: TransactionFromHistoryType[] } | undefined
+
 export type TransactionReceipt = Omit<TransactionReceiptWeb3, 'logs'>
 
 export type useTransactionProps = (tokenName: TOKEN, recipientAddress: string, amount: string) =>

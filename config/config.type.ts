@@ -6,5 +6,7 @@ export type ConfigType = {
   REDUX_DEBUG: boolean;
   CLIENT_ID: string;
   COIN_GECKO_API_URL: string;
+  POLYGON_SCAN_API_URL: string;
+  API_POLYGON_SCAN_KEY: string;
   NETWORK: NETWORK;
 }

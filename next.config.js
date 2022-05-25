@@ -1,5 +1,5 @@
 const {
-  API_URL, IS_PROD, REDUX_DEBUG, CLIENT_ID,COIN_GECKO_API_URL, NETWORK
+  API_URL, IS_PROD, REDUX_DEBUG, CLIENT_ID,COIN_GECKO_API_URL, NETWORK,POLYGON_SCAN_API_URL, API_POLYGON_SCAN_KEY
 } = require('config');
 const { withPlugins } = require('next-compose-plugins');
 const withSvgr = require('@newhighsco/next-plugin-svgr')
@@ -18,7 +18,9 @@ const runtimeConfig= {
     REDUX_DEBUG,
     CLIENT_ID,
     COIN_GECKO_API_URL,
-    NETWORK
+    NETWORK,
+    POLYGON_SCAN_API_URL,
+    API_POLYGON_SCAN_KEY
   },
   trailingSlash: true,
 };

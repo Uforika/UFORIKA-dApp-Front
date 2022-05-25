@@ -3,9 +3,10 @@ import React, {
 } from 'react';
 import { ADAPTER_STATUS_TYPE } from '@web3auth/base';
 import useWalletService from '@services/wallets/wallet';
-import { TRANSACTION_HISTORY } from '@constants/transaction-history.constants';
-import { ConnectType, GetBalanceType, TransferMethodType } from '../types/wallets.types';
+import { getTransactionHistoryFromLocalStorage, setTransactionHistoryInLocalStorage } from '@helpers/transaction.helper';
+import { mergeTransactionHistory } from '@constants/wallets.constants';
 import { TransactionFromHistoryType } from '../types/transaction.types';
+import { ConnectType, GetBalanceType, TransferMethodType } from '../types/wallets.types';
 
 export type WalletContextType = {
   address: string | null,
@@ -15,7 +16,7 @@ export type WalletContextType = {
   walletLogout: () => Promise<void>,
   walletStatus: ADAPTER_STATUS_TYPE | undefined,
   getBalance: GetBalanceType
-  getTransactionHistory: () => TransactionFromHistoryType[],
+  getTransactionHistory: () => Promise<TransactionFromHistoryType[]>,
   transferMethod: TransferMethodType
 }
 
@@ -28,7 +29,7 @@ const initialContextState = {
   walletLogout: () => Promise.resolve(),
   walletStatus: undefined,
   getBalance: () => undefined,
-  getTransactionHistory: () => [],
+  getTransactionHistory: () => Promise.resolve([]),
   transferMethod: () => Promise.resolve(undefined),
 };
 
@@ -44,6 +45,7 @@ const WalletProvider: FC = ({ children }) => {
     walletStatus,
     getBalance,
     transferMethod,
+    getHistory,
   } = useWalletService();
 
   const [address, setAddress] = useState<string | null>(null);
@@ -82,7 +84,32 @@ const WalletProvider: FC = ({ children }) => {
     return sign(message, address);
   }, [address, sign]);
 
-  const getTransactionHistory = useCallback(() => TRANSACTION_HISTORY, []);
+  const getTransactionHistory = useCallback(async () => {
+    if (!address) {
+      throw new Error('Not loaded web3');
+    }
+
+    const transactionHistoryFromLocalStorage = getTransactionHistoryFromLocalStorage();
+    const startBlock = transactionHistoryFromLocalStorage ? Number(transactionHistoryFromLocalStorage.lastBlockNumber) + 1 : undefined;
+
+    const resultList = await getHistory(address, startBlock);
+    const historyList = resultList.map((result) => result.result);
+
+    const flattedHistoryList = historyList.reduce((acc, val) => acc.concat(val));
+
+    const mergedTransaction = mergeTransactionHistory(flattedHistoryList);
+
+    const transactions = transactionHistoryFromLocalStorage
+      ? transactionHistoryFromLocalStorage.transactionHistory.concat(mergedTransaction) : mergedTransaction;
+
+    const sortedTransactionHistory = transactions
+      .sort((firstEl, secondEl) => ((firstEl.blockNumber > secondEl.blockNumber) ? 1
+        : ((firstEl.blockNumber > secondEl.blockNumber) ? -1 : 0)));
+
+    setTransactionHistoryInLocalStorage(sortedTransactionHistory);
+
+    return sortedTransactionHistory;
+  }, [address, getHistory]);
 
   const walletProviderValue = useMemo(() => ({
     address,
@@ -94,7 +121,7 @@ const WalletProvider: FC = ({ children }) => {
     getBalance,
     getTransactionHistory,
     transferMethod,
-  }), [address, chainId, connect, getBalance, getTransactionHistory, getSign, logout, walletStatus, transferMethod]);
+  }), [address, chainId, getSign, connect, logout, walletStatus, getBalance, getTransactionHistory, transferMethod]);
 
   return (
     <WalletContext.Provider value={walletProviderValue}>

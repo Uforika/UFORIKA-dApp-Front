@@ -7,7 +7,6 @@ import BigNumber from 'bignumber.js';
 import { TOKEN } from '@constants/token.constants';
 import { DEFAULT_BALANCE_VALUE } from '@constants/wallets.constants';
 import { GAS_PRICE } from '@constants/transaction.constants';
-import { calculateFee } from '@helpers/balance.helper';
 import { TransactionReceipt, useTransactionProps } from '../types/transaction.types';
 
 export const useWallet = () => {
@@ -19,6 +18,7 @@ export const useWallet = () => {
     address, sign, chainId, getBalance, walletAuth, walletLogout, walletStatus, getTransactionHistory, transferMethod,
   };
 };
+
 export const useBalance = (token: TOKEN): BigNumber => {
   const [balance, setBalance] = useState<BigNumber>(DEFAULT_BALANCE_VALUE);
   const { getBalance, address } = useWallet();
@@ -42,8 +42,7 @@ export const useTransfer: useTransactionProps = (tokenName, recipientAddress, am
   const getFee = useCallback(async () => {
     const estimateGas = await transferMethod<number>(tokenName, data, address, 'estimateGas');
 
-    const fee = estimateGas ? calculateFee(estimateGas, GAS_PRICE, 18) : undefined;
-
+    const fee = estimateGas ? new BigNumber(estimateGas).multipliedBy(GAS_PRICE).div(10 ** 18) : undefined;
     return fee;
   }, [address, data, tokenName, transferMethod]);
 
