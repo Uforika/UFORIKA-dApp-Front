@@ -2,7 +2,7 @@ import React, {
   createContext, FC, useCallback, useEffect, useMemo, useState,
 } from 'react';
 import BigNumber from 'bignumber.js';
-import { ADAPTER_STATUS_TYPE } from '@web3auth/base';
+import { ADAPTER_STATUS, ADAPTER_STATUS_TYPE } from '@web3auth/base';
 import useWalletService from '@services/wallets/wallet';
 import { getTransactionHistoryFromLocalStorage, setTransactionHistoryInLocalStorage } from '@helpers/transaction.helper';
 import { DEFAULT_BALANCE_VALUE, mergeTransactionHistory } from '@constants/wallets.constants';
@@ -53,6 +53,14 @@ const WalletProvider: FC = ({ children }) => {
   const [address, setAddress] = useState<string | null>(null);
   const [chainId, setChainId] = useState<number | null>(null);
   const [balance, setBalance] = useState<{ [key: string]: BigNumber } | undefined>(undefined);
+
+  useEffect(() => {
+    if ((!address && walletStatus === ADAPTER_STATUS.READY)
+      || walletStatus === ADAPTER_STATUS.DISCONNECTED) {
+      setBalance(undefined);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [address, walletStatus]);
 
   const setUserAddress = useCallback(async () => {
     try {
