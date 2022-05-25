@@ -15,12 +15,13 @@ type Props = StrictDropdownProps & {
   onFilterChange: (_: SyntheticEvent<HTMLElement>, data: DropdownProps) => void
   searchValue?: string
   onSearch: (_: SyntheticEvent<HTMLElement>, data: InputProps) => void
+  refreshTransactions: () => void
 }
 
 const TableHistoryPanel: FC<Props> = ({
   options, onFilterChange, filterValue,
   onClearSearch, searchValue, onSearch,
-  className,
+  className, refreshTransactions,
 }) => {
 
   const isEmptyHistory = false;
@@ -59,6 +60,7 @@ const TableHistoryPanel: FC<Props> = ({
           trigger={(
             <ButtonIcon
               width={20}
+              onClick={refreshTransactions}
               className={styles.refresh}
               type={ICONS.REFRESH}
             />
@@ -67,7 +69,6 @@ const TableHistoryPanel: FC<Props> = ({
           content="Refresh"
         />
       )}
-
     </div>
   );
 };

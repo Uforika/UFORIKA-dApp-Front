@@ -3,46 +3,42 @@ import React, {
 } from 'react';
 import { VariableSizeList as List } from 'react-window';
 import { TransactionFromHistoryType } from 'src/types/transaction.types';
-import Header from '@components/Header';
 import useWindowSize from '@hooks/window-size.hooks';
 import { useDropdownFilter } from '@hooks/dropdown-filter.hooks';
 import { useSearch } from '@hooks/search-input.hook';
-import { FOOTER_HEIGHT, HEADER_HEIGHT } from '@constants/ui.constants';
+import Header from '@components/Header';
 import Loader from '@components/Loader';
+import { FOOTER_HEIGHT, HEADER_HEIGHT } from '@constants/ui.constants';
+import { useWallet } from '@hooks/wallet.hooks';
+import { SORT_OPTIONS } from '../constants/history.constants';
 import TableRow from './TableHistoryRow';
 import TableHistoryPanel from './TableHistoryPanel';
 import TransactionEmptyHistory from './TransactionEmptyHistory';
-import { getItemSize, handleScroll } from './helpers';
+import { filterTransactionByType, getItemSize, handleScroll } from './helpers';
 import styles from './styles.module.scss';
-
-const sortOptions = [{
-  type: 'all',
-  value: 'All',
-  name: 'All types',
-  text: 'All types',
-},
-{
-  type: 'someType',
-  value: 'SomeType',
-  name: 'Some type',
-  text: 'Some type',
-},
-];
+import { TRANSACTION_FILER_TYPES } from '../types';
 
 type Props = {
   className?: string,
-  transactions?: TransactionFromHistoryType[]
+  transactions?: TransactionFromHistoryType[],
+  refreshTransactions: () => void
+  isLoading: boolean
 }
 
-const TableHistory: FC<Props> = ({ transactions, className }) => {
+const TableHistory: FC<Props> = ({
+  transactions, refreshTransactions, isLoading, className,
+}) => {
+  const { address } = useWallet();
+
   const { height } = useWindowSize();
   const scrollPanel = useRef<HTMLDivElement>(null);
   const {
     onSearch, searchedTransactions, onClearSearch, searchValue,
   } = useSearch(transactions);
 
-  const { filterValue, onFilterChange } = useDropdownFilter(sortOptions);
-  const isEmptyHistory = !searchedTransactions.length;
+  const { filterValue, onFilterChange } = useDropdownFilter(SORT_OPTIONS);
+  const searchedAndFilteredTransactions = filterTransactionByType(searchedTransactions, filterValue as TRANSACTION_FILER_TYPES, address);
+  const isEmptyHistory = !searchedAndFilteredTransactions.length;
 
   const renderList = useMemo(() => {
     if (!height) {
@@ -52,20 +48,20 @@ const TableHistory: FC<Props> = ({ transactions, className }) => {
     return (
       <List
         height={height - FOOTER_HEIGHT - HEADER_HEIGHT}
-        itemCount={searchedTransactions.length}
-        itemSize={getItemSize(searchedTransactions.length)}
+        itemCount={searchedAndFilteredTransactions.length}
+        itemSize={getItemSize(searchedAndFilteredTransactions.length)}
         onScroll={handleScroll(scrollPanel)}
         width="100%"
         className={styles.list}
       >
         {({ index, style }) => (
           <div className={styles.rowWrap} style={style}>
-            <TableRow className={styles.row} transaction={searchedTransactions[index]} />
+            <TableRow isLoading={isLoading} className={styles.row} transaction={searchedAndFilteredTransactions[index]} />
           </div>
         )}
       </List>
     );
-  }, [height, searchedTransactions]);
+  }, [height, isLoading, searchedAndFilteredTransactions]);
 
   const renderHead = () => (
     <div className={styles.head} ref={scrollPanel}>
@@ -73,18 +69,19 @@ const TableHistory: FC<Props> = ({ transactions, className }) => {
         Transaction History
       </Header>
       <TableHistoryPanel
-        options={sortOptions}
+        options={SORT_OPTIONS}
         filterValue={filterValue}
         onFilterChange={onFilterChange}
         onSearch={onSearch}
         onClearSearch={onClearSearch}
         searchValue={searchValue}
         className={styles.panel}
+        refreshTransactions={refreshTransactions}
       />
     </div>
   );
 
-  if (!transactions) {
+  if (!transactions || isLoading) {
     return (
       <div className={className}>
         {renderHead()}

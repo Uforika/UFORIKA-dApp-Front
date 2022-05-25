@@ -114,6 +114,7 @@ const WalletProvider: FC = ({ children }) => {
   }, [address, balance, getBalance]);
 
   const getTransactionHistory = useCallback(async () => {
+
     if (!address) {
       return undefined;
     }
@@ -122,10 +123,9 @@ const WalletProvider: FC = ({ children }) => {
     const startBlock = transactionHistoryFromLocalStorage ? Number(transactionHistoryFromLocalStorage.lastBlockNumber) + 1 : undefined;
 
     const resultList = await getHistory(address, startBlock);
-    const historyList = resultList.map((result) => result.result);
+    const historyList = resultList.map((result) => (result.status === '0' ? [] : result.result));
 
     const flattedHistoryList = historyList.reduce((acc, val) => acc.concat(val));
-
     const mergedTransaction = mergeTransactionHistory(flattedHistoryList);
 
     const transactions = transactionHistoryFromLocalStorage
@@ -137,6 +137,7 @@ const WalletProvider: FC = ({ children }) => {
     setTransactionHistoryInLocalStorage(sortedTransactionHistory);
 
     return sortedTransactionHistory;
+
   }, [address, getHistory]);
 
   const walletProviderValue = useMemo(() => ({

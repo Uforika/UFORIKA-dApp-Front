@@ -23,10 +23,11 @@ import styles from './styles.module.scss';
 type Props = {
   transaction: TransactionFromHistoryType,
   className?: string
+  isLoading: boolean
 }
 
 const TableHistoryRow: FC<Props> = ({
-  transaction, className,
+  transaction, className, isLoading,
 }) => {
   const { address } = useWallet();
 
@@ -41,11 +42,12 @@ const TableHistoryRow: FC<Props> = ({
   } = transaction;
 
   const createLink = TRX_LINK_CONSTRUCTOR[CONFIG.NETWORK];
-
-  const isSendTransactionType = address === from;
+  const isSendTransactionType = address?.toLocaleLowerCase() === from.toLocaleLowerCase();
 
   const transactionStatus = getTransactionStatus(txReceiptStatus, isError);
 
+  const senderLabel = isSendTransactionType ? 'To:' : 'From:';
+  const sender = isSendTransactionType ? to : from;
   return (
     <div className={cn(styles.row, className)}>
       <div>
@@ -62,7 +64,7 @@ const TableHistoryRow: FC<Props> = ({
               {isSendTransactionType ? 'Send' : 'Receive'}
             </span>
             <span className={styles.senderAddress}>
-              {`To: ${doEllipsisStringMiddle(to, 8, 8)}`}
+              {`${senderLabel} ${doEllipsisStringMiddle(sender, 8, 8)}`}
             </span>
           </div>
         </div>
@@ -79,7 +81,6 @@ const TableHistoryRow: FC<Props> = ({
         <div className={cn(styles.cellWrapColumn, styles.right, styles.mr40)}>
           <span className={styles.transactionValue}>
             {`${divideTokenValueByDecimal(value, tokenDecimal)} ${tokenSymbol || ''}`}
-
           </span>
           <span className={styles.transactionFee}>
             {`Fee: ${calculateFee(gasPrice, gasUsed, tokenDecimal).toString()} MATIC`}
@@ -96,6 +97,8 @@ const TableHistoryRow: FC<Props> = ({
               target="_blank"
               rel="noopener noreferrer"
               as="a"
+              loading={isLoading}
+              disabled={isLoading}
               type={ICONS.LINK}
               width={20}
             />

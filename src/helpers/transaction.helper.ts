@@ -3,6 +3,11 @@ import { TransactionFromHistoryType, TransactionHistoryObjectType } from '../typ
 
 export const setTransactionHistoryInLocalStorage = (transactionHistory: TransactionFromHistoryType[]) => {
   const lastTransaction = transactionHistory[0];
+
+  if (!lastTransaction) {
+    return;
+  }
+
   const transactionHistoryObject: TransactionHistoryObjectType = { lastBlockNumber: lastTransaction.blockNumber, transactionHistory };
   localStorage.setItem(LOCAL_STORAGE_TRANSACTION_HISTORY_KEY, JSON.stringify(transactionHistoryObject));
 };

@@ -15,3 +15,5 @@ export enum TRANSACTION_STATUSES {
 }
 
 export type TRANSACTION_STATUS = 'success' | 'fail' | 'pending'
+
+export type TRANSACTION_FILER_TYPES = 'all' | 'sent' | 'received'
