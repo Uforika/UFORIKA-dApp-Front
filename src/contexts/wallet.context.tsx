@@ -91,11 +91,15 @@ const WalletProvider: FC = ({ children }) => {
     if (balance && balance[token]) {
       return balance[token];
     }
-    const setValue = (value: BigNumber) => {
-      setBalance((currentBalance) => ({
-        ...currentBalance,
-        [token]: value,
-      }));
+    const setValue = (value: BigNumber | undefined) => {
+      if (value) {
+        setBalance((currentBalance) => ({
+          ...currentBalance,
+          [token]: value,
+        }));
+        return;
+      }
+      setBalance((currentBalance) => currentBalance);
     };
     getBalance(address, token, setValue);
     return DEFAULT_BALANCE_VALUE;

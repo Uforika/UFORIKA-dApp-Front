@@ -6,7 +6,6 @@ import { logError } from '@helpers/log.helper';
 import { TOKEN, TOKEN_CONFIG } from '@constants/token.constants';
 import { CONFIG } from '@constants/config.constants';
 import { AbiItem } from 'web3-utils';
-import { DEFAULT_BALANCE_VALUE } from '@constants/wallets.constants';
 import { GAS_PRICE } from '@constants/transaction.constants';
 import { getTransactionListFromAccount, TransactionListFromAccountType } from '@services/wallets/polygon-scan.wallet';
 import erc20AbiJson from '../../abi/erc20AbiJson.json';
@@ -62,7 +61,7 @@ const useWalletService: () => WalletType = () => {
 
   const getBalance: GetBalanceType = useCallback((address, tokenName, setBalance) => {
     if (!web3WS || !address) {
-      setBalance(DEFAULT_BALANCE_VALUE);
+      setBalance(undefined);
       return;
     }
     const token = TOKEN_CONFIG[CONFIG.NETWORK][tokenName];
