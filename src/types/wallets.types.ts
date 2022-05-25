@@ -11,4 +11,7 @@ type LoginPayloadType = {
 export type ConnectType = <LoginProviderType extends keyof LoginPayloadType>
 (loginProvider: LoginProviderType, loginPayload: LoginPayloadType[LoginProviderType]) => Promise<void>;
 
+export type TransferMethodType = <T>
+(tokenName: TOKEN, data: unknown[], from: string | null, method: 'send' | 'estimateGas') => Promise<T | undefined>;
+
 export type GetBalanceType = (address: string | null, tokenName: TOKEN, setBalance: (value: BigNumber) => void) => void;

@@ -1,3 +1,7 @@
+import { TransactionReceipt as TransactionReceiptWeb3 } from 'web3-core';
+import BigNumber from 'bignumber.js';
+import { TOKEN } from '@constants/token.constants';
+
 export type TransactionFromHistoryType = {
   blockHash: string
   blockNumber: string
@@ -21,3 +25,8 @@ export type TransactionFromHistoryType = {
   txreceipt_status?: string
   value: string
 }
+
+export type TransactionReceipt = Omit<TransactionReceiptWeb3, 'logs'>
+
+export type useTransactionProps = (tokenName: TOKEN, recipientAddress: string, amount: string) =>
+[sendTransaction: () => Promise<TransactionReceipt | undefined>, fee: Promise<BigNumber | undefined>]

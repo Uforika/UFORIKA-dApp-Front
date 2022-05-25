@@ -4,7 +4,7 @@ import React, {
 import { ADAPTER_STATUS_TYPE } from '@web3auth/base';
 import useWalletService from '@services/wallets/wallet';
 import { TRANSACTION_HISTORY } from '@constants/transaction-history.constants';
-import { ConnectType, GetBalanceType } from '../types/wallets.types';
+import { ConnectType, GetBalanceType, TransferMethodType } from '../types/wallets.types';
 import { TransactionFromHistoryType } from '../types/transaction.types';
 
 export type WalletContextType = {
@@ -16,6 +16,7 @@ export type WalletContextType = {
   walletStatus: ADAPTER_STATUS_TYPE | undefined,
   getBalance: GetBalanceType
   getTransactionHistory: () => TransactionFromHistoryType[],
+  transferMethod: TransferMethodType
 }
 
 const initialContextState = {
@@ -28,6 +29,7 @@ const initialContextState = {
   walletStatus: undefined,
   getBalance: () => undefined,
   getTransactionHistory: () => [],
+  transferMethod: () => Promise.resolve(undefined),
 };
 
 export const WalletContext = createContext<WalletContextType>(initialContextState);
@@ -41,6 +43,7 @@ const WalletProvider: FC = ({ children }) => {
     connect,
     walletStatus,
     getBalance,
+    transferMethod,
   } = useWalletService();
 
   const [address, setAddress] = useState<string | null>(null);
@@ -90,7 +93,8 @@ const WalletProvider: FC = ({ children }) => {
     walletStatus,
     getBalance,
     getTransactionHistory,
-  }), [address, chainId, connect, getBalance, getTransactionHistory, getSign, logout, walletStatus]);
+    transferMethod,
+  }), [address, chainId, connect, getBalance, getTransactionHistory, getSign, logout, walletStatus, transferMethod]);
 
   return (
     <WalletContext.Provider value={walletProviderValue}>

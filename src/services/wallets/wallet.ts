@@ -3,13 +3,14 @@ import BigNumber from 'bignumber.js';
 import { ADAPTER_STATUS_TYPE } from '@web3auth/base';
 import useWeb3Auth from '@services/wallets/web3auth.wallet';
 import { logError } from '@helpers/log.helper';
-import { TOKEN_CONFIG } from '@constants/token.constants';
+import { TOKEN, TOKEN_CONFIG } from '@constants/token.constants';
 import { CONFIG } from '@constants/config.constants';
 import { AbiItem } from 'web3-utils';
 import { DEFAULT_BALANCE_VALUE } from '@constants/wallets.constants';
+import { GAS_PRICE } from '@constants/transaction.constants';
 import erc20AbiJson from '../../abi/erc20AbiJson.json';
 import { TransferEventType } from '../../types/contract.types';
-import { ConnectType, GetBalanceType } from '../../types/wallets.types';
+import { ConnectType, GetBalanceType, TransferMethodType } from '../../types/wallets.types';
 
  type WalletType = {
    sign: (messages: string, address: string) => Promise<string>,
@@ -18,7 +19,8 @@ import { ConnectType, GetBalanceType } from '../../types/wallets.types';
    logout: () => Promise<void>,
    connect: ConnectType,
    walletStatus: ADAPTER_STATUS_TYPE | undefined,
-   getBalance: GetBalanceType
+   getBalance: GetBalanceType,
+   transferMethod: TransferMethodType,
  }
 
 const useWalletService: () => WalletType = () => {
@@ -30,7 +32,19 @@ const useWalletService: () => WalletType = () => {
     logout,
     connect,
     web3WS,
+    web3,
   } = useWeb3Auth();
+
+  const transferMethod: TransferMethodType = useCallback(async <T>
+  (tokenName: TOKEN, data: unknown[], from: string | null, method: 'send' | 'estimateGas') => {
+    if (!web3 || !from) {
+      return undefined;
+    }
+    const token = TOKEN_CONFIG[CONFIG.NETWORK][tokenName];
+    const contract = new web3.eth.Contract(erc20AbiJson as AbiItem[], token.address, { gasPrice: GAS_PRICE });
+    const transaction = (await contract.methods.transfer(...data)[method]({ from }) as T);
+    return transaction;
+  }, [web3]);
 
   const getBalance: GetBalanceType = useCallback((address, tokenName, setBalance) => {
     if (!web3WS || !address) {
@@ -71,7 +85,8 @@ const useWalletService: () => WalletType = () => {
     connect,
     walletStatus: status,
     getBalance,
-  }), [sign, getChainId, getAccounts, logout, connect, status, getBalance]);
+    transferMethod,
+  }), [sign, getChainId, getAccounts, logout, connect, status, getBalance, transferMethod]);
 
 };
 
