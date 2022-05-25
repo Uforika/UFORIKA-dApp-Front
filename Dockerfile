@@ -8,6 +8,9 @@ RUN yarn install --frozen-lockfile --production
 
 FROM base as builder
 
+ARG NODE_CONFIG_ENV
+ENV NODE_CONFIG_ENV=$NODE_CONFIG_ENV
+
 RUN yarn install --frozen-lockfile --production=false
 
 COPY . .
