@@ -5,12 +5,12 @@ import cn from 'classnames';
 import { useWallet } from '@hooks/wallet.hooks';
 import useWindowSize from '@hooks/window-size.hooks';
 import Button from '@components/Button';
-import { LOGIN_PROVIDER } from '@helpers/wallets.helper';
 import Icon from '@components/Icon';
 import { ICONS } from '@components/Icon/types';
 import { showToast } from '@components/Toast';
 import { TOAST_ERROR } from '@constants/toast.constants';
 import { TOAST_MASSAGE_ERRORS } from '@constants/messages.constants';
+import { LOGIN_PROVIDER } from '@constants/wallets.constants';
 import { MAX_ICON_WIDTH, SOCIAL_LOGIN } from './constants';
 import styles from './styles.module.scss';
 

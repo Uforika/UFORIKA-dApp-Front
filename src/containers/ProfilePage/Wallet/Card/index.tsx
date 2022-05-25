@@ -1,12 +1,12 @@
 import React, { FC, memo } from 'react';
 import Icon from '@components/Icon';
 import { ICONS } from '@components/Icon/types';
-import { formatNumber } from '@helpers/balance.helper';
+import BigNumber from 'bignumber.js';
 import styles from './styles.module.scss';
 
 type Props = {
-  count: number,
-  usdPrice: number,
+  count: BigNumber,
+  usdPrice: BigNumber,
   name: string,
   logo: ICONS.FORA_COIN_LOGO | ICONS.MATIC_COIN_LOGO,
   color: string
@@ -17,9 +17,9 @@ const Card: FC<Props> = ({
 }) => (
   <div className={styles.card}>
     <div>
-      <h3 className={styles.count} style={{ color }}>{formatNumber(count)}</h3>
+      <h3 className={styles.count} style={{ color }}>{count.toFormat(2)}</h3>
       <p className={styles.name}>{name}</p>
-      <p className={styles.usdPrice}>${formatNumber(usdPrice)}</p>
+      <p className={styles.usdPrice}>${usdPrice.toFormat(2)}</p>
     </div>
     <div>
       <Icon width={48} type={logo} />

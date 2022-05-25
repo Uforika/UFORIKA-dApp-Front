@@ -1,3 +1,4 @@
 **/*.scss
 **/*.svg
 **/*.png
+/src/abi/*.json

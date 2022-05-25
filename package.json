@@ -54,6 +54,7 @@
     "swr": "^1.2.1",
     "web3": "^1.7.1",
     "web3-core": "^1.7.1",
+    "web3-utils": "^1.7.3",
     "yup": "^0.32.11"
   },
   "devDependencies": {

@@ -1,7 +1,10 @@
-import { useContext } from 'react';
+import {
+  useContext, useEffect, useState,
+} from 'react';
 import { WalletContext } from '@contexts/wallet.context';
-import { TOKEN } from '@constants/token.constants';
 import BigNumber from 'bignumber.js';
+import { TOKEN } from '@constants/token.constants';
+import { DEFAULT_BALANCE_VALUE } from '@constants/wallets.constants';
 
 export const useWallet = () => {
   const {
@@ -12,14 +15,13 @@ export const useWallet = () => {
     address, sign, chainId, getBalance, walletAuth, walletLogout, walletStatus, getTransactionHistory,
   };
 };
-
 export const useBalance = (token: TOKEN): BigNumber => {
+  const [balance, setBalance] = useState<BigNumber>(DEFAULT_BALANCE_VALUE);
+  const { getBalance, address } = useWallet();
 
-  if (token === TOKEN.POLYGON) {
-    return new BigNumber(200);
-  }
-  if (token === TOKEN.FORA) {
-    return new BigNumber(100000);
-  }
-  return new BigNumber(0);
+  useEffect(() => {
+    getBalance(address, token, setBalance);
+  }, [address, getBalance, token]);
+
+  return balance;
 };

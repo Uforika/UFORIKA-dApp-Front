@@ -10,10 +10,13 @@ export const CHAIN_CONFIG = {
   [NETWORK.MAINNET_POLYGON]: {
     chainNamespace: CHAIN_NAMESPACES.EIP155,
     chainId: hexValue(137),
+    rpcTarget: 'https://rpc-mainnet.matic.network',
+    rpcWss: 'wss://rpc-mainnet.matic.network',
   },
   [NETWORK.TESTNET_POLYGON]: {
     chainNamespace: CHAIN_NAMESPACES.EIP155,
     chainId: hexValue(80001),
-    rpcTarget: 'https://matic-mumbai.chainstacklabs.com/',
+    rpcTarget: 'https://matic-mumbai.chainstacklabs.com',
+    rpcWss: 'wss://ws-matic-mumbai.chainstacklabs.com',
   },
 };

@@ -5,5 +5,6 @@ export type ConfigType = {
   IS_PROD: boolean;
   REDUX_DEBUG: boolean;
   CLIENT_ID: string;
+  COIN_GECKO_API_URL: string;
   NETWORK: NETWORK;
 }

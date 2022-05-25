@@ -3,5 +3,6 @@
   "CLIENT_ID": "BNARyX2gaQycLvcVSCI3eY4CMndS8pXbxtsR2PBzPr4ShyRG0EnUyyB2kjkxvXjFwEnrSIHvXr14rIwageqWysY",
   "IS_PROD": false,
   "REDUX_DEBUG": false,
-  "NETWORK": "TESTNET_POLYGON"
+  "NETWORK": "TESTNET_POLYGON",
+  "COIN_GECKO_API_URL": "https://api.coingecko.com/api/v3"
 }

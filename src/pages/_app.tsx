@@ -12,6 +12,7 @@ import { SDKConfig } from '@782-uforika/client-sdk';
 import { TSDKConfig } from '@782-uforika/client-sdk/core/ConfigContext';
 import { CONFIG } from '@constants/config.constants';
 import { SDK_PATH_TO_JWT, SDK_REFRESH_TOKEN_REQUEST, SDK_SIGN_IN_PATHS } from '@constants/sdk.constants';
+import { RateProvider } from '@contexts/rate.context';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const socket = useSocket(true);
@@ -37,20 +38,22 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     >
       <WalletProvider>
         <AuthProvider>
-          <ModalProvider>
-            <Component {...pageProps} />
-            <ToastContainer
-              position="top-right"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
-          </ModalProvider>
+          <RateProvider>
+            <ModalProvider>
+              <Component {...pageProps} />
+              <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+            </ModalProvider>
+          </RateProvider>
         </AuthProvider>
       </WalletProvider>
     </SDKConfig>

@@ -4,34 +4,44 @@ import {
 import Web3 from 'web3';
 import { provider as ProviderType } from 'web3-core';
 import {
-  ADAPTER_EVENTS, ADAPTER_STATUS, ADAPTER_STATUS_TYPE,
+  ADAPTER_EVENTS,
+  ADAPTER_STATUS,
+  ADAPTER_STATUS_TYPE,
   MULTI_CHAIN_ADAPTERS,
-  SafeEventEmitterProvider, WALLET_ADAPTERS,
+  SafeEventEmitterProvider,
+  WALLET_ADAPTERS,
 } from '@web3auth/base';
 import { Web3AuthCore as Web3AuthCoreType } from '@web3auth/core';
 import { CONFIG } from '@constants/config.constants';
 import { CHAIN_CONFIG } from '@constants/network.constants';
+import { LOGIN_PROVIDER } from '@constants/wallets.constants';
 import { logError, logInfo } from '@helpers/log.helper';
-import { CONNECT_TYPE, LOGIN_PROVIDER } from '@helpers/wallets.helper';
+import { ConnectType } from '../../types/wallets.types';
 
 type Web3AuthWalletType = {
-  status: ADAPTER_STATUS_TYPE | undefined
-  getAccounts: () => Promise<string[]>
-  getChainId: () => Promise<number>
-  getBalance: (address: string) => Promise<string>
-  sign: (message: string, address: string) => Promise<string>
-  connect: CONNECT_TYPE,
-  logout: () => Promise<void>
+  status: ADAPTER_STATUS_TYPE | undefined,
+  getAccounts: () => Promise<string[]>,
+  getChainId: () => Promise<number>,
+  getBalance: (address: string) => Promise<string>,
+  sign: (message: string, address: string) => Promise<string>,
+  connect: ConnectType,
+  logout: () => Promise<void>,
+  web3: Web3 | undefined,
+  web3WS: Web3 | undefined,
 }
 
 const useWeb3Auth: () => Web3AuthWalletType = () => {
   const [web3, setWeb3] = useState<Web3 | undefined>(undefined);
+  const [web3WS, setWeb3WS] = useState<Web3 | undefined>(undefined);
   const [web3Auth, setWeb3Auth] = useState<Web3AuthCoreType | undefined>(undefined);
   const [status, setStatus] = useState<ADAPTER_STATUS_TYPE | undefined>(ADAPTER_STATUS.NOT_READY);
 
   const initWeb3 = (provider: SafeEventEmitterProvider | ProviderType) => {
     const web3Instance = new Web3(provider as ProviderType);
+    const web3InstanceWS = new Web3();
+    web3InstanceWS.setProvider(new Web3.providers.WebsocketProvider(CHAIN_CONFIG[CONFIG.NETWORK].rpcWss));
     setWeb3(web3Instance);
+    setWeb3WS(web3InstanceWS);
   };
 
   const subscribeAuthEvents = useCallback((web3auth: Web3AuthCoreType) => {
@@ -68,7 +78,11 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
       const { MetamaskAdapter } = await import('@web3auth/metamask-adapter');
 
       const web3AuthInstance = new Web3AuthCore({
-        chainConfig: CHAIN_CONFIG[CONFIG.NETWORK],
+        chainConfig: {
+          chainNamespace: CHAIN_CONFIG[CONFIG.NETWORK].chainNamespace,
+          rpcTarget: CHAIN_CONFIG[CONFIG.NETWORK].rpcTarget,
+          chainId: CHAIN_CONFIG[CONFIG.NETWORK].chainId,
+        },
         storageKey: 'local',
       });
       subscribeAuthEvents(web3AuthInstance);
@@ -144,7 +158,7 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
 
   }, [web3, web3Auth]);
 
-  const connect: CONNECT_TYPE = useCallback(async (loginProvider, loginPayload) => {
+  const connect: ConnectType = useCallback(async (loginProvider, loginPayload) => {
     if (!web3Auth) return;
     if (loginProvider === LOGIN_PROVIDER.METAMASK) {
       await web3Auth.connectTo(WALLET_ADAPTERS.METAMASK, { loginProvider, login_hint: loginPayload });
@@ -167,7 +181,9 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
     sign,
     connect,
     logout,
-  }), [connect, getAccounts, getBalance, getChainId, logout, sign, status]);
+    web3,
+    web3WS,
+  }), [connect, getAccounts, getBalance, getChainId, logout, sign, status, web3, web3WS]);
 };
 
 export default useWeb3Auth;

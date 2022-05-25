@@ -2,7 +2,6 @@ import React, { FC, memo } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { LOGIN_PROVIDER } from '@helpers/wallets.helper';
 import { useWallet } from '@hooks/wallet.hooks';
 import Button from '@components/Button';
 import Input from '@components/Input';
@@ -10,6 +9,7 @@ import { showToast } from '@components/Toast';
 import { TOAST_MASSAGE_ERRORS } from '@constants/messages.constants';
 import { TOAST_ERROR } from '@constants/toast.constants';
 import { DEFAULT_CRITERIA_MODE, DEFAULT_REVALIDATE_MODE, FIELD_NAMES } from '@constants/form.constants';
+import { LOGIN_PROVIDER } from '@constants/wallets.constants';
 import { emailYup } from './validators';
 import styles from './styles.module.scss';
 

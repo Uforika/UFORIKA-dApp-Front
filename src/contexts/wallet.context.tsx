@@ -3,18 +3,18 @@ import React, {
 } from 'react';
 import { ADAPTER_STATUS_TYPE } from '@web3auth/base';
 import useWalletService from '@services/wallets/wallet';
-import { CONNECT_TYPE } from '@helpers/wallets.helper';
 import { TRANSACTION_HISTORY } from '@constants/transaction-history.constants';
+import { ConnectType, GetBalanceType } from '../types/wallets.types';
 import { TransactionFromHistoryType } from '../types/transaction.types';
 
 export type WalletContextType = {
   address: string | null,
   chainId: number | null,
   sign: (messages: string) => Promise<string>,
-  getBalance: () => Promise<string>,
-  walletAuth: CONNECT_TYPE,
+  walletAuth: ConnectType,
   walletLogout: () => Promise<void>,
   walletStatus: ADAPTER_STATUS_TYPE | undefined,
+  getBalance: GetBalanceType
   getTransactionHistory: () => TransactionFromHistoryType[],
 }
 
@@ -22,11 +22,11 @@ const initialContextState = {
   address: null,
   chainId: null,
   sign: () => Promise.resolve(''),
-  getBalance: () => Promise.resolve(''),
   isLoadingWallet: true,
   walletAuth: () => Promise.resolve(),
   walletLogout: () => Promise.resolve(),
   walletStatus: undefined,
+  getBalance: () => undefined,
   getTransactionHistory: () => [],
 };
 
@@ -35,12 +35,12 @@ export const WalletContext = createContext<WalletContextType>(initialContextStat
 const WalletProvider: FC = ({ children }) => {
   const {
     sign,
-    getBalance,
     getChainId,
     getAccounts,
     logout,
     connect,
     walletStatus,
+    getBalance,
   } = useWalletService();
 
   const [address, setAddress] = useState<string | null>(null);
@@ -71,14 +71,6 @@ const WalletProvider: FC = ({ children }) => {
     setCurrentChainId().catch(() => null);
   }, [setCurrentChainId, setUserAddress]);
 
-  const getCurrentBalance = useCallback((): Promise<string> => {
-    if (!address) {
-      throw new Error('Not loaded web3');
-    }
-
-    return getBalance(address);
-  }, [address, getBalance]);
-
   const getSign = useCallback((message: string): Promise<string> => {
     if (!address) {
       throw new Error('Not loaded web3');
@@ -96,9 +88,9 @@ const WalletProvider: FC = ({ children }) => {
     walletAuth: connect,
     walletLogout: logout,
     walletStatus,
-    getBalance: getCurrentBalance,
+    getBalance,
     getTransactionHistory,
-  }), [address, chainId, connect, getCurrentBalance, getSign, getTransactionHistory, logout, walletStatus]);
+  }), [address, chainId, connect, getBalance, getTransactionHistory, getSign, logout, walletStatus]);
 
   return (
     <WalletContext.Provider value={walletProviderValue}>

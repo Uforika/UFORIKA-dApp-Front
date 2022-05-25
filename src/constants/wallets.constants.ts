@@ -1,3 +1,5 @@
+import BigNumber from 'bignumber.js';
+
 export enum LOGIN_PROVIDER {
   GOOGLE = 'google',
   FACEBOOK = 'facebook',
@@ -18,11 +20,4 @@ export enum LOGIN_PROVIDER {
   METAMASK = 'metamask',
 }
 
-type LOGIN_PAYLOAD_TYPE = {
-  [LOGIN_PROVIDER.EMAIL_PASSWORDLESS]: string,
-} & {
-  [key in Exclude<LOGIN_PROVIDER, LOGIN_PROVIDER.EMAIL_PASSWORDLESS>]: undefined
-}
-
-export type CONNECT_TYPE = <LOGIN_PROVIDER_TYPE extends keyof LOGIN_PAYLOAD_TYPE>
-(loginProvider: LOGIN_PROVIDER_TYPE, loginPayload: LOGIN_PAYLOAD_TYPE[LOGIN_PROVIDER_TYPE]) => Promise<void>
+export const DEFAULT_BALANCE_VALUE = new BigNumber(0);

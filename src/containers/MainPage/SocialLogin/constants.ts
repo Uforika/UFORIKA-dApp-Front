@@ -1,5 +1,5 @@
-import { LOGIN_PROVIDER } from '@helpers/wallets.helper';
 import { ICONS } from '@components/Icon/types';
+import { LOGIN_PROVIDER } from '@constants/wallets.constants';
 
 export const SOCIAL_LOGIN = [
   {

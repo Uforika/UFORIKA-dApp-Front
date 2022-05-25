@@ -1,9 +1,9 @@
 import React, { FC, memo } from 'react';
 import Button from '@components/Button';
 import { useWallet } from '@hooks/wallet.hooks';
-import { LOGIN_PROVIDER } from '@helpers/wallets.helper';
 import Icon from '@components/Icon';
 import { ICONS } from '@components/Icon/types';
+import { LOGIN_PROVIDER } from '@constants/wallets.constants';
 import styles from './styles.module.scss';
 
 const WalletLogin: FC = () => {
