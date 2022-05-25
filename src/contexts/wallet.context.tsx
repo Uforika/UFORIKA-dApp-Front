@@ -120,8 +120,7 @@ const WalletProvider: FC = ({ children }) => {
       ? transactionHistoryFromLocalStorage.transactionHistory.concat(mergedTransaction) : mergedTransaction;
 
     const sortedTransactionHistory = transactions
-      .sort((firstEl, secondEl) => ((firstEl.blockNumber > secondEl.blockNumber) ? 1
-        : ((firstEl.blockNumber > secondEl.blockNumber) ? -1 : 0)));
+      .sort((firstEl, secondEl) => Number(secondEl.timeStamp) - Number(firstEl.timeStamp));
 
     setTransactionHistoryInLocalStorage(sortedTransactionHistory);
 
