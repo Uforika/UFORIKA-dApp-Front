@@ -1,12 +1,13 @@
 import {
   useCallback,
-  useContext, useMemo,
+  useContext, useEffect, useMemo, useState,
 } from 'react';
 import { WalletContext } from '@contexts/wallet.context';
 import BigNumber from 'bignumber.js';
 import { TOKEN } from '@constants/token.constants';
 import { GAS_PRICE } from '@constants/transaction.constants';
 import { calculateFee } from '@helpers/balance.helper';
+import { DEFAULT_BALANCE_VALUE } from '@constants/wallets.constants';
 import { TransactionReceipt, useTransactionProps } from '../types/transaction.types';
 
 export const useWallet = () => {
@@ -21,8 +22,13 @@ export const useWallet = () => {
 
 export const useBalance = (token: TOKEN): BigNumber => {
   const { getBalance } = useWallet();
+  const [balance, setBalance] = useState(DEFAULT_BALANCE_VALUE);
 
-  return getBalance(token);
+  useEffect(() => {
+    setBalance(getBalance(token));
+  }, [getBalance, token]);
+
+  return balance;
 };
 
 export const useTransfer: useTransactionProps = (tokenName, recipientAddress, amount) => {

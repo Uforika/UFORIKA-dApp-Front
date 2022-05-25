@@ -18,7 +18,7 @@ export type WalletContextType = {
   walletLogout: () => Promise<void>,
   walletStatus: ADAPTER_STATUS_TYPE | undefined,
   getBalance: (token: TOKEN) => BigNumber,
-  getTransactionHistory: () => Promise<TransactionFromHistoryType[]>,
+  getTransactionHistory: () => Promise<TransactionFromHistoryType[] | undefined>,
   transferMethod: TransferMethodType
 }
 
@@ -31,7 +31,7 @@ const initialContextState = {
   walletLogout: () => Promise.resolve(),
   walletStatus: undefined,
   getBalance: () => DEFAULT_BALANCE_VALUE,
-  getTransactionHistory: () => Promise.resolve([]),
+  getTransactionHistory: () => Promise.resolve(undefined),
   transferMethod: () => Promise.resolve(undefined),
 };
 
@@ -103,7 +103,7 @@ const WalletProvider: FC = ({ children }) => {
 
   const getTransactionHistory = useCallback(async () => {
     if (!address) {
-      throw new Error('Not loaded web3');
+      return undefined;
     }
 
     const transactionHistoryFromLocalStorage = getTransactionHistoryFromLocalStorage();

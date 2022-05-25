@@ -12,6 +12,7 @@ import {
 import { showToast } from '@components/Toast';
 import { TOAST_MASSAGE_ERRORS } from '@constants/messages.constants';
 import { TOAST_ERROR } from '@constants/toast.constants';
+import { LOCAL_STORAGE_TRANSACTION_HISTORY_KEY } from '@constants/transaction.constants';
 import { AuthMeType } from '../types/auth.types';
 
 /**
@@ -50,6 +51,7 @@ const AuthProvider: FC = ({ children }) => {
     if ((!address && walletStatus === ADAPTER_STATUS.READY && userProfile !== null)
         || walletStatus === ADAPTER_STATUS.DISCONNECTED) {
       signOut({}).then(async () => {
+        localStorage.removeItem(LOCAL_STORAGE_TRANSACTION_HISTORY_KEY);
         await mutateProfile();
       }).catch(() => null);
     }
