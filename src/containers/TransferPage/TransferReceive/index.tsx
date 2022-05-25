@@ -1,13 +1,14 @@
 import React, { FC, memo, useCallback } from 'react';
+import { useWallet } from '@hooks/wallet.hooks';
 import { downloadQRCode } from '@helpers/qrCode.helper';
+import { copy } from '@helpers/copy.helper';
 import Header from '@components/Header';
 import QrCode from '@components/QrCode';
 import LinkButton from '@components/LinkButton';
 import ButtonIcon from '@components/ButtonIcon';
-import { ICONS } from '@components/Icon/types';
-import { useWallet } from '@hooks/wallet.hooks';
-import { copy } from '@helpers/copy.helper';
+import { ICONS } from '@components/Icon/constants';
 import Popup from '@components/Popup';
+import { TOAST_MASSAGE_SUCCESS } from '@constants/messages.constants';
 import styles from './styles.module.scss';
 
 const TransferReceive: FC = () => {
@@ -18,7 +19,7 @@ const TransferReceive: FC = () => {
   }, []);
 
   const handleCopy = useCallback(() => {
-    copy(address as string);
+    copy(address as string, TOAST_MASSAGE_SUCCESS.COPY);
   }, [address]);
 
   return (

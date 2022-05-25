@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { useCurrencyConversion } from '@hooks/currency-conversion.hooks';
 import { useBalance } from '@hooks/wallet.hooks';
 import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import { CURRENCY, TOKEN } from '@constants/token.constants';
 import { FORA_NAME } from '@constants/global.constants';
 import styles from './styles.module.scss';

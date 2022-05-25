@@ -1,12 +1,12 @@
 import React, {
   createContext, FC, useCallback, useEffect, useMemo, useState,
 } from 'react';
+import BigNumber from 'bignumber.js';
 import { ADAPTER_STATUS_TYPE } from '@web3auth/base';
 import useWalletService from '@services/wallets/wallet';
 import { getTransactionHistoryFromLocalStorage, setTransactionHistoryInLocalStorage } from '@helpers/transaction.helper';
 import { DEFAULT_BALANCE_VALUE, mergeTransactionHistory } from '@constants/wallets.constants';
 import { TOKEN } from '@constants/token.constants';
-import BigNumber from 'bignumber.js';
 import { ConnectType, TransferMethodType } from '../types/wallets.types';
 import { TransactionFromHistoryType } from '../types/transaction.types';
 

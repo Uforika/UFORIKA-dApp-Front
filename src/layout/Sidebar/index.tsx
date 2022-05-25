@@ -5,7 +5,7 @@ import { useWallet } from '@hooks/wallet.hooks';
 import Menu from '@components/Menu';
 import Link from '@components/Link';
 import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import { LEFT_MENU_LIST } from './constants';
 import styles from './styles.module.scss';
 

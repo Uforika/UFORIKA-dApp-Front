@@ -12,6 +12,8 @@ export enum TOKEN {
   FORA='FORA',
 }
 
+export const DEFAULT_TOKEN_DECIMAL = 18;
+
 export enum TOKEN_ID {
   POLYGON='matic-network',
   FORA='matic-network',

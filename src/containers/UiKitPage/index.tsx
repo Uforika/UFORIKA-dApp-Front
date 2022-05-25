@@ -6,6 +6,8 @@ import UiKitDropdowns from './UiKitDropdowns';
 import UiKitIcons from './UiKitIcons';
 import UiKitPopups from './UiKitPopups';
 import styles from './styles.module.scss';
+import UiKitInputs from './UiKitInputs';
+import UiKitLabels from './UiKitLabels';
 
 const UiKitPage: Page = () => (
   <div className={styles.page}>
@@ -15,9 +17,11 @@ const UiKitPage: Page = () => (
       </div>
       <br />
       <br />
+      <UiKitLabels />
       <UiKitModals />
       <UiKitPopups />
       <UiKitDropdowns />
+      <UiKitInputs />
       <UiKitIcons />
     </div>
   </div>

@@ -1,0 +1,58 @@
+@import '../../../../assets/scss/helpers/all';
+
+.row {
+  align-items: center;
+  color: $white;
+  display: grid;
+  grid-column-gap: 20px;
+  grid-template-columns: 200px 1fr 78px 1fr 28px;
+  padding: 16px 20px;
+}
+
+.cellWrapColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.cellWrap {
+  align-items: center;
+  display: flex;
+}
+
+.date {
+  @include body-m();
+}
+
+.time {
+  @include body-s($dustyGray);
+  margin-top: 4px;
+}
+
+.cellWrap2Content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+}
+
+.transactionType,
+.transactionValue {
+  @include body-l-semi-bold();
+}
+
+.senderAddress,
+.transactionFee {
+  @include body-s($dustyGray);
+  white-space: nowrap;
+}
+
+.cellWrap.center {
+  justify-content: center;
+}
+
+.cellWrapColumn.right {
+  align-items: flex-end;
+}
+
+.mr40 {
+  margin-right: 40px;
+}

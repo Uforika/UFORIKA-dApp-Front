@@ -50,7 +50,7 @@ const DropdownCurrency: FC<Props> = ({
   }, [onChange, activeOption]);
 
   return (
-    <>
+    <div>
       <div className={styles.panel}>
         {label && (
           <label className={styles.label} htmlFor={name}>
@@ -82,7 +82,7 @@ const DropdownCurrency: FC<Props> = ({
           />
         </Dropdown>
       </div>
-    </>
+    </div>
   );
 };
 

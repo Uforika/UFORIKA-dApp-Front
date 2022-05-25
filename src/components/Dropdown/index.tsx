@@ -1,8 +1,8 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, ReactNode } from 'react';
 import { Dropdown as UIDropdown, StrictDropdownProps } from 'semantic-ui-react';
 import cn from 'classnames';
 import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import styles from './styles.module.scss';
 
 type Props = StrictDropdownProps & {
@@ -13,11 +13,12 @@ type Props = StrictDropdownProps & {
   name: string
   errorMessage?: string
   size?: 'big' | 'small',
-  isInlineView?: boolean
+  isInlineView?: boolean,
+  icon?: ReactNode
 }
 
 const Dropdown: FC<Props> = ({
-  selectOnBlur, selectOnNavigation, fluid, label,
+  selectOnBlur, selectOnNavigation, fluid, label, icon,
   name, errorMessage, className, size, isInlineView, ...props
 }) => (
   <div className={cn(styles.wrap, className, { [styles.inline]: isInlineView })}>
@@ -27,13 +28,7 @@ const Dropdown: FC<Props> = ({
       selectOnNavigation={selectOnNavigation}
       selectOnBlur={selectOnBlur}
       className={cn(styles.dropdown, size ? styles[size] : null)}
-      icon={(
-        <Icon
-          className="dropdownIcon"
-          type={ICONS.DROPDOWN_CHEVRON}
-          width={16}
-        />
-      )}
+      icon={icon}
       id={name}
       {...props}
     />
@@ -49,6 +44,13 @@ Dropdown.defaultProps = {
   errorMessage: '',
   size: undefined,
   isInlineView: false,
+  icon: () => (
+    <Icon
+      className="dropdownIcon"
+      type={ICONS.DROPDOWN_CHEVRON}
+      width={16}
+    />
+  ),
 };
 
 export default memo(Dropdown);

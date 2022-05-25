@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 import { PATH_PRIVACY, PATH_TERMS } from '@constants/routes.constants';
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import Icon from '@components/Icon';
 import SocialLogin from './SocialLogin';
 import EmailLogin from './EmailLogin';

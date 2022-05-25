@@ -1,5 +1,6 @@
 export enum ICONS {
   DROPDOWN_CHEVRON = 'dropdownChevron',
+  DROPDOWN_CHEVRON_WHITE = 'dropdownChevronWhite',
   DROPDOWN_CURRENCY_BTC = 'dropdownCurrencyBTC',
   DROPDOWN_CURRENCY_RFUEL = 'dropdownCurrencyRFUEL',
   DROPDOWN_CURRENCY_USDT = 'dropdownCurrencyUSDT',
@@ -19,7 +20,6 @@ export enum ICONS {
   LOGIN_LINKEDIN = 'loginLinkedin',
   LOGIN_WECHAT = 'loginWechat',
   LOGIN_WEIBO = 'loginWeibo',
-  LOGIN_MORE = 'loginMore',
   SIDEBAR_PROFILE = 'sidebarProfile',
   SIDEBAR_TRANSFER = 'sidebarTransfer',
   SIDEBAR_HISTORY = 'sidebarHistory',
@@ -30,7 +30,13 @@ export enum ICONS {
   WEB3_AUTH_LOGO = 'web3AuthLogo',
   PROFILE_QR_CODE = 'profileQrCode',
   PROFILE_COPY = 'profileCopy',
-  CLOSE_QR_CODE_MODAL = 'closeQrCodeModal',
+  CLOSE = 'close',
+  CLOSE_WHITE = 'closeWhite',
   PROFILE_POLYGON_POWERED = 'polygonPowered',
-  PROFILE_UFOSHIP = 'profileUfoship',
+  UFO_SHIP = 'UFOShip',
+  SEARCH = 'search',
+  REFRESH = 'refresh',
+  LINK = 'link',
+  TRANSACTION_SEND = 'transactionSend',
+  TRANSACTION_RECEIVE = 'transactionReceive'
 }

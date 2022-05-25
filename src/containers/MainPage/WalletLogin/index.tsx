@@ -2,7 +2,7 @@ import React, { FC, memo } from 'react';
 import Button from '@components/Button';
 import { useWallet } from '@hooks/wallet.hooks';
 import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import { LOGIN_PROVIDER } from '@constants/wallets.constants';
 import styles from './styles.module.scss';
 

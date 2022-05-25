@@ -1,0 +1,54 @@
+@import '../../assets/scss/helpers/all';
+
+.root {
+  position: relative;
+}
+
+.input {
+  display: inline-flex;
+
+  &:global.ui.input {
+    &.ui[class*='left icon'].input > input {
+      padding-left: 30px !important;
+      padding-right: 40px !important;
+    }
+
+    input {
+      @include body-l($white);
+      background-color: transparent;
+      border: 1px solid transparent;
+      border-radius: 20px;
+      color: $white;
+      height: 28px;
+
+      &[type='text'] {
+        &::placeholder {
+          color: $white !important;
+        }
+      }
+
+      &:hover {
+        border: 1px solid $dustyGray;
+      }
+
+      &:focus {
+        border: 1px solid $malachite;
+      }
+    }
+  }
+}
+
+.icon {
+  bottom: 0;
+  left: 8px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+}
+
+.close {
+  bottom: 0;
+  position: absolute;
+  right: 8px;
+  top: 0;
+}

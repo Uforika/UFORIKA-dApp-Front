@@ -1,4 +1,4 @@
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import { StrictDropdownMenuProps, StrictDropdownItemProps } from 'semantic-ui-react';
 
 export type DropdownCurrencyItemType = StrictDropdownItemProps & {

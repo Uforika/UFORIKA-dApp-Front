@@ -130,6 +130,10 @@
   align-items: center;
   display: flex;
 
+  .label {
+    margin-bottom: 0;
+  }
+
   .dropdown {
     background-color: transparent;
     height: auto;

@@ -1,9 +1,15 @@
 @import '../../assets/scss/helpers/all';
 
 .root {
+  display: flex;
+
   :global {
     h1.ui.header {
       @include h1();
+    }
+
+    h2.ui.header {
+      @include h2();
     }
 
     h3.ui.header {

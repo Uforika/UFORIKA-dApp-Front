@@ -3,7 +3,7 @@ import { MenuItem } from 'semantic-ui-react';
 import Link from 'next/link';
 import Menu from '@components/Menu';
 import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import Popup from '@components/Popup';
 import { TOP_MENU_LIST } from './constants';
 import Balance from './Balance';

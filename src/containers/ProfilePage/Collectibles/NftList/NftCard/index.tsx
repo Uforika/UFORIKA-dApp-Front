@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 type Props = {
   name: string,
   type: string,
-  nftImage: string
+  nftImage?: string
 }
 
 const NftCard: FC<Props> = ({ name, type, nftImage }) => (
@@ -16,5 +16,9 @@ const NftCard: FC<Props> = ({ name, type, nftImage }) => (
     <p className={styles.type}>{type}</p>
   </div>
 );
+
+NftCard.defaultProps = {
+  nftImage: undefined,
+};
 
 export default memo(NftCard);

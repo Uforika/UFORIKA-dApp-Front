@@ -3,8 +3,9 @@ import { useWallet } from '@hooks/wallet.hooks';
 import { useQrCodeModal } from '@hooks/modals.hooks';
 import Popup from '@components/Popup';
 import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import { copy } from '@helpers/copy.helper';
+import { TOAST_MASSAGE_SUCCESS } from '@constants/messages.constants';
 import styles from './styles.module.scss';
 
 const Address: FC = () => {
@@ -13,7 +14,7 @@ const Address: FC = () => {
   const [showModal] = useQrCodeModal(address);
 
   const handleCopy = useCallback(() => {
-    copy(address);
+    copy(address, TOAST_MASSAGE_SUCCESS.COPY);
   }, [address]);
 
   return (

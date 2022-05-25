@@ -3,9 +3,13 @@ import cn from 'classnames';
 import { Loader, Button as UIButton, StrictButtonProps } from 'semantic-ui-react';
 import styles from './styles.module.scss';
 
-type PickedTypes = 'primary' | 'secondary' | 'children' | 'onClick'| 'loading' | 'className' | 'disabled' | 'size' | 'icon'
+type PickedFromUITypes = 'primary' | 'secondary' | 'children' | 'onClick'| 'loading' | 'className' | 'disabled' | 'size' | 'icon' | 'as'
 
-export type ButtonProps = Pick<StrictButtonProps, PickedTypes>
+export type ButtonProps = Pick<StrictButtonProps, PickedFromUITypes> & {
+  target?: string,
+  rel?: string,
+  href?: string
+}
 
 const Button: React.FC<ButtonProps> = ({
   className,
@@ -27,5 +31,11 @@ const Button: React.FC<ButtonProps> = ({
     </UIButton>
   </div>
 );
+
+Button.defaultProps = {
+  target: undefined,
+  rel: undefined,
+  href: undefined,
+};
 
 export default memo(Button);

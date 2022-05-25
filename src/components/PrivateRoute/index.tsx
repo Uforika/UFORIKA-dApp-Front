@@ -1,10 +1,8 @@
-import React, {
-  FC, memo, useEffect,
-} from 'react';
+import React, { FC, memo, useEffect } from 'react';
 import { useAuth } from '@hooks/auth.hooks';
 import { useRouter } from 'next/router';
 import { PATH_INDEX } from '@constants/routes.constants';
-import { Loader } from 'semantic-ui-react';
+import Loader from '@components/Loader';
 
 type Props = {
   children: React.ReactNode

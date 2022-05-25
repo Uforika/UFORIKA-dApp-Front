@@ -2,7 +2,7 @@ import React, { FC, memo, useState } from 'react';
 import Button from '@components/Button';
 import Header from '@components/Header';
 import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import Input from '@components/Input';
 import DropdownCurrency from 'src/modules/DropdownCurrency';
 // TODO: remove and use real data

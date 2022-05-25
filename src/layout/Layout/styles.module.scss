@@ -35,7 +35,6 @@
 }
 
 .contentWrapper {
-  display: grid;
   grid-area: main;
   overflow: auto;
   z-index: 1;
@@ -77,11 +76,10 @@
 }
 
 .main {
-  display: flex;
+  display: grid;
   height: 100%;
   margin: auto;
   max-width: 1680px;
   transform: none !important;
-  width: 100%;
   z-index: 0 !important;
 }

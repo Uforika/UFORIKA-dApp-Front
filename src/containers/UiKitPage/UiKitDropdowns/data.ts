@@ -1,4 +1,4 @@
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 
 export const options = [
   { text: 'One', value: 'one' },

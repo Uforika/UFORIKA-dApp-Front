@@ -1,10 +1,10 @@
 import React, { FC, memo } from 'react';
+import { downloadQRCode } from '@helpers/qrCode.helper';
 import Modal from '@components/Modal';
 import LinkButton from '@components/LinkButton';
-import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
-import { downloadQRCode } from '@helpers/qrCode.helper';
+import { ICONS } from '@components/Icon/constants';
 import QrCode from '@components/QrCode';
+import ButtonIcon from '@components/ButtonIcon';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -21,9 +21,12 @@ const ModalQrCode: FC<Props> = ({ address, onClose, ...props }) => {
   return (
     <Modal size="tiny" {...props}>
       <div className={styles.panel}>
-        <button className={styles.closeIcon} onClick={onClose}>
-          <Icon width={24} type={ICONS.CLOSE_QR_CODE_MODAL} />
-        </button>
+        <ButtonIcon
+          className={styles.closeIcon}
+          onClick={onClose}
+          width={24}
+          type={ICONS.CLOSE}
+        />
         <div className={styles.background} />
         <div className={styles.shadow} />
         <div className={styles.content}>

@@ -1,7 +1,8 @@
 import React, { FC, memo } from 'react';
+import cn from 'classnames';
 import Button, { ButtonProps } from '@components/Button';
 import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import styles from './styles.module.scss';
 
 type Props = ButtonProps & {
@@ -11,9 +12,9 @@ type Props = ButtonProps & {
 }
 
 const ButtonIcon: FC<Props> = ({
-  width, height, type, ...props
+  width, height, type, className, ...props
 }) => (
-  <div className={styles.wrap}>
+  <div className={cn(styles.wrap, className)}>
     <Button
       icon={(
         <Icon

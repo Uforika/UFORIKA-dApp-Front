@@ -62,6 +62,14 @@
   line-height: 24px;
 }
 
+@mixin body-l-semi-bold($color: $white) {
+  color: $color;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
 @mixin body-m-semi-bold($color: $white) {
   color: $color;
   font-family: 'Inter';

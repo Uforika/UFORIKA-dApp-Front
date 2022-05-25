@@ -24,17 +24,22 @@ import { ReactComponent as IconLoginKakao } from './assets/loginKakao.svg';
 import { ReactComponent as IconLoginWeibo } from './assets/loginWeibo.svg';
 import { ReactComponent as IconLoginLinkedin } from './assets/loginLinkedin.svg';
 import { ReactComponent as IconLoginWechat } from './assets/loginWechat.svg';
-import { ReactComponent as IconLoginMore } from './assets/loginMore.svg';
 import { ReactComponent as IconUforikaLogo } from './assets/uforikaLogo.svg';
 import { ReactComponent as IconWeb3AuthLogo } from './assets/web3AuthLogo.svg';
 import { ReactComponent as IconForaCoinLogo } from './assets/foraCoinLogo.svg';
 import { ReactComponent as IconMaticCoinLogo } from './assets/maticCoinLogo.svg';
 import { ReactComponent as IconProfileQrCode } from './assets/profileQrCode.svg';
 import { ReactComponent as IconProfileCopy } from './assets/profileCopy.svg';
-import { ReactComponent as IconCloseQrCodeModal } from './assets/closeQrCodeModal.svg';
+import { ReactComponent as IconClose } from './assets/close.svg';
 import { ReactComponent as IconPolygonPowered } from './assets/polygonPowered.svg';
-import { ReactComponent as IconProfileUfoship } from './assets/profileUfoship.svg';
-import { ICONS } from './types';
+import { ReactComponent as IconUFOship } from './assets/UFOShip.svg';
+import { ReactComponent as IconSearch } from './assets/search.svg';
+import { ReactComponent as IconRefresh } from './assets/refresh.svg';
+import { ReactComponent as IconTransactionSend } from './assets/transactionSend.svg';
+import { ReactComponent as IconTransactionReceive } from './assets/transactionReceive.svg';
+import { ReactComponent as IconLink } from './assets/link.svg';
+
+import { ICONS } from './constants';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -55,7 +60,23 @@ const Icon: FC<Props> = ({
       case ICONS.SUCCESS:
         return <IconModalSuccess />;
       case ICONS.DROPDOWN_CHEVRON:
-        return <IconDropdownChevron />;
+        return (
+          <IconDropdownChevron
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            stroke="#9C9C9C"
+          />
+        );
+      case ICONS.DROPDOWN_CHEVRON_WHITE:
+        return (
+          <IconDropdownChevron
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            stroke="#fff"
+          />
+        );
       case ICONS.DROPDOWN_CURRENCY_BTC:
         return <IconDropdownCurrencyBTC />;
       case ICONS.DROPDOWN_CURRENCY_RFUEL:
@@ -90,8 +111,6 @@ const Icon: FC<Props> = ({
         return <IconLoginWechat />;
       case ICONS.LOGIN_WEIBO:
         return <IconLoginWeibo />;
-      case ICONS.LOGIN_MORE:
-        return <IconLoginMore />;
       case ICONS.SIDEBAR_TRANSFER:
         return <IconSidebarTransfer />;
       case ICONS.SIDEBAR_HISTORY:
@@ -112,12 +131,39 @@ const Icon: FC<Props> = ({
         return <IconProfileQrCode />;
       case ICONS.PROFILE_COPY:
         return <IconProfileCopy />;
-      case ICONS.CLOSE_QR_CODE_MODAL:
-        return <IconCloseQrCodeModal />;
+      case ICONS.CLOSE:
+        return (
+          <IconClose
+            stroke="#9c9c9c"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        );
+      case ICONS.CLOSE_WHITE:
+        return (
+          <IconClose
+            stroke="#fff"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        );
       case ICONS.PROFILE_POLYGON_POWERED:
         return <IconPolygonPowered />;
-      case ICONS.PROFILE_UFOSHIP:
-        return <IconProfileUfoship />;
+      case ICONS.UFO_SHIP:
+        return <IconUFOship />;
+      case ICONS.SEARCH:
+        return <IconSearch />;
+      case ICONS.REFRESH:
+        return <IconRefresh />;
+      case ICONS.LINK:
+        return <IconLink />;
+      case ICONS.TRANSACTION_SEND:
+        return <IconTransactionSend />;
+      case ICONS.TRANSACTION_RECEIVE:
+        return <IconTransactionReceive />;
+
       default:
         return null;
     }

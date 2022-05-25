@@ -20,3 +20,9 @@ export const CHAIN_CONFIG = {
     rpcWss: 'wss://ws-matic-mumbai.chainstacklabs.com',
   },
 };
+
+export const TRX_LINK_CONSTRUCTOR = {
+  [NETWORK.MAINNET_POLYGON]: (address: string) => `https://polygonscan.com/tx/${address}`,
+  [NETWORK.TESTNET_POLYGON]: (address: string) => `https://mumbai.polygonscan.com/tx/${address}`,
+
+};

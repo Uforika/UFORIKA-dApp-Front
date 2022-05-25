@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react';
 import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
 import BigNumber from 'bignumber.js';
+import { ICONS } from '@components/Icon/constants';
 import styles from './styles.module.scss';
 
 type Props = {

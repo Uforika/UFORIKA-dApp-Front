@@ -1,4 +1,4 @@
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import { LOGIN_PROVIDER } from '@constants/wallets.constants';
 
 export const SOCIAL_LOGIN = [

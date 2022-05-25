@@ -1,0 +1,10 @@
+@import '../../assets/scss/helpers/all';
+
+.root:global.ui.loader::after {
+  border-color: $white transparent transparent;
+  border-width: 2px;
+}
+
+.root:global.ui.loader::before {
+  border: 2px solid rgba($white, 0.3);
+}

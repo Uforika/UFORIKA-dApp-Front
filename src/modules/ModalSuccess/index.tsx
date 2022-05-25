@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react';
 import Button from '@components/Button';
 import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import Modal from '../../components/Modal';
 import styles from './styles.module.scss';
 

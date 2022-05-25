@@ -6,7 +6,7 @@ import { useWallet } from '@hooks/wallet.hooks';
 import useWindowSize from '@hooks/window-size.hooks';
 import Button from '@components/Button';
 import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import { showToast } from '@components/Toast';
 import { TOAST_ERROR } from '@constants/toast.constants';
 import { TOAST_MASSAGE_ERRORS } from '@constants/messages.constants';
@@ -75,7 +75,7 @@ const SocialLogin: FC = () => {
         {hidden.length && (
           <div>
             <button className={cn(styles.buttonMore, { [styles.isActive]: isShowMore })} type="button" onClick={handleShowMore}>
-              <Icon width={28} type={ICONS.LOGIN_MORE} />
+              <Icon width={24} type={ICONS.DROPDOWN_CHEVRON} />
             </button>
           </div>
         )}

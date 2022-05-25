@@ -22,7 +22,7 @@ export type TransactionFromHistoryType = {
   tokenName?: string
   tokenSymbol?: string
   transactionIndex?: string
-  txreceipt_status?: string
+  txreceipt_status: '0' | '1'
   value: string
 }
 

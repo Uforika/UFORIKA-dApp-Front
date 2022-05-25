@@ -1,12 +1,13 @@
 /* eslint-disable max-len */
-import Popup from '@components/Popup';
 import React, { memo } from 'react';
+import Header from '@components/Header';
+import Popup from '@components/Popup';
 
 import styles from './styles.module.scss';
 
 const UiKitPopups = () => (
   <div className={styles.wrap}>
-    <h2>Popups</h2>
+    <Header className={styles.title} as="h2">Popups</Header>
     <Popup
       position="bottom left"
       trigger={<span>Popup</span>}

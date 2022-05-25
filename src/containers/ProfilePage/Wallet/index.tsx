@@ -1,14 +1,14 @@
 import React, { FC, memo } from 'react';
+import { FORA_NAME, MATIC_NAME } from '@constants/global.constants';
+import { ICONS } from '@components/Icon/constants';
+import Address from '@containers/ProfilePage/Wallet/Address';
 import { useRouter } from 'next/router';
-import { ICONS } from '@components/Icon/types';
 import Button from '@components/Button';
 import Icon from '@components/Icon';
-import Address from '@containers/ProfilePage/Wallet/Address';
 import { useBalance } from '@hooks/wallet.hooks';
 import { useCurrencyConversion } from '@hooks/currency-conversion.hooks';
 import { CURRENCY, TOKEN } from '@constants/token.constants';
 import { PATH_HISTORY, PATH_TRANSFER } from '@constants/routes.constants';
-import { FORA_NAME, MATIC_NAME } from '@constants/global.constants';
 import styles from './styles.module.scss';
 import Card from './Card';
 

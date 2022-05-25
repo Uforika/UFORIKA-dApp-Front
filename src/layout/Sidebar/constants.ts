@@ -1,4 +1,4 @@
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import { PATH_HISTORY, PATH_PROFILE, PATH_TRANSFER } from '@constants/routes.constants';
 
 export const LEFT_MENU_LIST = [

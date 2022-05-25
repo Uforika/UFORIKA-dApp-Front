@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, memo } from 'react';
 import Icon from '@components/Icon';
-import { ICONS } from '@components/Icon/types';
+import { ICONS } from '@components/Icon/constants';
 import styles from './styles.module.scss';
 
 type Props = {
