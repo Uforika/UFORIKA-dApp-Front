@@ -16,7 +16,7 @@ export const useCurrencyConversion = (fromToken: TOKEN, currency: CURRENCY, amou
     getExchangeRate().catch(() => null);
   }, [currency, fromToken, getCurrencyPrice]);
 
-  const convertedValue = amount.div(new BigNumber(exchangeRate));
+  const convertedValue = amount.multipliedBy(new BigNumber(exchangeRate));
 
   return convertedValue;
 };
