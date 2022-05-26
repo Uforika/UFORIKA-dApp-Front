@@ -95,8 +95,8 @@ const AuthProvider: FC = ({ children }) => {
 
   const authProviderValue = useMemo(() => ({
     userProfile,
-    isAuthorized: !!userProfile || walletStatus === ADAPTER_STATUS.NOT_READY,
-    isLoading: userProfile === undefined,
+    isAuthorized: !!userProfile,
+    isLoading: userProfile === undefined || walletStatus === ADAPTER_STATUS.NOT_READY,
   }), [userProfile, walletStatus]);
 
   return (

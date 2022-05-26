@@ -16,6 +16,7 @@ import { CONFIG } from '@constants/config.constants';
 import { CHAIN_CONFIG } from '@constants/network.constants';
 import { LOGIN_PROVIDER } from '@constants/wallets.constants';
 import { logError, logInfo } from '@helpers/log.helper';
+import { UX_MODE } from '@toruslabs/openlogin';
 import { ConnectType } from '../../types/wallets.types';
 
 type Web3AuthWalletType = {
@@ -88,7 +89,14 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
       subscribeAuthEvents(web3AuthInstance);
 
       const metamaskAdapter = new MetamaskAdapter();
-      const openLoginAdapter = new OpenloginAdapter({ adapterSettings: { network: 'testnet', clientId: CONFIG.CLIENT_ID } });
+      const openLoginAdapter = new OpenloginAdapter({
+        adapterSettings: {
+          network: 'testnet',
+          clientId:
+          CONFIG.CLIENT_ID,
+          uxMode: UX_MODE.REDIRECT,
+        },
+      });
       web3AuthInstance.configureAdapter(metamaskAdapter);
       web3AuthInstance.configureAdapter(openLoginAdapter);
       await web3AuthInstance.init();

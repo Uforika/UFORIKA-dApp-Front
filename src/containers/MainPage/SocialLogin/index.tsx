@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 import { useWallet } from '@hooks/wallet.hooks';
+import { useDOMContentLoaded } from '@hooks/dom.hooks';
 import useWindowSize from '@hooks/window-size.hooks';
 import Button from '@components/Button';
 import Icon from '@components/Icon';
@@ -17,6 +18,7 @@ import styles from './styles.module.scss';
 const SocialLogin: FC = () => {
   const { walletAuth } = useWallet();
   const [isShowMore, setShowMore] = useState(false);
+  const isDOMContentLoaded = useDOMContentLoaded();
 
   const socialIconListRef = useRef<HTMLUListElement>(null);
 
@@ -65,6 +67,7 @@ const SocialLogin: FC = () => {
               <Button
                 onClick={handlePressAuthorization(provider)}
                 secondary
+                disabled={!isDOMContentLoaded}
                 className={styles.button}
               >
                 <Icon width={24} type={icon} />
@@ -91,6 +94,7 @@ const SocialLogin: FC = () => {
               <Button
                 onClick={handlePressAuthorization(provider)}
                 secondary
+                disabled={!isDOMContentLoaded}
                 className={styles.button}
               >
                 <Icon width={24} type={icon} />
