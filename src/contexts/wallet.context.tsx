@@ -2,7 +2,7 @@ import React, {
   createContext, FC, useCallback, useEffect, useMemo, useState,
 } from 'react';
 import BigNumber from 'bignumber.js';
-import { ADAPTER_STATUS, ADAPTER_STATUS_TYPE } from '@web3auth/base';
+import { ADAPTER_STATUS, ADAPTER_STATUS_TYPE, UserInfo } from '@web3auth/base';
 import useWalletService from '@services/wallets/wallet';
 import { getTransactionHistoryFromLocalStorage, setTransactionHistoryInLocalStorage } from '@helpers/transaction.helper';
 import { DEFAULT_BALANCE_VALUE, mergeTransactionHistory } from '@constants/wallets.constants';
@@ -19,7 +19,8 @@ export type WalletContextType = {
   walletStatus: ADAPTER_STATUS_TYPE | undefined,
   getBalance: (token: TOKEN) => BigNumber,
   getTransactionHistory: () => Promise<TransactionFromHistoryType[] | undefined>,
-  transferMethod: TransferMethodType
+  transferMethod: TransferMethodType,
+  userInfo: Partial<UserInfo>,
 }
 
 const initialContextState = {
@@ -33,6 +34,7 @@ const initialContextState = {
   getBalance: () => DEFAULT_BALANCE_VALUE,
   getTransactionHistory: () => Promise.resolve(undefined),
   transferMethod: () => Promise.resolve(undefined),
+  userInfo: {},
 };
 
 export const WalletContext = createContext<WalletContextType>(initialContextState);
@@ -48,6 +50,7 @@ const WalletProvider: FC = ({ children }) => {
     getBalance,
     transferMethod,
     getHistory,
+    userInfo,
   } = useWalletService();
 
   const [address, setAddress] = useState<string | null>(null);
@@ -150,7 +153,8 @@ const WalletProvider: FC = ({ children }) => {
     getBalance: getCurrentBalance,
     getTransactionHistory,
     transferMethod,
-  }), [address, chainId, getSign, connect, logout, walletStatus, getCurrentBalance, getTransactionHistory, transferMethod]);
+    userInfo,
+  }), [address, chainId, getSign, connect, logout, walletStatus, getCurrentBalance, getTransactionHistory, transferMethod, userInfo]);
 
   return (
     <WalletContext.Provider value={walletProviderValue}>

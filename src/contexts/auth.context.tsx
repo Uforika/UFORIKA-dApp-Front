@@ -1,7 +1,7 @@
 import React, {
   createContext, FC, useEffect, useMemo, useState,
 } from 'react';
-import { ADAPTER_STATUS } from '@web3auth/base';
+import { ADAPTER_STATUS, UserInfo } from '@web3auth/base';
 import { useWallet } from '@hooks/wallet.hooks';
 import { logError } from '@helpers/log.helper';
 import {
@@ -25,19 +25,21 @@ export type AuthContextType = {
   userProfile: AuthMeType | undefined | null,
   isAuthorized: boolean,
   isLoading: boolean,
+  userInfo: Partial<UserInfo>,
 }
 
 const initialContextState = {
   userProfile: undefined,
   isAuthorized: false,
   isLoading: true,
+  userInfo: {},
 };
 
 export const AuthContext = createContext<AuthContextType>(initialContextState);
 
 const AuthProvider: FC = ({ children }) => {
   const {
-    address, sign, walletStatus, walletLogout,
+    address, sign, walletStatus, walletLogout, userInfo,
   } = useWallet();
 
   const [userProfile, setUserProfile] = useState<AuthMeType | undefined | null>(undefined);
@@ -50,6 +52,7 @@ const AuthProvider: FC = ({ children }) => {
   useEffect(() => {
     if ((!address && walletStatus === ADAPTER_STATUS.READY && userProfile !== null)
         || walletStatus === ADAPTER_STATUS.DISCONNECTED) {
+      setUserProfile(undefined);
       signOut({}).then(async () => {
         localStorage.removeItem(LOCAL_STORAGE_TRANSACTION_HISTORY_KEY);
         await mutateProfile();
@@ -95,9 +98,11 @@ const AuthProvider: FC = ({ children }) => {
 
   const authProviderValue = useMemo(() => ({
     userProfile,
+    userInfo,
     isAuthorized: !!userProfile,
-    isLoading: userProfile === undefined || walletStatus === ADAPTER_STATUS.NOT_READY,
-  }), [userProfile, walletStatus]);
+    isLoading: userProfile === undefined || walletStatus === ADAPTER_STATUS.NOT_READY
+        || walletStatus === undefined || walletStatus === ADAPTER_STATUS.CONNECTING,
+  }), [userInfo, userProfile, walletStatus]);
 
   return (
     <AuthContext.Provider value={authProviderValue}>

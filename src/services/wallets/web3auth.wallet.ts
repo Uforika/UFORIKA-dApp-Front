@@ -8,7 +8,7 @@ import {
   ADAPTER_STATUS,
   ADAPTER_STATUS_TYPE,
   MULTI_CHAIN_ADAPTERS,
-  SafeEventEmitterProvider,
+  SafeEventEmitterProvider, UserInfo,
   WALLET_ADAPTERS,
 } from '@web3auth/base';
 import { Web3AuthCore as Web3AuthCoreType } from '@web3auth/core';
@@ -27,6 +27,7 @@ type Web3AuthWalletType = {
   sign: (message: string, address: string) => Promise<string>,
   connect: ConnectType,
   logout: () => Promise<void>,
+  userInfo: Partial<UserInfo>,
   web3: Web3 | undefined,
   web3WS: Web3 | undefined,
 }
@@ -36,6 +37,7 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
   const [web3WS, setWeb3WS] = useState<Web3 | undefined>(undefined);
   const [web3Auth, setWeb3Auth] = useState<Web3AuthCoreType | undefined>(undefined);
   const [status, setStatus] = useState<ADAPTER_STATUS_TYPE | undefined>(ADAPTER_STATUS.NOT_READY);
+  const [userInfo, setUserInfo] = useState<Partial<UserInfo>>({});
 
   const initWeb3 = (provider: SafeEventEmitterProvider | ProviderType) => {
     const web3Instance = new Web3(provider as ProviderType);
@@ -48,6 +50,11 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
   const subscribeAuthEvents = useCallback((web3auth: Web3AuthCoreType) => {
     web3auth.on(ADAPTER_EVENTS.CONNECTED, () => {
       logInfo('connected to wallet');
+      const getUserInfo = async () => {
+        const userInfoResponse = await web3auth.getUserInfo();
+        setUserInfo(userInfoResponse);
+      };
+      getUserInfo().catch(() => null);
       initWeb3(web3auth.provider);
     });
 
@@ -59,6 +66,7 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
       setStatus(ADAPTER_STATUS.DISCONNECTED);
       logInfo('disconnected');
       setWeb3(undefined);
+      setUserInfo({});
     });
 
     web3auth.on(ADAPTER_EVENTS.ERRORED, (error) => {
@@ -189,9 +197,10 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
     sign,
     connect,
     logout,
+    userInfo,
     web3,
     web3WS,
-  }), [connect, getAccounts, getBalance, getChainId, logout, sign, status, web3, web3WS]);
+  }), [connect, getAccounts, getBalance, getChainId, logout, sign, status, userInfo, web3, web3WS]);
 };
 
 export default useWeb3Auth;

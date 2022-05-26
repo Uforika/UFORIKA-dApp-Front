@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import BigNumber from 'bignumber.js';
-import { ADAPTER_STATUS_TYPE } from '@web3auth/base';
+import { ADAPTER_STATUS_TYPE, UserInfo } from '@web3auth/base';
 import useWeb3Auth from '@services/wallets/web3auth.wallet';
 import { logError } from '@helpers/log.helper';
 import { TOKEN, TOKEN_CONFIG } from '@constants/token.constants';
@@ -22,6 +22,7 @@ import { ConnectType, GetBalanceType, TransferMethodType } from '../../types/wal
    getBalance: GetBalanceType
    transferMethod: TransferMethodType
    getHistory: (address: string, startBlock: number | undefined) => Promise<TransactionListFromAccountType[]>
+   userInfo: Partial<UserInfo>,
  }
 
 const useWalletService: () => WalletType = () => {
@@ -34,6 +35,7 @@ const useWalletService: () => WalletType = () => {
     connect,
     web3WS,
     web3,
+    userInfo,
   } = useWeb3Auth();
 
   const transferMethod: TransferMethodType = useCallback(async <T>
@@ -100,7 +102,8 @@ const useWalletService: () => WalletType = () => {
     getBalance,
     transferMethod,
     getHistory,
-  }), [sign, getChainId, getAccounts, logout, connect, status, getBalance, transferMethod]);
+    userInfo,
+  }), [sign, getChainId, getAccounts, logout, connect, status, getBalance, transferMethod, userInfo]);
 
 };
 
