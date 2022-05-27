@@ -50,8 +50,7 @@ const AuthProvider: FC = ({ children }) => {
   const [meProfile, , mutateProfile] = useAuthControllerGetMeSWR();
 
   useEffect(() => {
-    if ((!address && walletStatus === ADAPTER_STATUS.READY && userProfile !== null)
-        || walletStatus === ADAPTER_STATUS.DISCONNECTED) {
+    if ((!address && walletStatus === ADAPTER_STATUS.READY && userProfile !== null)) {
       setUserProfile(undefined);
       signOut({}).then(async () => {
         localStorage.removeItem(LOCAL_STORAGE_TRANSACTION_HISTORY_KEY);
