@@ -13,7 +13,10 @@ import { showToast } from '@components/Toast';
 import { TOAST_MASSAGE_ERRORS } from '@constants/messages.constants';
 import { TOAST_ERROR } from '@constants/toast.constants';
 import { LOCAL_STORAGE_TRANSACTION_HISTORY_KEY } from '@constants/transaction.constants';
+import { AUTH_ERROR } from '@constants/auth.constants';
+import { ApiError } from '@782-uforika/client-sdk/core/ApiError';
 import { AuthMeType } from '../types/auth.types';
+import { BodyErrorType } from '../types/api.types';
 
 /**
  * AuthMeType - AUTHORIZED
@@ -75,9 +78,19 @@ const AuthProvider: FC = ({ children }) => {
 
         await mutateProfile();
 
-      } catch (error) {
-        showToast(TOAST_MASSAGE_ERRORS.AUTH_ERROR, TOAST_ERROR);
-        logError(error);
+      } catch (errorResponse) {
+
+        if (errorResponse instanceof ApiError) {
+          errorResponse.body.errors.forEach((error: BodyErrorType) => {
+            if (error.message === AUTH_ERROR.USER_BLOCKED) {
+              showToast(TOAST_MASSAGE_ERRORS.AUTH_ERROR_BLOCKED_USER, TOAST_ERROR);
+            }
+          });
+        } else {
+          showToast(TOAST_MASSAGE_ERRORS.AUTH_ERROR, TOAST_ERROR);
+        }
+
+        logError(errorResponse);
         await walletLogout();
       }
     };
