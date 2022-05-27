@@ -10,6 +10,7 @@
 }
 
 .title {
+  justify-content: center;
   text-align: center;
 }
 
@@ -20,11 +21,8 @@
 .qrWrap {
   background-color: $white;
   border-radius: 6px;
-  border-radius: 6px;
   display: flex;
-  margin: 0 auto;
-  margin: auto;
-  margin-top: 32px;
+  margin: 32px auto auto;
   max-width: 192px;
   overflow: hidden;
   padding: 16px;
