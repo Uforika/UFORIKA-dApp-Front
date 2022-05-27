@@ -48,7 +48,7 @@ export const useSendForm = ({ balanceFora, balancePolygon, activeOptionId }: Sen
         ...localErrors,
         amount: FORM_FIELDS_ERRORS.REQUIRED,
       };
-    } else if (Number(amount) < 100) {
+    } else if (Number(amount) < 1) {
       localErrors = {
         ...localErrors,
         amount: `${FORM_FIELDS_ERRORS.MINIMUM_SEND_LIMIT} ${activeOptionId || ''}`,
