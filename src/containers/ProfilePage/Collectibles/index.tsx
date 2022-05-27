@@ -3,7 +3,7 @@ import Header from '@components/Header';
 import NftList from './NftList';
 import Card from './Card';
 import styles from './styles.module.scss';
-import { CARDS, NFT_LIST, TYPE_NFT_OPTIONS } from '../constants';
+import { CARDS, TYPE_NFT_OPTIONS } from '../constants';
 
 const Collectibles: FC = () => (
   <>
@@ -12,7 +12,7 @@ const Collectibles: FC = () => (
       {CARDS.map((cardData) => (
         <Card key={cardData.title} {...cardData} />
       ))}
-      <NftList nftList={NFT_LIST} typeNftOptionList={TYPE_NFT_OPTIONS} />
+      <NftList nftList={[]} typeNftOptionList={TYPE_NFT_OPTIONS} />
     </div>
   </>
 );
