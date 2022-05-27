@@ -8,7 +8,8 @@ import Icon from '@components/Icon';
 import { useBalance } from '@hooks/wallet.hooks';
 import { useCurrencyConversion } from '@hooks/currency-conversion.hooks';
 import { CURRENCY, TOKEN } from '@constants/token.constants';
-import { PATH_HISTORY, PATH_TRANSFER } from '@constants/routes.constants';
+import { PATH_BENEFITS, PATH_HISTORY, PATH_TRANSFER } from '@constants/routes.constants';
+import LinkButton from '@components/LinkButton';
 import styles from './styles.module.scss';
 import Card from './Card';
 
@@ -42,7 +43,12 @@ const Wallet: FC = () => {
             </div>
           </div>
           <div className={styles.supported}>
-            <Icon width={16} type={ICONS.PROFILE_POLYGON_POWERED} /> Supported by Polygon<span>Benefits</span>
+            <Icon width={16} type={ICONS.PROFILE_POLYGON_POWERED} /> Supported by Polygon
+            <a href={PATH_BENEFITS} target="_blank" rel="noreferrer">
+              <LinkButton className={styles.button}>
+                Benefits
+              </LinkButton>
+            </a>
           </div>
         </div>
       </div>
