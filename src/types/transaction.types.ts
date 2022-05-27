@@ -32,5 +32,5 @@ export type TransactionHistoryObjectType = { lastBlockNumber: string, transactio
 
 export type TransactionReceipt = Omit<TransactionReceiptWeb3, 'logs'>
 
-export type useTransactionProps = (tokenName: TOKEN, recipientAddress: string, amount: string) =>
+export type useTransactionProps = (tokenName: TOKEN, recipientAddress: string | undefined, amount: string | undefined) =>
 [sendTransaction: () => Promise<TransactionReceipt | undefined>, fee: Promise<BigNumber | undefined>]

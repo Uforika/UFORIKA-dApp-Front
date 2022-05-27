@@ -1,9 +1,6 @@
 export enum ICONS {
   DROPDOWN_CHEVRON = 'dropdownChevron',
   DROPDOWN_CHEVRON_WHITE = 'dropdownChevronWhite',
-  DROPDOWN_CURRENCY_BTC = 'dropdownCurrencyBTC',
-  DROPDOWN_CURRENCY_RFUEL = 'dropdownCurrencyRFUEL',
-  DROPDOWN_CURRENCY_USDT = 'dropdownCurrencyUSDT',
   FAIL = 'fail',
   SUCCESS = 'success',
   LOGIN_METAMASK = 'loginMetamask',
@@ -25,8 +22,8 @@ export enum ICONS {
   SIDEBAR_HISTORY = 'sidebarHistory',
   SIDEBAR_LOGOUT = 'sidebarLogout',
   UFORIKA_LOGO = 'uforikaLogo',
-  FORA_COIN_LOGO = 'foraCoinLogo',
-  MATIC_COIN_LOGO = 'maticCoinLogo',
+  COIN_FORA = 'coinFora',
+  COIN_MATIC = 'coinMatic',
   WEB3_AUTH_LOGO = 'web3AuthLogo',
   PROFILE_QR_CODE = 'profileQrCode',
   PROFILE_COPY = 'profileCopy',
@@ -38,5 +35,6 @@ export enum ICONS {
   REFRESH = 'refresh',
   LINK = 'link',
   TRANSACTION_SEND = 'transactionSend',
-  TRANSACTION_RECEIVE = 'transactionReceive'
+  TRANSACTION_RECEIVE = 'transactionReceive',
+  BACK = 'back'
 }

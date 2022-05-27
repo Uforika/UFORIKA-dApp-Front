@@ -3,6 +3,10 @@ type MESSAGES_MAP = { [key: string]: string };
 export const FORM_FIELDS_ERRORS: MESSAGES_MAP = {
   REQUIRED: 'This field is required',
   EMAIL_INCORRECT: 'Email address is incorrect',
+  INVALID_ADDRESS: 'Invalid address',
+  NOT_ENOUGH_BALANCE: 'Insufficient funds in the wallet balance',
+  NOT_ENOUGH_FEE: 'Insufficient funds in the wallet balance to pay the fee',
+  MINIMUM_SEND_LIMIT: 'The minimum amount should not be less than 100',
 };
 
 export const TOAST_MASSAGE_ERRORS: MESSAGES_MAP = {

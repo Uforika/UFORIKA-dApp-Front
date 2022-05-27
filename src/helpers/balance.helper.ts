@@ -8,3 +8,6 @@ export const calculateFee = (
 ) => new BigNumber(gasUsed)
   .multipliedBy(gasPrice)
   .div(10 ** Number(tokenDecimal || DEFAULT_TOKEN_DECIMAL));
+
+export const balanceToBN = (balance: string, tokenDecimal: number) => new BigNumber(balance)
+  .multipliedBy(Number(tokenDecimal));

@@ -1,6 +1,5 @@
 @import '../../assets/scss/helpers/all';
 
-
 .menuContainer :global {
   .ui.menu {
     border: 0;
@@ -60,7 +59,6 @@
             }
           }
 
-
           &.active {
             border: 0;
             color: $malachite;
@@ -96,12 +94,6 @@
           padding: 14px 20px;
           transition: border-color $transitionSpeed, background-color $transitionSpeed, box-shadow $transitionSpeed;
           width: 220px;
-
-          svg {
-            margin-right: 10px;
-            max-width: 100%;
-            object-fit: contain;
-          }
 
           &:hover:not(.disabled):not(.active),
           &:global(:focus) {

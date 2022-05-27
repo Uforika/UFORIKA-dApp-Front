@@ -18,26 +18,20 @@ const Header = () => (
         className={styles.logoContainer}
         type={ICONS.UFORIKA_LOGO}
       />
-      {TOP_MENU_LIST.map(({ href, label, disabled }) => (
-        disabled
-          ? (
-            <Popup
-              key={label}
-              trigger={(
-                <MenuItem disabled={disabled}>
-                  {label}
-                </MenuItem>
-              )}
-              position="bottom left"
-              content="Soon"
-            />
-          ) : (
-            <Link key={label} href={href}>
-              <MenuItem>
-                {label}
-              </MenuItem>
-            </Link>
-          )
+      {TOP_MENU_LIST.map(({ href, label, disabled }) => (disabled ? (
+        <Popup
+          key={label}
+          trigger={(
+            <MenuItem disabled={disabled}>{label}</MenuItem>
+          )}
+          position="bottom left"
+          content="Soon"
+        />
+      ) : (
+        <Link key={label} href={href}>
+          <MenuItem>{label}</MenuItem>
+        </Link>
+      )
       ))}
     </div>
     <div className={styles.rightContainer}>

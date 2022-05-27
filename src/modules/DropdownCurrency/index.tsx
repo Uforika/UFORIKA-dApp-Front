@@ -1,11 +1,12 @@
 import React, {
   ChangeEvent, FC, memo, useCallback, useMemo,
 } from 'react';
-import { StrictDropdownProps } from 'semantic-ui-react';
+import { DropdownItemProps, StrictDropdownProps } from 'semantic-ui-react';
+import cn from 'classnames';
 import Dropdown from '@components/Dropdown';
+import { TOKEN } from '@constants/token.constants';
 import DropdownCurrencyTrigger from './DropdownCurrencyTrigger';
 import DropdownCurrencyMenu from './DropdownCurrencyMenu';
-import useActiveSelection from './hooks/useActiveSelection';
 import { DropdownCurrencyItemType } from './types';
 import styles from './styles.module.scss';
 
@@ -17,13 +18,16 @@ type Props = Omit<StrictDropdownProps, 'onChange' | 'value' | 'options'> & {
   label?: string
   panelText?: string
   size?: 'small' | 'big'
+  pattern?: string
+  errorMessage?: string
+  activeOptionId: string | null
+  onSelectOption: (id: TOKEN) => void
 }
 
 const DropdownCurrency: FC<Props> = ({
-  options, name, placeholder, value, label, onChange, panelText, size,
+  options, name, placeholder, value, label, activeOptionId,
+  onChange, panelText, size, pattern, errorMessage, onSelectOption,
 }) => {
-  const { activeOptionId, handleSelectOption } = useActiveSelection(options);
-
   const activeOption = options.find(({ id }) => id === activeOptionId);
 
   const activeTrigger = useMemo(() => {
@@ -40,7 +44,10 @@ const DropdownCurrency: FC<Props> = ({
   }, [activeOption]);
 
   const handleChangeCurrencyValue = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(event.target.value);
+    if (event.target.validity.valid) {
+      onChange?.(event.target.value);
+    }
+
   }, [onChange]);
 
   const handleSetCurrencyValue = useCallback(() => {
@@ -48,6 +55,10 @@ const DropdownCurrency: FC<Props> = ({
       onChange?.(activeOption.value as string);
     }
   }, [onChange, activeOption]);
+
+  const handleSelectOption = (_event: React.MouseEvent<Element, MouseEvent>, { id }: DropdownItemProps) => {
+    onSelectOption(id as TOKEN);
+  };
 
   return (
     <div>
@@ -67,14 +78,22 @@ const DropdownCurrency: FC<Props> = ({
       </div>
       <div className={styles.wrap}>
         <input
+          pattern={pattern}
           placeholder={placeholder}
-          className={styles.input}
+          className={cn(styles.input, styles[size || ''])}
           value={value}
           name={name}
           id={name}
           onChange={handleChangeCurrencyValue}
         />
-        <Dropdown className={styles.dropdown} size={size} name={name} trigger={activeTrigger}>
+        <Dropdown
+          error={!!errorMessage}
+          errorMessage={errorMessage}
+          className={styles.dropdown}
+          size={size}
+          name={name}
+          trigger={activeTrigger}
+        >
           <DropdownCurrencyMenu
             activeItemId={activeOptionId}
             onSelect={handleSelectOption}
@@ -92,6 +111,8 @@ DropdownCurrency.defaultProps = {
   label: undefined,
   panelText: undefined,
   size: undefined,
+  pattern: undefined,
+  errorMessage: undefined,
 };
 
 export default memo(DropdownCurrency);

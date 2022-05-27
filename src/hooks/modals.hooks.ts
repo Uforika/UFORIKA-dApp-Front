@@ -40,13 +40,13 @@ export const useSuccessModal = (text: string, onSuccess: () => void): [() => voi
   return [handleShowModal, handleHide];
 };
 
-export const useFailModal = (text: string, onSuccess: () => void): [() => void, () => void] => {
+export const useFailModal = (text: string, onSubmit: () => void): [() => void, () => void] => {
   const { showModal, hideModal } = useModals();
 
   const handleShowModal = useCallback(() => showModal(MODAL_TYPES.FAIL, {
     text,
-    onSuccess,
-  }), [onSuccess, text, showModal]);
+    onSubmit,
+  }), [onSubmit, text, showModal]);
 
   const handleHide = useCallback(() => hideModal(MODAL_TYPES.FAIL), [hideModal]);
 

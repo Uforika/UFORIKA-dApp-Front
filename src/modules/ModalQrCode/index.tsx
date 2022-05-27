@@ -19,7 +19,7 @@ const ModalQrCode: FC<Props> = ({ address, onClose, ...props }) => {
   };
 
   return (
-    <Modal size="tiny" {...props}>
+    <Modal onClose={onClose} size="tiny" {...props}>
       <div className={styles.panel}>
         <ButtonIcon
           className={styles.closeIcon}

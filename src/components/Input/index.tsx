@@ -55,7 +55,7 @@ const Input: FC<TInputProps> = ({
       disabled={disabled}
       readOnly={readonly}
       type={type}
-      value={value}
+      value={value || ''}
       data-disabled={disabled}
       {...(readonly ? {
         value: value?.toString(),

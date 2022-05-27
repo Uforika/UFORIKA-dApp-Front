@@ -1,67 +1,98 @@
-import React, { FC, memo, useState } from 'react';
-import Button from '@components/Button';
-import Header from '@components/Header';
-import Icon from '@components/Icon';
+import React, { FC, memo, useMemo } from 'react';
+import Section from '@components/Section';
 import { ICONS } from '@components/Icon/constants';
-import Input from '@components/Input';
-import DropdownCurrency from 'src/modules/DropdownCurrency';
-// TODO: remove and use real data
-import { currencyOptions } from '@containers/UiKitPage/UiKitDropdowns/data';
+import { FORA_NAME } from '@constants/global.constants';
+import { TOKEN, TOKEN_CONFIG } from '@constants/token.constants';
+import { useBalance } from '@hooks/wallet.hooks';
+import useDropdownCurrencySelection from '@hooks/dropdown-currency-selection.hook';
+import { CONFIG } from '@constants/config.constants';
+import { useSendForm } from './hooks/send-form.hook';
+import { usePrepareTransfer } from './hooks/prepare-transfer.hook';
+import TransferForm from './TransferForm';
+import TransferConfirm from './TransferConfirm';
 import styles from './styles.module.scss';
+import { getCurrencyOptions } from './helpers/transfer.helpers';
+import { useTotalAmount } from './hooks/total-amount.hook';
 
 type Props = {
-
+  address: string | null
 }
 
-const TransferSend: FC<Props> = () => {
-  const [currencyValue, setCurrencyValue] = useState<string>();
-  const handleChangeCurrencyValue = (value: string) => {
-    setCurrencyValue(value);
-  };
+const TransferSend: FC<Props> = ({ address }) => {
+  const balanceFora = useBalance(TOKEN.FORA);
+  const balancePolygon = useBalance(TOKEN.POLYGON);
+
+  const currencyOptions = useMemo(() => getCurrencyOptions({
+    balanceFora: balanceFora.toString(),
+    balancePolygon: balancePolygon.toString(),
+  }), [balanceFora, balancePolygon]);
+
+  const { activeOptionId, onSelectOption } = useDropdownCurrencySelection(currencyOptions);
+  const activeOption = useMemo(() => currencyOptions.find(({ id }) => id === activeOptionId), [currencyOptions, activeOptionId]);
+
+  const {
+    validateForm,
+    amount,
+    changeAmount,
+    to,
+    changeTo,
+    errors,
+    clearForm,
+  } = useSendForm({
+    activeOptionId: activeOption?.id,
+    balancePolygon,
+    balanceFora,
+  });
+
+  const {
+    isFormStage,
+    submitTransfer,
+    changeFormStage,
+    fee,
+    confirmTransfer,
+    isTransactionInProgress,
+  } = usePrepareTransfer({
+    to, amount, validateForm, clearForm,
+  });
+
+  const { decimals } = TOKEN_CONFIG[CONFIG.NETWORK][activeOptionId as TOKEN];
+
+  const totalAmount = useTotalAmount({
+    amount, decimals, fee, activeOptionId,
+  });
 
   return (
-    <div className={styles.root}>
-      <Header as="h3">Send</Header>
-      <div className={styles.fields}>
-        <div className={styles.field}>
-          <Input
-            name="sendTransaction"
-            label="To"
-            placeholder="Wallet address"
-            size="big"
-          />
-        </div>
-        <div className={styles.field}>
-          <DropdownCurrency
-            name="sendTransactionDropdown"
-            label="Amount"
-            options={currencyOptions}
-            panelText="Send All"
-            onChange={handleChangeCurrencyValue}
-            value={currencyValue}
-            size="big"
-            placeholder="0.00"
-          />
-        </div>
-      </div>
-      <div className={styles.table}>
-        <div className={styles.row}>
-          <span className={styles.key}>Transaction fee:</span>
-          <span className={styles.value}>0.1 MATIC</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.key}>Total amount:</span>
-          <span className={styles.value}>0 $</span>
-        </div>
-      </div>
-      <div className={styles.button}>
-        <Button primary>Transfer</Button>
-      </div>
-      <div className={styles.hintRow}>
-        <Icon width={16} type={ICONS.PROFILE_POLYGON_POWERED} />
-        <span className={styles.hint}>Supported by Polygon</span>
-      </div>
-    </div>
+    <Section className={styles.root}>
+      {isFormStage ? (
+        <TransferForm
+          currencyOptions={currencyOptions}
+          onChangeAmount={changeAmount}
+          amount={amount}
+          totalAmount={totalAmount.toString() || '0'}
+          onSubmit={submitTransfer}
+          to={to}
+          fee={fee.toString()}
+          changeTo={changeTo}
+          errors={errors}
+          onSelectOption={onSelectOption}
+          activeOptionId={activeOptionId}
+        />
+      ) : (
+        <TransferConfirm
+          currencyIcon={ICONS.COIN_FORA}
+          amount={amount}
+          onCancel={changeFormStage}
+          confirmTransfer={confirmTransfer}
+          token={FORA_NAME}
+          fee={fee.toString()}
+          feeToken="MATIC"
+          network={CONFIG.NETWORK}
+          from={address}
+          to={to as string}
+          isTransactionInProgress={isTransactionInProgress}
+        />
+      )}
+    </Section>
   );
 };
 

@@ -19,3 +19,11 @@ export const getTransactionHistoryFromLocalStorage = (): TransactionHistoryObjec
   }
   return (JSON.parse(transactionsFromLocalStorage)) as TransactionHistoryObjectType;
 };
+
+export const checkIsAmountValid = (amount: string | undefined) => {
+  if (!amount) {
+    return false;
+  }
+
+  return !!Number(amount) && Number(amount) !== 0;
+};

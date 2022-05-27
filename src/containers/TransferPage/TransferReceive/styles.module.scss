@@ -1,17 +1,14 @@
 @import '../../../assets/scss/helpers/all';
 
 .root {
-  background-color: rgba($black, 0.6);
-  border: 0.5px solid rgba($white, 0.3);
-  border-radius: 6px;
   max-width: 378px;
   padding: 40px;
   width: 100%;
 }
 
 .title {
+  display: flex;
   justify-content: center;
-  text-align: center;
 }
 
 .button {

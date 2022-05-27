@@ -44,13 +44,12 @@ Dropdown.defaultProps = {
   errorMessage: '',
   size: undefined,
   isInlineView: false,
-  icon: () => (
-    <Icon
-      className="dropdownIcon"
-      type={ICONS.DROPDOWN_CHEVRON}
-      width={16}
-    />
-  ),
+  icon:
+  <Icon
+    className="dropdownIcon"
+    type={ICONS.DROPDOWN_CHEVRON}
+    width={16}
+  />,
 };
 
 export default memo(Dropdown);

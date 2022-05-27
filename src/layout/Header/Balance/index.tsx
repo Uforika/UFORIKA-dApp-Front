@@ -13,7 +13,7 @@ const Balance = () => {
 
   return (
     <div className={styles.container}>
-      <Icon className={styles.icon} width={24} type={ICONS.FORA_COIN_LOGO} />
+      <Icon className={styles.icon} width={24} type={ICONS.COIN_FORA} />
       <div>
         <p className={styles.balance}>{balanceFora.toFormat(2)} {FORA_NAME}</p>
         <p className={styles.balanceUsd}>${balanceForaUsd.toFormat(2)}</p>

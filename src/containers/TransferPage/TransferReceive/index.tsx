@@ -1,5 +1,4 @@
 import React, { FC, memo, useCallback } from 'react';
-import { useWallet } from '@hooks/wallet.hooks';
 import { downloadQRCode } from '@helpers/qrCode.helper';
 import { copy } from '@helpers/copy.helper';
 import Header from '@components/Header';
@@ -8,11 +7,15 @@ import LinkButton from '@components/LinkButton';
 import ButtonIcon from '@components/ButtonIcon';
 import { ICONS } from '@components/Icon/constants';
 import Popup from '@components/Popup';
+import Section from '@components/Section';
 import { TOAST_MASSAGE_SUCCESS } from '@constants/messages.constants';
 import styles from './styles.module.scss';
 
-const TransferReceive: FC = () => {
-  const { address } = useWallet();
+type Props = {
+  address: string | null
+}
+
+const TransferReceive: FC<Props> = ({ address }) => {
 
   const handleDownloadQrCode = useCallback(() => {
     downloadQRCode('TransferReceiveQr');
@@ -23,7 +26,7 @@ const TransferReceive: FC = () => {
   }, [address]);
 
   return (
-    <div className={styles.root}>
+    <Section className={styles.root}>
       <Header className={styles.title} as="h3">Your wallet address</Header>
       <div className={styles.qrWrap}>
         <QrCode id="TransferReceiveQr" size={160} value={address as string} />
@@ -40,7 +43,7 @@ const TransferReceive: FC = () => {
       <LinkButton onClick={handleDownloadQrCode} className={styles.button}>
         Download QR
       </LinkButton>
-    </div>
+    </Section>
   );
 };
 

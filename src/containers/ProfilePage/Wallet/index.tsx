@@ -29,8 +29,8 @@ const Wallet: FC = () => {
       <h3 className={styles.title}>My wallet</h3>
       <div className={styles.content}>
         <div className={styles.grid}>
-          <Card color="#00FF44" name={FORA_NAME} logo={ICONS.FORA_COIN_LOGO} count={balanceFora} usdPrice={balanceForaUsd} />
-          <Card color="#B18CEF" name={MATIC_NAME} logo={ICONS.MATIC_COIN_LOGO} count={balancePolygon} usdPrice={balancePolygonUsd} />
+          <Card color="#00FF44" name={FORA_NAME} logo={ICONS.COIN_FORA} count={balanceFora} usdPrice={balanceForaUsd} />
+          <Card color="#B18CEF" name={MATIC_NAME} logo={ICONS.COIN_MATIC} count={balancePolygon} usdPrice={balancePolygonUsd} />
           <Address />
         </div>
         <div className={styles.bottomContent}>

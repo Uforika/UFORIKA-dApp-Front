@@ -21,6 +21,7 @@ export type WalletContextType = {
   getTransactionHistory: () => Promise<TransactionFromHistoryType[] | undefined>,
   transferMethod: TransferMethodType,
   userInfo: Partial<UserInfo>,
+  checkIsAddressValid: (address: string) => boolean
 }
 
 const initialContextState = {
@@ -35,6 +36,7 @@ const initialContextState = {
   getTransactionHistory: () => Promise.resolve(undefined),
   transferMethod: () => Promise.resolve(undefined),
   userInfo: {},
+  checkIsAddressValid: () => false,
 };
 
 export const WalletContext = createContext<WalletContextType>(initialContextState);
@@ -51,6 +53,7 @@ const WalletProvider: FC = ({ children }) => {
     transferMethod,
     getHistory,
     userInfo,
+    checkIsAddressValid,
   } = useWalletService();
 
   const [address, setAddress] = useState<string | null>(null);
@@ -152,6 +155,7 @@ const WalletProvider: FC = ({ children }) => {
     getTransactionHistory,
     transferMethod,
     userInfo,
+    checkIsAddressValid,
   }), [
     address,
     chainId,
@@ -163,6 +167,7 @@ const WalletProvider: FC = ({ children }) => {
     getTransactionHistory,
     transferMethod,
     userInfo,
+    checkIsAddressValid,
   ]);
 
   return (

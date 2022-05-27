@@ -23,6 +23,7 @@ import { TransactionFromHistoryType } from '../../types/transaction.types';
    walletStatus: ADAPTER_STATUS_TYPE | undefined,
    getBalance: GetBalanceType
    transferMethod: TransferMethodType
+   checkIsAddressValid: (address: string) => boolean,
    getHistory: (address: string, startBlock: number | undefined) => Promise<TransactionFromHistoryType[]>
    userInfo: Partial<UserInfo>,
  }
@@ -116,6 +117,8 @@ const useWalletService: () => WalletType = () => {
       });
   }, [web3WS]);
 
+  const checkIsAddressValid = useCallback((address: string) => web3?.utils.isAddress(address) ?? false, [web3]);
+
   return useMemo(() => ({
     sign,
     getChainId,
@@ -127,7 +130,19 @@ const useWalletService: () => WalletType = () => {
     transferMethod,
     getHistory,
     userInfo,
-  }), [sign, getChainId, getAccounts, logout, connect, status, getBalance, transferMethod, userInfo]);
+    checkIsAddressValid,
+  }), [
+    sign,
+    getChainId,
+    getAccounts,
+    logout,
+    connect,
+    status,
+    getBalance,
+    transferMethod,
+    userInfo,
+    checkIsAddressValid,
+  ]);
 
 };
 

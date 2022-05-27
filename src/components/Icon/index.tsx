@@ -6,9 +6,7 @@ import { ReactComponent as IconSidebarHistory } from './assets/sidebarHistory.sv
 import { ReactComponent as IconSidebarTransfer } from './assets/sidebarTransfer.svg';
 import { ReactComponent as IconModalFail } from './assets/fail.svg';
 import { ReactComponent as IconModalSuccess } from './assets/success.svg';
-import { ReactComponent as IconDropdownCurrencyBTC } from './assets/dropdownCurrencyBTC.svg';
-import { ReactComponent as IconDropdownCurrencyUSDT } from './assets/dropdownCurrencyUSDT.svg';
-import { ReactComponent as IconDropdownCurrencyRFUEL } from './assets/dropdownCurrencyRFUEL.svg';
+
 import { ReactComponent as IconDropdownChevron } from './assets/dropdownChevron.svg';
 import { ReactComponent as IconLoginMetamask } from './assets/loginMetamask.svg';
 import { ReactComponent as IconLoginGoogle } from './assets/loginGoogle.svg';
@@ -26,8 +24,8 @@ import { ReactComponent as IconLoginLinkedin } from './assets/loginLinkedin.svg'
 import { ReactComponent as IconLoginWechat } from './assets/loginWechat.svg';
 import { ReactComponent as IconUforikaLogo } from './assets/uforikaLogo.svg';
 import { ReactComponent as IconWeb3AuthLogo } from './assets/web3AuthLogo.svg';
-import { ReactComponent as IconForaCoinLogo } from './assets/foraCoinLogo.svg';
-import { ReactComponent as IconMaticCoinLogo } from './assets/maticCoinLogo.svg';
+import { ReactComponent as IconCoinFora } from './assets/coinFora.svg';
+import { ReactComponent as IconCoinMatic } from './assets/coinMatic.svg';
 import { ReactComponent as IconProfileQrCode } from './assets/profileQrCode.svg';
 import { ReactComponent as IconProfileCopy } from './assets/profileCopy.svg';
 import { ReactComponent as IconClose } from './assets/close.svg';
@@ -38,6 +36,7 @@ import { ReactComponent as IconRefresh } from './assets/refresh.svg';
 import { ReactComponent as IconTransactionSend } from './assets/transactionSend.svg';
 import { ReactComponent as IconTransactionReceive } from './assets/transactionReceive.svg';
 import { ReactComponent as IconLink } from './assets/link.svg';
+import { ReactComponent as IconBack } from './assets/back.svg';
 
 import { ICONS } from './constants';
 import styles from './styles.module.scss';
@@ -77,12 +76,6 @@ const Icon: FC<Props> = ({
             stroke="#fff"
           />
         );
-      case ICONS.DROPDOWN_CURRENCY_BTC:
-        return <IconDropdownCurrencyBTC />;
-      case ICONS.DROPDOWN_CURRENCY_RFUEL:
-        return <IconDropdownCurrencyRFUEL />;
-      case ICONS.DROPDOWN_CURRENCY_USDT:
-        return <IconDropdownCurrencyUSDT />;
       case ICONS.LOGIN_METAMASK:
         return <IconLoginMetamask />;
       case ICONS.LOGIN_GOOGLE:
@@ -121,10 +114,10 @@ const Icon: FC<Props> = ({
         return <IconSidebarLogout />;
       case ICONS.UFORIKA_LOGO:
         return <IconUforikaLogo />;
-      case ICONS.FORA_COIN_LOGO:
-        return <IconForaCoinLogo />;
-      case ICONS.MATIC_COIN_LOGO:
-        return <IconMaticCoinLogo />;
+      case ICONS.COIN_FORA:
+        return <IconCoinFora />;
+      case ICONS.COIN_MATIC:
+        return <IconCoinMatic />;
       case ICONS.WEB3_AUTH_LOGO:
         return <IconWeb3AuthLogo />;
       case ICONS.PROFILE_QR_CODE:
@@ -163,7 +156,8 @@ const Icon: FC<Props> = ({
         return <IconTransactionSend />;
       case ICONS.TRANSACTION_RECEIVE:
         return <IconTransactionReceive />;
-
+      case ICONS.BACK:
+        return <IconBack />;
       default:
         return null;
     }

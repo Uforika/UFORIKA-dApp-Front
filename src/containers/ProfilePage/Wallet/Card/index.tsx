@@ -8,7 +8,7 @@ type Props = {
   count: BigNumber,
   usdPrice: BigNumber,
   name: string,
-  logo: ICONS.FORA_COIN_LOGO | ICONS.MATIC_COIN_LOGO,
+  logo: ICONS.COIN_FORA | ICONS.COIN_MATIC,
   color: string
 }
 

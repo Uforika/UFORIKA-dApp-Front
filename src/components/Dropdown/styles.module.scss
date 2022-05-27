@@ -85,6 +85,8 @@
 }
 
 .wrap {
+  display: flex;
+  flex-direction: column;
   position: relative;
 
   :global {
@@ -121,9 +123,8 @@
 }
 
 .error {
-  @include body-m($radicalRed);
-  position: absolute;
-  top: calc(100% + 4px);
+  @include body-s($radicalRed);
+  margin-top: 4px;
 }
 
 .wrap.inline {

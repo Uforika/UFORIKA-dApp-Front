@@ -1,0 +1,38 @@
+@import '../../../../assets/scss/helpers/all';
+
+.field {
+  margin-top: 20px;
+}
+
+.label {
+  @include body-m($dustyGray);
+  margin-bottom: 4px;
+}
+
+.head {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+}
+
+.panel {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 32px;
+  width: 100%;
+}
+
+.amount {
+  @include h3();
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.fee,
+.network,
+.from,
+.to {
+  @include body-l();
+}
