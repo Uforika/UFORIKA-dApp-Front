@@ -20,6 +20,7 @@ export const TYPE_NFT_OPTIONS = [
   { text: 'All types', value: 'all' },
   { text: 'IKAs', value: 'IKAs' },
   { text: 'Plots', value: 'Plots' },
+  { text: 'Hover boards', value: 'hoverBoards' },
 ];
 
 export const CARDS = [

@@ -37,9 +37,12 @@ const NftList: FC<Props> = ({ nftList, typeNftOptionList }) => {
               />
             )}
           />
-          <ul className={styles.list}>
-            {filteredNftOptions.map((option) => <NftCard key={option.name} {...option} />)}
-          </ul>
+          {filteredNftOptions.length ? (
+            <ul className={styles.list}>
+              {filteredNftOptions.map((option) => <NftCard key={option.name} {...option} />)}
+            </ul>
+          ) : <EmptyCard />}
+
         </>
       )}
     </div>
