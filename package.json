@@ -21,7 +21,7 @@
     "hosted-git-info": "^2.8.9"
   },
   "dependencies": {
-    "@782-uforika/client-sdk": "^0.2.1651154864",
+    "@782-uforika/client-sdk": "^0.2.1653658210",
     "@ethersproject/bytes": "^5.6.1",
     "@hookform/resolvers": "^2.8.10",
     "@metamask/detect-provider": "^1.2.0",
