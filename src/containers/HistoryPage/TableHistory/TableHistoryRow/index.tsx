@@ -1,18 +1,19 @@
 import React, { FC, memo } from 'react';
 import { SemanticCOLORS } from 'semantic-ui-react';
 import cn from 'classnames';
+import { useWallet } from '@hooks/wallet.hooks';
 import Popup from '@components/Popup';
 import ButtonIcon from '@components/ButtonIcon';
 import { ICONS } from '@components/Icon/constants';
-import { CONFIG } from '@constants/config.constants';
 import Label from '@components/Label';
 import Icon from '@components/Icon';
 import { TRX_LINK_CONSTRUCTOR } from '@constants/network.constants';
+import { NETWORK_TOKEN_NAME } from '@constants/token.constants';
+import { CONFIG } from '@constants/config.constants';
 import { doEllipsisStringMiddle } from '@helpers/string.helper';
 import { calculateFee } from '@helpers/balance.helper';
 import { formatDate } from '@helpers/date.helper';
 import { divideTokenValueByDecimal } from '@helpers/number.helper';
-import { useWallet } from '@hooks/wallet.hooks';
 import { TransactionFromHistoryType } from 'src/types/transaction.types';
 import {
   TRANSACTION_COLORS_BY_STATUSES,
@@ -38,7 +39,8 @@ const TableHistoryRow: FC<Props> = ({
   const {
     hash, to, gasPrice, gasUsed, tokenDecimal,
     txreceipt_status: txReceiptStatus, timeStamp,
-    value, tokenSymbol, from, isError,
+    value, tokenSymbol, from, isError, isInternalTransaction,
+    isNetworkCurrencyTransaction,
   } = transaction;
 
   const createLink = TRX_LINK_CONSTRUCTOR[CONFIG.NETWORK];
@@ -48,6 +50,17 @@ const TableHistoryRow: FC<Props> = ({
 
   const senderLabel = isSendTransactionType ? 'To:' : 'From:';
   const sender = isSendTransactionType ? to : from;
+
+  const getTransactionTokenSymbol = () => {
+    if (tokenSymbol) {
+      return tokenSymbol;
+    }
+    if (isInternalTransaction || isNetworkCurrencyTransaction) {
+      return NETWORK_TOKEN_NAME[CONFIG.NETWORK];
+    }
+    return '';
+  };
+
   return (
     <div className={cn(styles.row, className)}>
       <div>
@@ -73,18 +86,21 @@ const TableHistoryRow: FC<Props> = ({
         <div className={cn(styles.cellWrap, styles.center)}>
           <Label
             color={TRANSACTION_COLORS_BY_STATUSES[transactionStatus] as SemanticCOLORS}
-          >{transactionStatus}
+          >
+            {transactionStatus}
           </Label>
         </div>
       </div>
       <div>
         <div className={cn(styles.cellWrapColumn, styles.right, styles.mr40)}>
-          <span className={styles.transactionValue}>
-            {`${divideTokenValueByDecimal(value, tokenDecimal)} ${tokenSymbol || ''}`}
+          <span className={cn(styles.transactionValue, { [styles.isReceive]: !isSendTransactionType })}>
+            {`${isSendTransactionType ? '-' : '+'}${divideTokenValueByDecimal(value, tokenDecimal)} ${getTransactionTokenSymbol()}`}
           </span>
-          <span className={styles.transactionFee}>
-            {`Fee: ${calculateFee(gasPrice, gasUsed, tokenDecimal).toString()} MATIC`}
-          </span>
+          {isSendTransactionType && (
+            <span className={styles.transactionFee}>
+              {`Fee: ${calculateFee(gasPrice, gasUsed, tokenDecimal).toString()} MATIC`}
+            </span>
+          )}
         </div>
       </div>
       <div>

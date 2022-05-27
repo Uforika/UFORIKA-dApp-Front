@@ -12,11 +12,21 @@ import { TransactionReceipt, useTransactionProps } from '../types/transaction.ty
 
 export const useWallet = () => {
   const {
-    address, sign, chainId, getBalance, walletAuth, walletLogout, walletStatus, getTransactionHistory, transferMethod, userInfo,
+    address, sign, chainId,
+    getBalance, walletAuth, walletLogout, walletStatus, getTransactionHistory, transferMethod, userInfo,
   } = useContext(WalletContext);
 
   return {
-    address, sign, chainId, getBalance, walletAuth, walletLogout, walletStatus, getTransactionHistory, transferMethod, userInfo,
+    address,
+    sign,
+    chainId,
+    getBalance,
+    walletAuth,
+    walletLogout,
+    walletStatus,
+    getTransactionHistory,
+    transferMethod,
+    userInfo,
   };
 };
 

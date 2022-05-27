@@ -125,11 +125,9 @@ const WalletProvider: FC = ({ children }) => {
     const transactionHistoryFromLocalStorage = getTransactionHistoryFromLocalStorage();
     const startBlock = transactionHistoryFromLocalStorage ? Number(transactionHistoryFromLocalStorage.lastBlockNumber) + 1 : undefined;
 
-    const resultList = await getHistory(address, startBlock);
-    const historyList = resultList.map((result) => (result.status === '0' ? [] : result.result));
+    const historyList = await getHistory(address, startBlock);
 
-    const flattedHistoryList = historyList.reduce((acc, val) => acc.concat(val));
-    const mergedTransaction = mergeTransactionHistory(flattedHistoryList);
+    const mergedTransaction = mergeTransactionHistory(historyList);
 
     const transactions = transactionHistoryFromLocalStorage
       ? transactionHistoryFromLocalStorage.transactionHistory.concat(mergedTransaction) : mergedTransaction;
@@ -154,7 +152,18 @@ const WalletProvider: FC = ({ children }) => {
     getTransactionHistory,
     transferMethod,
     userInfo,
-  }), [address, chainId, getSign, connect, logout, walletStatus, getCurrentBalance, getTransactionHistory, transferMethod, userInfo]);
+  }), [
+    address,
+    chainId,
+    getSign,
+    connect,
+    logout,
+    walletStatus,
+    getCurrentBalance,
+    getTransactionHistory,
+    transferMethod,
+    userInfo,
+  ]);
 
   return (
     <WalletContext.Provider value={walletProviderValue}>

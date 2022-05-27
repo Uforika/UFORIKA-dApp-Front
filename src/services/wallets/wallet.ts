@@ -7,10 +7,12 @@ import { TOKEN, TOKEN_CONFIG } from '@constants/token.constants';
 import { CONFIG } from '@constants/config.constants';
 import { AbiItem } from 'web3-utils';
 import { GAS_PRICE } from '@constants/transaction.constants';
-import { getTransactionListFromAccount, TransactionListFromAccountType } from '@services/wallets/polygon-scan.wallet';
+import { getTransactionListFromAccount } from '@services/wallets/polygon-scan.wallet';
+import { flatArrays } from '@helpers/array.helper';
 import erc20AbiJson from '../../abi/erc20AbiJson.json';
 import { TransferEventType } from '../../types/contract.types';
 import { ConnectType, GetBalanceType, TransferMethodType } from '../../types/wallets.types';
+import { TransactionFromHistoryType } from '../../types/transaction.types';
 
  type WalletType = {
    sign: (messages: string, address: string) => Promise<string>,
@@ -21,7 +23,7 @@ import { ConnectType, GetBalanceType, TransferMethodType } from '../../types/wal
    walletStatus: ADAPTER_STATUS_TYPE | undefined,
    getBalance: GetBalanceType
    transferMethod: TransferMethodType
-   getHistory: (address: string, startBlock: number | undefined) => Promise<TransactionListFromAccountType[]>
+   getHistory: (address: string, startBlock: number | undefined) => Promise<TransactionFromHistoryType[]>
    userInfo: Partial<UserInfo>,
  }
 
@@ -49,17 +51,39 @@ const useWalletService: () => WalletType = () => {
     return transaction;
   }, [web3]);
 
-  const getHistory = (address: string, startBlock: number | undefined) => Promise.all([
-    getTransactionListFromAccount('txlist', address, startBlock),
-    getTransactionListFromAccount('txlistinternal', address, startBlock),
-    ...(Object.keys(TOKEN) as Array<keyof typeof TOKEN>)
-      .map((tokenName) => getTransactionListFromAccount(
-        'tokentx',
-        address,
-        startBlock,
-        TOKEN_CONFIG[CONFIG.NETWORK][tokenName].address,
-      )),
-  ]);
+  const getHistory = async (address: string, startBlock: number | undefined) => {
+
+    const [normalTransactionsResponse, internalTransactionsResponse] = await Promise.all([
+      getTransactionListFromAccount('txlist', address, startBlock),
+      getTransactionListFromAccount('txlistinternal', address, startBlock),
+    ]);
+
+    const normalTransactions: TransactionFromHistoryType[] = normalTransactionsResponse.result.map((transaction) => ({
+      ...transaction,
+      isNetworkCurrencyTransaction: transaction.input === '0x',
+    }));
+
+    const internalTransactions: TransactionFromHistoryType[] = internalTransactionsResponse.result.map((transaction) => ({
+      ...transaction,
+      isInternalTransaction: true,
+    }));
+
+    const tokensTransactionsResponse = await Promise.all([
+      ...(Object.keys(TOKEN) as Array<keyof typeof TOKEN>)
+        .map((tokenName) => getTransactionListFromAccount(
+          'tokentx',
+          address,
+          startBlock,
+          TOKEN_CONFIG[CONFIG.NETWORK][tokenName].address,
+        )),
+    ]);
+
+    const tokensTransactions = tokensTransactionsResponse.map((tokenTransactionsResponse) => tokenTransactionsResponse.result);
+    const flattedTokensTransactions: TransactionFromHistoryType[] = flatArrays<TransactionFromHistoryType>(tokensTransactions);
+
+    const historyList = normalTransactions.concat(internalTransactions).concat(flattedTokensTransactions);
+    return historyList;
+  };
 
   const getBalance: GetBalanceType = useCallback((address, tokenName, setBalance) => {
     if (!web3WS || !address) {

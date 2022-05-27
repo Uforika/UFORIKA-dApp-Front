@@ -16,7 +16,7 @@ export type TransactionFromHistoryType = {
   input: string
   isError?: string
   nonce: string
-  timeStamp: string,
+  timeStamp: string
   to: string
   tokenDecimal?: string
   tokenName?: string
@@ -24,6 +24,8 @@ export type TransactionFromHistoryType = {
   transactionIndex?: string
   txreceipt_status: '0' | '1'
   value: string
+  isInternalTransaction?: boolean
+  isNetworkCurrencyTransaction?: boolean
 }
 
 export type TransactionHistoryObjectType = { lastBlockNumber: string, transactionHistory: TransactionFromHistoryType[] } | undefined

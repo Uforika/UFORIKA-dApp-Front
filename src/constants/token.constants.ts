@@ -12,6 +12,11 @@ export enum TOKEN {
   FORA='FORA',
 }
 
+export const NETWORK_TOKEN_NAME = {
+  [NETWORK.MAINNET_POLYGON]: 'MATIC',
+  [NETWORK.TESTNET_POLYGON]: 'MATIC',
+};
+
 export const DEFAULT_TOKEN_DECIMAL = 18;
 
 export enum TOKEN_ID {

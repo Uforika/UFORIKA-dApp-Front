@@ -37,6 +37,10 @@
 .transactionType,
 .transactionValue {
   @include body-l-semi-bold();
+
+  &.isReceive {
+    color: $malachite;
+  }
 }
 
 .senderAddress,
