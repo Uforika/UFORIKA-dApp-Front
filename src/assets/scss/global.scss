@@ -64,3 +64,20 @@ ul {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+// TODO: remove when version semantic-ui-react was more then 2.1.2
+
+body {
+  div {
+    &:last-child[style^='display: flex; position: absolute;'] {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    &:last-child[style^='display: flex; position: absolute; inset: 0px auto auto 0px;'],
+    [style^='display: flex; position: absolute; inset: auto auto 0px 0px;'] {
+      display: flex !important;
+      visibility: visible !important;
+    }
+  }
+}
