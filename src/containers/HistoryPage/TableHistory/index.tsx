@@ -94,7 +94,7 @@ const TableHistory: FC<Props> = ({
       {renderHead()}
       {isEmptyHistory ? (
         <div className={styles.emptyTable}>
-          <TransactionEmptyHistory />
+          <TransactionEmptyHistory withoutTransactions={!transactions.length} />
         </div>
       ) : renderList }
     </div>
