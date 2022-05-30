@@ -16,6 +16,7 @@ const ButtonIcon: FC<Props> = ({
 }) => (
   <div className={cn(styles.wrap, className)}>
     <Button
+      className={styles.buttonIcon}
       icon={(
         <Icon
           width={width}

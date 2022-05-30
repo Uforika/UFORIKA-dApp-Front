@@ -36,7 +36,7 @@ const TransferReceive: FC<Props> = ({ address }) => {
         <Popup
           content="Copy"
           position="bottom left"
-          trigger={<ButtonIcon onClick={handleCopy} type={ICONS.PROFILE_COPY} />}
+          trigger={<ButtonIcon onClick={handleCopy} type={ICONS.COPY} />}
         />
 
       </div>

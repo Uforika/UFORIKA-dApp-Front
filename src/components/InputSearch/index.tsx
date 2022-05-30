@@ -57,7 +57,7 @@ const InputSearch: FC<InputSearch> = ({
           onClick={handleClearSearch}
           className={styles.close}
           width={20}
-          type={ICONS.CLOSE_WHITE}
+          type={ICONS.CLOSE}
         />
       )}
     </div>

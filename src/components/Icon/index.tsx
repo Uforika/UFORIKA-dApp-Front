@@ -6,8 +6,7 @@ import { ReactComponent as IconSidebarHistory } from './assets/sidebarHistory.sv
 import { ReactComponent as IconSidebarTransfer } from './assets/sidebarTransfer.svg';
 import { ReactComponent as IconModalFail } from './assets/fail.svg';
 import { ReactComponent as IconModalSuccess } from './assets/success.svg';
-
-import { ReactComponent as IconDropdownChevron } from './assets/dropdownChevron.svg';
+import { ReactComponent as IconChevron } from './assets/chevron.svg';
 import { ReactComponent as IconLoginMetamask } from './assets/loginMetamask.svg';
 import { ReactComponent as IconLoginGoogle } from './assets/loginGoogle.svg';
 import { ReactComponent as IconLoginTwitter } from './assets/loginTwitter.svg';
@@ -26,8 +25,8 @@ import { ReactComponent as IconUforikaLogo } from './assets/uforikaLogo.svg';
 import { ReactComponent as IconWeb3AuthLogo } from './assets/web3AuthLogo.svg';
 import { ReactComponent as IconCoinFora } from './assets/coinFora.svg';
 import { ReactComponent as IconCoinMatic } from './assets/coinMatic.svg';
-import { ReactComponent as IconProfileQrCode } from './assets/profileQrCode.svg';
-import { ReactComponent as IconProfileCopy } from './assets/profileCopy.svg';
+import { ReactComponent as IconQrCode } from './assets/qrCode.svg';
+import { ReactComponent as IconCopy } from './assets/copy.svg';
 import { ReactComponent as IconClose } from './assets/close.svg';
 import { ReactComponent as IconPolygonPowered } from './assets/polygonPowered.svg';
 import { ReactComponent as IconUFOship } from './assets/UFOShip.svg';
@@ -46,10 +45,11 @@ type Props = {
   width?: number
   height?: number
   className?: string
+  isActive?: boolean
 }
 
 const Icon: FC<Props> = ({
-  type, width, height, className,
+  type, width, height, className, isActive,
 }) => {
 
   const getIconByType = () => {
@@ -59,23 +59,7 @@ const Icon: FC<Props> = ({
       case ICONS.SUCCESS:
         return <IconModalSuccess />;
       case ICONS.DROPDOWN_CHEVRON:
-        return (
-          <IconDropdownChevron
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            stroke="#9C9C9C"
-          />
-        );
-      case ICONS.DROPDOWN_CHEVRON_WHITE:
-        return (
-          <IconDropdownChevron
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            stroke="#fff"
-          />
-        );
+        return <IconChevron />;
       case ICONS.LOGIN_METAMASK:
         return <IconLoginMetamask />;
       case ICONS.LOGIN_GOOGLE:
@@ -120,28 +104,12 @@ const Icon: FC<Props> = ({
         return <IconCoinMatic />;
       case ICONS.WEB3_AUTH_LOGO:
         return <IconWeb3AuthLogo />;
-      case ICONS.PROFILE_QR_CODE:
-        return <IconProfileQrCode />;
-      case ICONS.PROFILE_COPY:
-        return <IconProfileCopy />;
+      case ICONS.QR_CODE:
+        return <IconQrCode />;
+      case ICONS.COPY:
+        return <IconCopy />;
       case ICONS.CLOSE:
-        return (
-          <IconClose
-            stroke="#9c9c9c"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        );
-      case ICONS.CLOSE_WHITE:
-        return (
-          <IconClose
-            stroke="#fff"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        );
+        return <IconClose />;
       case ICONS.PROFILE_POLYGON_POWERED:
         return <IconPolygonPowered />;
       case ICONS.UFO_SHIP:
@@ -151,7 +119,7 @@ const Icon: FC<Props> = ({
       case ICONS.REFRESH:
         return <IconRefresh />;
       case ICONS.LINK:
-        return <IconLink />;
+        return <span className="filled"><IconLink /></span>;
       case ICONS.TRANSACTION_SEND:
         return <IconTransactionSend />;
       case ICONS.TRANSACTION_RECEIVE:
@@ -166,7 +134,7 @@ const Icon: FC<Props> = ({
   return (
     <div
       style={{ width, height: height || width }}
-      className={cn(styles.wrap, className)}
+      className={cn(styles.wrap, className, { [styles.active]: isActive })}
     >
       {getIconByType()}
     </div>
@@ -178,6 +146,7 @@ Icon.defaultProps = {
   width: undefined,
   height: undefined,
   className: undefined,
+  isActive: false,
 };
 
 export default memo(Icon);

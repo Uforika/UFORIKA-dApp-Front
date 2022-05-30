@@ -19,9 +19,9 @@ const Button: React.FC<ButtonProps> = ({
   icon,
   ...props
 }) => (
-  <div className={styles.buttonWrapper}>
+  <div className={styles.root}>
     <UIButton
-      className={cn(styles.button, className, { [styles.icon]: icon })}
+      className={cn(styles.button, className)}
       size={size}
       {...props}
     >

@@ -10,7 +10,7 @@
   color: $white;
 }
 
-.buttonWrapper {
+.root {
   .button {
     align-items: center;
     border-radius: 120px;
@@ -176,19 +176,6 @@
             border-color: rgba($black, 0.6) transparent transparent;
           }
         }
-      }
-    }
-
-    &.icon {
-      background-color: transparent;
-      border-radius: 6px;
-
-      &::before {
-        display: none;
-      }
-
-      &:hover {
-        background-color: rgba($sanMarino, 0.1);
       }
     }
   }

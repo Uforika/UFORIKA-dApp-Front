@@ -1,8 +1,18 @@
+@import '../../assets/scss/helpers/all';
+
 .wrap {
   display: flex;
 
   svg {
     height: 100%;
     width: 100%;
+  }
+}
+
+.active {
+  :global {
+    svg {
+      stroke: $white;
+    }
   }
 }
