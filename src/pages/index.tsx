@@ -1,14 +1,15 @@
 import React from 'react';
 import { NextPage } from 'next';
 import MainPage from '@containers/MainPage';
+import NoAuthorizationRoute from '@components/NoAuthorizationRoute';
+import Layout from '@layout/Layout';
 
-type Props = {
-  title: string
-}
-const PageIndex: NextPage<Props> = ({ title }: Props) => <MainPage title={title} />;
-
-PageIndex.getInitialProps = () => ({
-  title: 'Test title',
-});
+const PageIndex: NextPage = () => (
+  <NoAuthorizationRoute>
+    <Layout>
+      <MainPage />
+    </Layout>
+  </NoAuthorizationRoute>
+);
 
 export default PageIndex;

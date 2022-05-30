@@ -1,0 +1,75 @@
+@import '../../assets/scss/helpers/all';
+
+.wrap {
+  position: relative;
+
+  :global {
+    .dropdownIcon {
+      position: absolute;
+      right: 16px;
+    }
+  }
+}
+
+.input {
+  @include body-m($black);
+  background-color: transparent;
+  border: 0;
+  border-radius: 60px;
+  border-bottom-left-radius: 60px;
+  height: 44px;
+  max-width: 56%;
+  outline: none;
+  padding-left: 12px;
+  padding-right: 12px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+
+  &::placeholder {
+    color: $dustyGray;
+  }
+}
+
+.input.big {
+  height: 56px;
+}
+
+.input + .dropdown {
+  :global {
+    .dropdown::before {
+      border: 1px $dustyGray solid;
+    }
+
+    .error.dropdown::before {
+      border: 2px $carnation solid;
+    }
+  }
+}
+
+.dropdown {
+  display: flex;
+}
+
+.label {
+  @include body-m-semi-bold($white);
+  display: flex;
+}
+
+.panel {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  margin-bottom: 4px;
+}
+
+.panelText {
+  color: $malachite;
+  justify-self: end;
+  margin-left: auto;
+
+  &:active {
+    opacity: 0.7;
+  }
+}

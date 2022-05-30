@@ -4,6 +4,7 @@
     "alwaysStrict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "lib": [
@@ -54,7 +55,7 @@
         "./src/models/*"
       ],
       "@modules/*": [
-        "./src/modules/*"
+        "src/Modules/*"
       ],
       "@redux/*": [
         "./src/redux/*"
@@ -70,6 +71,7 @@
   ],
   "include": [
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "custom.d.ts"
   ]
 }

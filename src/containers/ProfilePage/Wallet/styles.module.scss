@@ -1,0 +1,45 @@
+@import '../../../assets/scss/helpers/all';
+
+.wrapper {
+  margin-bottom: 48px;
+}
+
+.title {
+  margin-bottom: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-gap: 32px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 20px;
+}
+
+.bottomContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons {
+  display: flex;
+}
+
+.buttonContainer {
+  &:not(:last-child) {
+    margin-right: 16px;
+  }
+}
+
+.supported {
+  @include body-m($dustyGray);
+  align-items: center;
+  display: flex;
+
+  > div {
+    margin-right: 4px;
+  }
+
+  a {
+    margin-left: 6px;
+  }
+}

@@ -1,0 +1,19 @@
+@import '../../../assets/scss/helpers/all';
+
+.title {
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+
+  > div {
+    &:last-child {
+      grid-column-end: 4;
+      grid-column-start: 1;
+    }
+  }
+}

@@ -1,0 +1,61 @@
+@import '../../../assets/scss/helpers/all';
+
+.panel {
+  padding-left: 40px;
+  padding-right: 50px;
+}
+
+.emptyTable {
+  margin-top: 188px;
+  padding-bottom: 40px;
+  padding-left: 40px;
+  padding-right: 50px;
+}
+
+.title {
+  margin-top: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.rowWrap {
+  align-items: end;
+  display: grid;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.rowWrap {
+  &:only-child {
+    margin-top: 40px;
+  }
+
+  .row {
+    background-color: rgba($black, 0.6);
+    border-left: 0.5px solid rgba($white, 0.4);
+    border-right: 0.5px solid rgba($white, 0.4);
+    border-top: 0.5px solid rgba($white, 0.4);
+  }
+
+  &:first-child {
+    .row {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+    }
+  }
+
+  &:last-child {
+    .row {
+      border-bottom: 0.5px solid rgba($white, 0.4);
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      margin-bottom: 40px;
+    }
+  }
+}
+
+.head {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}

@@ -1,0 +1,182 @@
+@import '../../assets/scss/helpers/all';
+
+@mixin primary() {
+  background-color: $malachite;
+  color: $black;
+}
+
+@mixin secondary() {
+  background-color: transparent;
+  color: $white;
+}
+
+.root {
+  .button {
+    align-items: center;
+    border-radius: 120px;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    position: relative;
+    transition: $transitionSpeed;
+    width: 100%;
+
+    &:active {
+      opacity: 0.7;
+    }
+
+    &::before {
+      border: 2px solid transparent;
+      border-radius: 120px;
+      bottom: -2px;
+      content: '';
+      left: -2px;
+      position: absolute;
+      right: -2px;
+      top: -2px;
+      transition: border $transitionSpeed;
+    }
+
+    .children {
+      align-items: center;
+      display: flex;
+    }
+
+    &:disabled {
+      opacity: 0.3 !important;
+    }
+
+    .loader {
+      display: flex;
+      left: 0;
+      position: relative;
+      top: 0;
+      transform: translate(0);
+
+      &::before,
+      &::after {
+        border-width: 1.5px !important;
+        left: 0;
+        margin: 0 !important;
+      }
+    }
+
+    &:global {
+      &.large {
+        @include subtitle1();
+        max-height: 56px;
+        padding: 16px 24px;
+
+        .loader {
+          height: 20px;
+          margin-right: 8px;
+          width: 20px;
+
+          &::before,
+          &::after {
+            height: 20px;
+            width: 20px;
+          }
+        }
+      }
+
+      &.medium {
+        @include body-m-semi-bold();
+        line-height: 18px;
+        max-height: 44px;
+        padding: 12px 20px;
+
+        .loader {
+          height: 16px;
+          margin-right: 4px;
+          width: 16px;
+
+          &::before,
+          &::after {
+            height: 16px;
+            width: 16px;
+          }
+        }
+      }
+
+      &.small {
+        max-height: 32px;
+        padding: 4px;
+      }
+
+      &.secondary {
+        @include secondary;
+        border: 1px solid $dustyGray;
+
+        &:hover {
+          @include secondary;
+          background-color: rgba($malachite, 0.3);
+          border: 1px solid $dustyGray;
+        }
+
+        &:active:not([disabled]) {
+          @include secondary;
+          color: rgba($white, 0.7);
+        }
+
+        &:focus {
+          @include secondary;
+
+          &::before {
+            border: 1px solid;
+            bottom: -3px;
+            left: -3px;
+            right: -3px;
+            top: -3px;
+          }
+        }
+
+        .loader {
+          &::before {
+            border-color: rgba($white, 0.3);
+          }
+
+          &::after {
+            border-color: $white transparent transparent;
+          }
+        }
+      }
+
+      &.primary {
+        @include primary;
+        border: unset;
+
+        &:hover:not([disabled]) {
+          @include primary;
+
+          &::before {
+            border-color: $magicMint;
+          }
+        }
+
+        &:active:not([disabled]) {
+          @include primary;
+          color: rgba($black, 0.6);
+        }
+
+        &:focus:not([disabled]) {
+          @include primary;
+
+          &::before {
+            border: 1px solid $malachite;
+          }
+        }
+
+        .loader {
+          &::before {
+            border-color: rgba($black, 0.3);
+          }
+
+          &::after {
+            border-color: rgba($black, 0.6) transparent transparent;
+          }
+        }
+      }
+    }
+  }
+}

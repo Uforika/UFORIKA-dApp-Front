@@ -26,3 +26,41 @@ export const useConfirmModal = (text: string, onSuccess: () => void, onFailure: 
 
   return [handleShowModal, handleHide];
 };
+
+export const useSuccessModal = (text: string, onSuccess: () => void): [() => void, () => void] => {
+  const { showModal, hideModal } = useModals();
+
+  const handleShowModal = useCallback(() => showModal(MODAL_TYPES.SUCCESS, {
+    text,
+    onSuccess,
+  }), [onSuccess, text, showModal]);
+
+  const handleHide = useCallback(() => hideModal(MODAL_TYPES.SUCCESS), [hideModal]);
+
+  return [handleShowModal, handleHide];
+};
+
+export const useFailModal = (text: string, onSubmit: () => void): [() => void, () => void] => {
+  const { showModal, hideModal } = useModals();
+
+  const handleShowModal = useCallback(() => showModal(MODAL_TYPES.FAIL, {
+    text,
+    onSubmit,
+  }), [onSubmit, text, showModal]);
+
+  const handleHide = useCallback(() => hideModal(MODAL_TYPES.FAIL), [hideModal]);
+
+  return [handleShowModal, handleHide];
+};
+
+export const useQrCodeModal = (address: string | null): [() => void, () => void] => {
+  const { showModal, hideModal } = useModals();
+
+  const handleShowModal = useCallback(() => showModal(MODAL_TYPES.QR_CODE, {
+    address,
+  }), [address, showModal]);
+
+  const handleHide = useCallback(() => hideModal(MODAL_TYPES.QR_CODE), [hideModal]);
+
+  return [handleShowModal, handleHide];
+};

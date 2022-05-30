@@ -1,0 +1,116 @@
+@import '../../assets/scss/helpers/all';
+
+.container {
+  position: relative;
+
+  .textLabel {
+    @include body-m-semi-bold();
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+
+  .inputContainer {
+    align-items: center;
+    background-color: $white;
+    border: 1px solid rgba($dustyGray, 0.5);
+    border-radius: 60px;
+    display: flex;
+    height: 40px;
+    max-height: 100%;
+    outline: 0;
+    padding-right: 20px;
+    position: relative;
+    transition: color $transitionSpeed, box-shadow $transitionSpeed, border $transitionSpeed;
+    width: 100%;
+
+    &.big {
+      height: 56px;
+
+      input {
+        height: 56px;
+      }
+    }
+
+    > input {
+      @include body-m($black);
+      background-color: transparent;
+      border: 0;
+      border-radius: 60px;
+      outline: 0;
+      padding: 10px 12px;
+
+      &::placeholder {
+        color: $dustyGray;
+      }
+
+      &:focus {
+        background: transparent;
+        border-color: unset;
+        box-shadow: none;
+        color: $black;
+      }
+
+      &:-webkit-autofill,
+      :-webkit-autofill:hover,
+      :-webkit-autofill:focus,
+      :-webkit-autofill:active {
+        box-shadow: 0 0 0 30px $white inset !important;
+      }
+    }
+
+    &.error {
+      border: 2px solid $radicalRed;
+    }
+
+    &.readonly {
+      .inputContainer > input {
+        cursor: default;
+      }
+    }
+
+    &:focus-within:not(.readonly) {
+      border: 2px solid $malachite;
+    }
+
+    &:hover:not([data-disabled='true']):not(:focus-within):not(.error):not(.readonly) {
+      border: 2px solid rgba($dustyGray, 0.5);
+      color: $dustyGray;
+    }
+
+    &[data-disabled='true'] {
+      background-color: $mineShaft;
+      border: 1px solid $dustyGray;
+      opacity: 1;
+    }
+  }
+
+  .infoBlock {
+    margin-top: 4px;
+
+    &.infoPositionAbsolute {
+      position: absolute;
+      top: 100%;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .textError {
+    @include body-s($radicalRed);
+  }
+
+  .hint {
+    @include body-s($dustyGray);
+
+    > ul {
+      list-style-type: disc;
+      padding-left: 12px;
+    }
+  }
+
+  .rightContent {
+    height: 100%;
+  }
+}

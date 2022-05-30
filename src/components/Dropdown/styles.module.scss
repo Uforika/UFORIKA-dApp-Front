@@ -1,0 +1,157 @@
+@import '../../assets/scss/helpers/all';
+
+.dropdown {
+  align-items: center;
+  background-color: $white;
+  border: 0;
+  border-radius: 60px;
+  color: rgba($black, 0.5);
+  display: flex !important;
+  font-family: 'Inter';
+  height: 44px;
+  justify-content: space-between;
+  padding-left: 12px;
+  padding-right: 12px;
+
+  &.big {
+    height: 56px;
+
+    input {
+      height: 56px;
+    }
+  }
+
+  &::before {
+    border: 1px solid $dustyGray;
+    border-radius: 60px;
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+  }
+
+  :global {
+    .menu {
+      border: 0 !important;
+      border-radius: 20px !important;
+      margin-top: 4px !important;
+      width: 100%;
+
+      .item:first-child {
+        border-top-left-radius: 19px;
+        border-top-right-radius: 19px;
+      }
+
+      .item:last-child {
+        border-bottom-left-radius: 19px;
+        border-bottom-right-radius: 19px;
+      }
+
+      .item.selected:not(:hover) {
+        background-color: transparent !important;
+      }
+
+      .item.selected {
+        color: $dustyGray !important;
+      }
+
+      .item.active {
+        font-weight: normal !important;
+
+        .text {
+          @include body-m($dustyGray);
+        }
+      }
+    }
+
+    .text {
+      color: $black;
+    }
+
+    input {
+      font-family: 'Inter';
+      height: 42px;
+    }
+  }
+}
+
+.label {
+  @include body-m-semi-bold($white);
+  display: flex;
+  margin-bottom: 4px;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  :global {
+    .dropdown.active:not(.error) {
+      &::before {
+        border: 2px solid $malachite;
+      }
+    }
+
+    .dropdown.active.error + span {
+      display: none;
+    }
+
+    .dropdown.active > .dropdownIcon svg {
+      transform: rotate(180deg);
+    }
+
+    .error {
+      &::before {
+        border: 2px solid $radicalRed;
+      }
+    }
+
+    .ui.dropdown.disabled {
+      background-color: $mineShaft;
+      opacity: 1;
+    }
+
+    .ui.dropdown.disabled:not(.button) > .default.text {
+      color: $dustyGray;
+      opacity: 1;
+    }
+  }
+}
+
+.error {
+  @include body-s($radicalRed);
+  margin-top: 4px;
+}
+
+.wrap.inline {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+
+  .label {
+    margin-bottom: 0;
+  }
+
+  .dropdown {
+    background-color: transparent;
+    height: auto;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  :global {
+    .dropdownIcon {
+      margin-left: 8px;
+    }
+
+    .divider.text {
+      @include body-l-semi-bold($white);
+    }
+  }
+}

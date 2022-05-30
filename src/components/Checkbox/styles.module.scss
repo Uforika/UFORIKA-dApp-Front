@@ -1,0 +1,298 @@
+/* stylelint-disable max-nesting-depth */
+@import '../../assets/scss/helpers/all';
+
+.checkboxContainer {
+  .wrapper {
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+    outline: 0;
+    position: relative;
+    width: auto;
+
+    &.withLabel {
+      &:global {
+        &:not(.toggle) {
+          > input {
+            ~ label {
+              padding: 0 4px 0 27px;
+            }
+          }
+        }
+      }
+    }
+
+    &:global {
+      &:not(.toggle) {
+        > input {
+          &:focus ~ label {
+            border: 1px solid rgba($white, 0.3);
+            color: $white;
+          }
+
+          &[type='checkbox'] {
+            ~ label {
+              &::before,
+              &::after {
+                border-radius: 2px;
+              }
+            }
+          }
+
+          &[type='radio'] {
+            ~ label {
+              &::before,
+              &::after {
+                border-radius: 50%;
+              }
+            }
+          }
+
+          ~ label {
+            @include body-m();
+            align-items: center;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            display: inline-flex;
+            min-height: 24px;
+            min-width: 24px;
+            padding: 0;
+
+            &::before,
+            &::after {
+              content: '';
+              height: 14px;
+              left: 4px;
+              opacity: 1;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 14px;
+            }
+
+            &::before {
+              background: #FFF;
+              border: 0;
+            }
+
+            &::after {
+              background-position: center;
+              background-repeat: no-repeat;
+            }
+
+            &:hover {
+              color: $white;
+            }
+          }
+
+          &:disabled {
+            ~ label {
+              color: $white !important;
+              opacity: 0.5;
+
+              &::before {
+                background-color: $dustyGray !important;
+                border-color: $dustyGray !important;
+              }
+
+              &::after {
+                background-color: unset;
+              }
+            }
+          }
+        }
+
+        &:not(.checked) {
+          > input {
+            &:focus ~ label {
+              &::after {
+                border: 2px solid rgba($white, 0.3);
+              }
+            }
+
+            &[type='checkbox'] {
+              ~ label {
+                &::after {
+                  border-radius: 4px;
+                }
+              }
+            }
+
+            &[type='radio'] {
+              ~ label {
+                &::after {
+                  border-radius: 50%;
+                  content: '';
+                }
+              }
+            }
+
+            ~ label {
+              &::after {
+                border: 2px solid rgba($dustyGray, 0.3);
+                height: 18px;
+                left: 2px;
+                width: 18px;
+              }
+            }
+
+            &:not(:disabled) {
+              ~ label {
+                &:hover {
+                  &::after {
+                    border: 2px solid rgba($white, 0.3);
+                  }
+                }
+              }
+
+              &[type='checkbox'] {
+                ~ label {
+                  &::after {
+                    background-image: url('/images/icons/checkbox/check.svg');
+                  }
+                }
+              }
+
+              &[type='radio'] {
+                ~ label {
+                  &::after {
+                    background-image: url('/images/icons/checkbox/radiopoint.svg');
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        &.checked {
+          > input {
+            &:focus ~ label {
+              &::before {
+                background-color: $malachite;
+                border-color: $malachite;
+              }
+            }
+
+            ~ label {
+              &::before {
+                background-color: $malachite;
+                border-color: $malachite;
+              }
+
+              &:hover {
+                color: $white;
+
+                &::after {
+                  background-color: rgba($white, 0.2);
+                }
+              }
+            }
+
+            &[type='checkbox'] {
+              ~ label {
+                &::after {
+                  background-image: url('/images/icons/checkbox/check-white.svg');
+                  content: '';
+                }
+              }
+            }
+
+            &[type='radio'] {
+              ~ label {
+                &::after {
+                  background-image: url('/images/icons/checkbox/radiopoint-white.svg');
+                  content: '';
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &.toggle {
+        &:hover {
+          &:not(.disabled) {
+            &::before {
+              background-color: rgba($white, 0.2);
+              border-radius: 12px;
+              bottom: 2px;
+              content: '';
+              display: block;
+              left: 2px;
+              position: absolute;
+              right: 2px;
+              top: 2px;
+              z-index: 2;
+            }
+          }
+        }
+
+        > input {
+          &:focus ~ label {
+            border-color: rgba($white, 0.3);
+          }
+
+          ~ label {
+            border: 1px solid transparent;
+            border-radius: 40px;
+            min-height: 24px;
+            padding: 0;
+            width: 44px;
+
+            &::before {
+              background-color: $dustyGray !important;
+              border: 0;
+              height: 20px;
+              left: 1px;
+              top: 1px;
+              width: 40px;
+            }
+
+            &::after {
+              box-shadow: unset;
+              height: 16px;
+              left: 3px;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 16px;
+            }
+          }
+        }
+
+        &:not(.checked) {
+          > input {
+            &:focus ~ label {
+              &::before {
+                background-color: $dustyGray;
+              }
+            }
+          }
+        }
+
+        &.checked {
+          > input {
+            &:focus ~ label {
+              &::before {
+                background-color: $malachite !important;
+              }
+            }
+
+            ~ label {
+              &::before {
+                background-color: $malachite !important;
+              }
+
+              &::after {
+                box-shadow: unset;
+                left: 22px;
+              }
+
+              &:hover {
+                color: $white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

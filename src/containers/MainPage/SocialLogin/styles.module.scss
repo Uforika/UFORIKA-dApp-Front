@@ -1,0 +1,79 @@
+@import '../../../assets/scss/helpers/all';
+
+.label {
+  @include body-m-semi-bold();
+  margin-bottom: 8px;
+}
+
+.container {
+  display: flex;
+
+  @include media-breakpoint-down($breakpointSm) {
+    justify-content: center;
+  }
+}
+
+.hiddenContainer {
+  display: flex;
+  margin-bottom: -15px;
+  margin-right: -15px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height $transitionSpeed;
+
+  @include media-breakpoint-down($breakpointSm) {
+    justify-content: center;
+  }
+
+  &.isShowMore {
+    max-height: 500px;
+    overflow: visible;
+  }
+}
+
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.item {
+  margin-bottom: 15px;
+  padding-right: 15px;
+
+  &.isHidden {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: -1000px;
+  }
+}
+
+.button,
+.buttonMore {
+  border: 1px solid $dustyGray !important;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: rgba($dustyGray, 0.2) !important;
+  }
+}
+
+.button {
+  padding: 9px !important;
+}
+
+.buttonMore {
+  align-items: center;
+  display: flex;
+  height: 44px;
+  justify-content: center;
+  padding: 5px;
+  transition: transform $transitionSpeed;
+  width: 44px;
+
+  &.isActive {
+    transform: rotate(180deg);
+  }
+}

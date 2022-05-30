@@ -1,0 +1,17 @@
+.wrap {
+  color: #FFF;
+  margin-top: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.title {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: 1fr 1fr;
+}

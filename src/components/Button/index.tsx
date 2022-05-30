@@ -1,75 +1,41 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { ReactNode, memo } from 'react';
+import React, { memo } from 'react';
 import cn from 'classnames';
-import Link from 'next/link';
-import 'focus-visible/dist/focus-visible.js';
+import { Loader, Button as UIButton, StrictButtonProps } from 'semantic-ui-react';
+import styles from './styles.module.scss';
 
-import styles from './button.module.scss';
+type PickedFromUITypes = 'primary' | 'secondary' | 'children' | 'onClick'| 'loading' | 'className' | 'disabled' | 'size' | 'icon' | 'as'
 
-type Props = {
-  className?: string,
-  href?: string,
-  disabled?: boolean,
-  loading?: boolean,
-  children?: ReactNode,
-  onClick?: () => void,
-  defaultStyle?: 'blueDark' | 'blue' | 'gray' | 'red' | 'transparent' | 'withoutBorder' | 'icon',
-  size?: 'sizeL' | 'sizeM' | 'sizeS',
+export type ButtonProps = Pick<StrictButtonProps, PickedFromUITypes> & {
+  target?: string,
+  rel?: string,
+  href?: string
 }
 
-const Button = ({
-  className, defaultStyle, onClick, children, disabled, loading, href, size, ...props
-}: Props) => {
-  if (href) {
-    return (
-      <Link href={href}>
-        <a
-          className={cn(styles.button, {
-            [styles[defaultStyle || '']]: defaultStyle,
-            [styles[size || '']]: size,
-            [styles.loading]: loading,
-          }, className)}
-          onClick={onClick}
-          {...props}
-        >
-          <div className={cn(styles.content, { [styles[defaultStyle || '']]: defaultStyle })}>
-            {loading && <div className={styles.loader} />}
-            <span className={cn({ [styles.loading]: loading })}> {children}</span>
-          </div>
-        </a>
-      </Link>
-    );
-  }
-  return (
-    <button
-      className={cn(styles.button, {
-        [styles[defaultStyle || '']]: defaultStyle,
-        [styles[size || '']]: size,
-        [styles.loading]: loading,
-      }, className)}
-      onClick={onClick}
-      disabled={disabled}
+const Button: React.FC<ButtonProps> = ({
+  className,
+  children,
+  loading,
+  size = 'large',
+  icon,
+  ...props
+}) => (
+  <div className={styles.root}>
+    <UIButton
+      className={cn(styles.button, className)}
+      size={size}
       {...props}
     >
-      <div className={cn(styles.content, { [styles[defaultStyle || '']]: defaultStyle })}>
-        {loading && <div className={styles.loader} />}
-        <span className={cn({ [styles.loading]: loading })}>{children}</span>
-      </div>
-    </button>
-  );
-};
+      {loading && <Loader className={styles.loader} active />}
+      {children}
+      {icon}
+    </UIButton>
+  </div>
+);
 
 Button.defaultProps = {
-  className: '',
-  href: '',
-  disabled: false,
-  loading: false,
-  defaultStyle: '',
-  children: null,
-  size: '',
-  onClick: () => {},
+  target: undefined,
+  rel: undefined,
+  href: undefined,
 };
 
 export default memo(Button);

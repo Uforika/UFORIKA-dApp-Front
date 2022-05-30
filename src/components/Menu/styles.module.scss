@@ -1,0 +1,117 @@
+@import '../../assets/scss/helpers/all';
+
+.menuContainer :global {
+  .ui.menu {
+    border: 0;
+    width: 100%;
+
+    &.secondary {
+      &.vertical .item:not(:last-child) {
+        margin-bottom: 4px;
+      }
+
+      &:not(.vertical) .item:not(:last-child) {
+        margin-right: 32px;
+      }
+
+      .item {
+        cursor: pointer !important;
+        outline: 0;
+
+        &.disabled {
+          color: rgba($white, 0.3) !important;
+          cursor: default !important;
+
+          svg {
+            stroke: rgba($white, 0.3);
+          }
+        }
+      }
+
+      &:not(.pointing) {
+        .item {
+          @include body-l-semi-bold($dustyGray);
+          background-color: transparent;
+          border: 0;
+          margin-left: 0;
+          padding: 0;
+          position: relative;
+          transition: border-color $transitionSpeed, color $transitionSpeed;
+
+          &::after {
+            background-color: transparent;
+            content: '';
+            display: block;
+            height: 2px;
+            margin-left: 0;
+            margin-top: 1px;
+            position: absolute;
+            top: 100%;
+            transition: background-color $transitionSpeed;
+            width: 100%;
+          }
+
+          &:hover:not(.disabled):not(.active) {
+            color: $white;
+
+            &::after {
+              background-color: $white;
+            }
+          }
+
+          &.active {
+            border: 0;
+            color: $malachite;
+            margin-bottom: 0;
+            margin-top: 0;
+
+            &::after {
+              background-color: $malachite;
+            }
+
+            &:hover:not(.disabled) {
+              background-color: unset;
+            }
+          }
+        }
+      }
+
+      &.pointing {
+        background-color: unset;
+        border: 0;
+        margin: 0;
+
+        .item {
+          @include body-l-semi-bold();
+          align-items: center;
+          background-color: transparent;
+          border: 1px solid transparent;
+          border-radius: 6px !important;
+          box-sizing: border-box;
+          display: flex;
+          justify-content: flex-start;
+          min-height: 48px;
+          padding: 14px 20px;
+          transition: border-color $transitionSpeed, background-color $transitionSpeed, box-shadow $transitionSpeed;
+          width: 220px;
+
+          &:hover:not(.disabled):not(.active),
+          &:global(:focus) {
+            border-color: rgba($white, 0.6);
+            color: $white;
+          }
+
+          &.active {
+            background-color: rgba($white, 0.2);
+            border-color: rgba($white, 0.3);
+            color: $white;
+
+            &:hover:not(.disabled) {
+              color: $white;
+            }
+          }
+        }
+      }
+    }
+  }
+}

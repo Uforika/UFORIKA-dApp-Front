@@ -1,21 +1,139 @@
-@mixin buttonL {
-  color: var(--dark);
+@mixin h1($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 56px;
+}
+
+@mixin h2($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+@mixin h3($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+@mixin h4($color: $white) {
+  color: $color;
+  font-family: 'Inter';
   font-size: 18px;
   font-weight: 600;
-  line-height: 133%;
+  line-height: 28px;
 }
 
-@mixin buttonM {
-  color: var(--dark);
+@mixin h5($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+@mixin h6($color: $white) {
+  color: $color;
+  font-family: 'Inter';
   font-size: 14px;
   font-weight: 600;
-  line-height: 129%;
+  line-height: 22px;
 }
 
-@mixin buttonS {
-  color: var(--dark);
+@mixin body-l-semi-bold($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+@mixin body-l($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@mixin body-l-semi-bold($color: $white) {
+  color: $color;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+@mixin body-m-semi-bold($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+@mixin body-m($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+@mixin body-s-semi-bold($color: $white) {
+  color: $color;
+  font-family: 'Inter';
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  line-height: 14px;
+  line-height: 18px;
+}
+
+@mixin body-s($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+@mixin subtitle1($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+@mixin subtitle2($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+@mixin overline($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+@mixin overline-label($color: $white) {
+  color: $color;
+  font-family: 'Inter';
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  text-transform: uppercase;
 }

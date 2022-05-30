@@ -1,3 +1,6 @@
 export enum MODAL_TYPES {
   CONFIRM = 'CONFIRM',
+  SUCCESS = 'SUCCESS',
+  QR_CODE = 'QR_CODE',
+  FAIL = 'FAIL'
 }

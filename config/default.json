@@ -1,5 +1,10 @@
 {
-  "API_URL": "https://718-green-admin.pixelplex-test.by/api/v1/manager",
+  "API_URL": "https://782-uforika.pixelplex-test.by",
+  "CLIENT_ID": "BNARyX2gaQycLvcVSCI3eY4CMndS8pXbxtsR2PBzPr4ShyRG0EnUyyB2kjkxvXjFwEnrSIHvXr14rIwageqWysY",
   "IS_PROD": false,
-  "REDUX_DEBUG": false
+  "REDUX_DEBUG": false,
+  "NETWORK": "TESTNET_POLYGON",
+  "COIN_GECKO_API_URL": "https://api.coingecko.com/api/v3",
+  "POLYGON_SCAN_API_URL": "https://api-testnet.polygonscan.com/api",
+  "API_POLYGON_SCAN_KEY": "8AEWIPNAY8UD6888CIQQB5TJ21EVUZK7NV"
 }

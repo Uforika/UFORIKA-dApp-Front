@@ -1,0 +1,96 @@
+@import '../../assets/scss/helpers/all';
+
+.wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  margin: auto;
+  max-width: 1270px;
+  padding: 0 20px;
+  width: 100%;
+
+  @include media-breakpoint-down($breakpointLg) {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+}
+
+.imageContainer {
+  margin: auto;
+  max-width: 647px;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  @include h1();
+  margin: 0 auto 8px;
+  max-width: 284px;
+}
+
+.description {
+  @include body-m();
+  opacity: 0.6;
+}
+
+.card {
+  backdrop-filter: blur(8px);
+  background: rgba($black, 0.6);
+  border: 0.5px solid rgba($white, 0.3);
+  border-radius: 12px;
+  margin-left: auto;
+  padding: 32px 31px;
+  width: 408px;
+
+  @include media-breakpoint-down($breakpointLg) {
+    margin: auto;
+  }
+
+  @include media-breakpoint-down($breakpointSm) {
+    width: 100%;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-row-gap: 24px;
+}
+
+.padding0 {
+  padding: 0 !important;
+}
+
+.footer {
+  @include body-s();
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerDescription {
+  color: rgba($white, 0.6);
+  max-width: 233px;
+
+  a {
+    color: rgba($white, 0.6);
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.secured {
+  text-align: right;
+
+  p {
+    margin-bottom: 8px;
+  }
+}

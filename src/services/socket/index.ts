@@ -1,8 +1,8 @@
+import { useCallback } from 'react';
 import io from 'socket.io-client';
 import { showToast } from '@components/Toast';
 import { TOAST_ERROR, TOAST_SUCCESS, TOAST_WARNING } from '@constants/toast.constants';
 import { SocketDataDTO } from '@dtos/socketData.dto';
-import { useCallback } from 'react';
 
 let socketIo: SocketIOClient.Socket;
 export const useConnectToSocket: () => () => SocketIOClient.Socket = () => useCallback(() => {

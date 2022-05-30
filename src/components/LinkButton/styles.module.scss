@@ -1,0 +1,66 @@
+@import '../../assets/scss/helpers/all';
+
+.button {
+  @include body-m($malachite);
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 4px;
+  position: relative;
+  transition: 0.3s;
+
+  .children {
+    align-items: center;
+    display: flex;
+  }
+
+  .iconLeft {
+    display: flex;
+    position: relative;
+  }
+
+  &:disabled {
+    color: rgba($white, 0.3);
+  }
+
+  &:hover:not([disabled]) {
+    text-decoration: underline;
+  }
+
+  &:focus:not([disabled]) {
+    border: 1px solid $malachite;
+    text-decoration: underline;
+  }
+
+  .iconLeft {
+    margin-right: 4px;
+  }
+
+  .loader {
+    height: 16px;
+    position: static;
+    transform: unset;
+    width: 16px;
+
+    &::before,
+    &::after {
+      border-width: 1.5px !important;
+      height: 16px;
+      left: 0;
+      margin: 0 !important;
+      width: 16px;
+    }
+
+    &::before {
+      border-color: rgba($white, 0.3);
+    }
+
+    &::after {
+      border-color: $white transparent transparent;
+    }
+  }
+}

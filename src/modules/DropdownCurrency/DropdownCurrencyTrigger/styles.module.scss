@@ -1,0 +1,34 @@
+@import '../../../assets/scss/helpers/all';
+
+.wrap {
+  align-items: center;
+  position: absolute;
+  right: 30px;
+  z-index: 2;
+}
+
+.panel {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 12px;
+}
+
+.image {
+  display: flex;
+  margin-right: 8px;
+}
+
+.text,
+.input {
+  @include body-m($dustyGray);
+}
+
+.input {
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  margin-right: 10px;
+  outline: none;
+  width: 100%;
+}

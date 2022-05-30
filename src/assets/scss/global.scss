@@ -1,10 +1,12 @@
 /* stylelint-disable selector-max-id */
 @import './vendors/normalize';
 @import './helpers/fonts';
+@import './helpers/variables';
 
 html,
 body,
 #__next {
+  background-color: $black;
   height: 100%;
 }
 
@@ -13,17 +15,69 @@ button {
   font-family: 'Inter';
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
 button {
   background-color: transparent;
   border: 0;
-  outline: 0;
   padding: 0;
-
-  &:focus {
-    outline: 0;
-  }
 }
 
 p {
   margin: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+  list-style-image: initial;
+  list-style-position: initial;
+  list-style-type: none;
+}
+
+::-webkit-scrollbar {
+  height: 5px !important;
+  width: 5px !important;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba($white, 0.9) !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: $white !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+// TODO: remove when version semantic-ui-react was more then 2.1.2
+
+body {
+  div {
+    &:last-child[style^='display: flex; position: absolute;'] {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    &:last-child[style^='display: flex; position: absolute; inset: 0px auto auto 0px;'],
+    [style^='display: flex; position: absolute; inset: auto auto 0px 0px;'] {
+      display: flex !important;
+      visibility: visible !important;
+    }
+  }
 }
