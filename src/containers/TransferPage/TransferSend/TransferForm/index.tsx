@@ -95,7 +95,7 @@ const TransferForm: FC<Props> = ({
         </div>
       </div>
       <div className={styles.button}>
-        <Button onClick={handleSubmit} primary>Transfer</Button>
+        <Button onClick={handleSubmit} primary disabled={!amount || !to}>Transfer</Button>
       </div>
       <div className={styles.hintRow}>
         <Icon width={16} type={ICONS.PROFILE_POLYGON_POWERED} />
