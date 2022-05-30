@@ -47,7 +47,8 @@ const TransferForm: FC<Props> = ({
   const handleSubmit = useCallback(() => { onSubmit(); }, [onSubmit]);
 
   const handleChangeTo = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    changeTo(event.target.value);
+    changeTo(event.target.value.replace(/ /g, ''));
+
   }, [changeTo]);
 
   const { amount: amountError, to: toError } = errors;

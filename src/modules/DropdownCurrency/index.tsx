@@ -44,11 +44,8 @@ const DropdownCurrency: FC<Props> = ({
   }, [activeOption]);
 
   const handleChangeCurrencyValue = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.validity.valid) {
-      onChange?.(event.target.value);
-    }
-
-  }, [onChange]);
+    onChange?.(event.target.validity.valid ? event.target.value : value?.toString() || '');
+  }, [onChange, value]);
 
   const handleSetCurrencyValue = useCallback(() => {
     if (activeOption) {
