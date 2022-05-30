@@ -112,7 +112,6 @@ const TableHistoryRow: FC<Props> = ({
               target="_blank"
               rel="noopener noreferrer"
               as="a"
-              loading={isLoading}
               disabled={isLoading}
               type={ICONS.LINK}
               width={20}

@@ -80,7 +80,7 @@ const TableHistory: FC<Props> = ({
     </div>
   );
 
-  if (!transactions || isLoading) {
+  if (!transactions) {
     return (
       <div className={className}>
         {renderHead()}
