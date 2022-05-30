@@ -10,7 +10,6 @@ import Icon from '@components/Icon';
 import { TRX_LINK_CONSTRUCTOR } from '@constants/network.constants';
 import { NETWORK_TOKEN_NAME } from '@constants/token.constants';
 import { CONFIG } from '@constants/config.constants';
-import { doEllipsisStringMiddle } from '@helpers/string.helper';
 import { calculateFee } from '@helpers/balance.helper';
 import { formatDate } from '@helpers/date.helper';
 import { divideTokenValueByDecimal } from '@helpers/number.helper';
@@ -76,8 +75,8 @@ const TableHistoryRow: FC<Props> = ({
             <span className={styles.transactionType}>
               {isSendTransactionType ? 'Send' : 'Receive'}
             </span>
-            <span className={styles.senderAddress}>
-              {`${senderLabel} ${doEllipsisStringMiddle(sender, 8, 8)}`}
+            <span className={styles.sender}>
+              {senderLabel}&nbsp;<span className={styles.senderAddress}>{sender}</span>
             </span>
           </div>
         </div>

@@ -43,9 +43,19 @@
   }
 }
 
-.senderAddress,
+.sender,
 .transactionFee {
   @include body-s($dustyGray);
+  align-items: center;
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.senderAddress {
+  display: inline-block;
+  max-width: 122px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
