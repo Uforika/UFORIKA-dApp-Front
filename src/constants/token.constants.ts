@@ -16,6 +16,10 @@ export const NETWORK_TOKEN_NAME = {
   [NETWORK.POLYGON]: 'MATIC',
 };
 
+export const NETWORK_NAME = {
+  [NETWORK.POLYGON]: 'Polygon',
+};
+
 export const DEFAULT_TOKEN_DECIMAL = 18;
 
 export enum TOKEN_ID {

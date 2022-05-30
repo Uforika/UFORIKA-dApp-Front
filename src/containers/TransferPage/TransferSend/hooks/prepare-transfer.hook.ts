@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js';
-import { TOKEN } from '@constants/token.constants';
+import { TOKEN, TOKEN_CONFIG } from '@constants/token.constants';
+import { CONFIG } from '@constants/config.constants';
 import { useTransfer, useWallet } from '@hooks/wallet.hooks';
 import {
   useCallback, useEffect, useState,
@@ -16,19 +17,24 @@ type Props = {
   amount?: string
   validateForm: (fee: BigNumber) => boolean
   clearForm: () => void
+  token: TOKEN
 }
 
-const prepareAmountToTransaction = (to: string) => new BigNumber(to).multipliedBy(10 ** 18).toString();
+const prepareAmountToTransaction = (to: string, token: TOKEN) => {
+  const { decimals } = TOKEN_CONFIG[CONFIG.NETWORK_TYPE][CONFIG.NETWORK][token];
+
+  return new BigNumber(to).multipliedBy(decimals).toString();
+};
 
 export const usePrepareTransfer = ({
-  to, amount, clearForm, validateForm,
+  to, amount, clearForm, validateForm, token,
 }: Props) => {
   const { checkIsAddressValid } = useWallet();
   const [isFormStage, setIsFormStage] = useState(true);
   const [isTransactionInProgress, setIsTransactionInProgress] = useState(false);
   const [fee, setFee] = useState<BigNumber>(new BigNumber(0));
 
-  const [sendTransaction, getFee] = useTransfer(TOKEN.FORA, to, prepareAmountToTransaction(amount || '0'));
+  const [sendTransaction, getFee] = useTransfer(token, to, prepareAmountToTransaction(amount || '0', token));
 
   const [showSuccessModal] = useSuccessModal('Transaction was successfully sent', () => null);
   const [showFailModal] = useFailModal('Oops, something went wrong', () => null);

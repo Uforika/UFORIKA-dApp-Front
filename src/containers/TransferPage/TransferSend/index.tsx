@@ -2,17 +2,19 @@ import React, { FC, memo, useMemo } from 'react';
 import Section from '@components/Section';
 import { ICONS } from '@components/Icon/constants';
 import { FORA_NAME } from '@constants/global.constants';
-import { TOKEN, TOKEN_CONFIG } from '@constants/token.constants';
+import {
+  NETWORK_NAME, NETWORK_TOKEN_NAME, TOKEN, TOKEN_CONFIG,
+} from '@constants/token.constants';
 import { useBalance } from '@hooks/wallet.hooks';
 import useDropdownCurrencySelection from '@hooks/dropdown-currency-selection.hook';
 import { CONFIG } from '@constants/config.constants';
 import { useSendForm } from './hooks/send-form.hook';
 import { usePrepareTransfer } from './hooks/prepare-transfer.hook';
+import { useTotalAmount } from './hooks/total-amount.hook';
 import TransferForm from './TransferForm';
 import TransferConfirm from './TransferConfirm';
-import styles from './styles.module.scss';
 import { getCurrencyOptions } from './helpers/transfer.helpers';
-import { useTotalAmount } from './hooks/total-amount.hook';
+import styles from './styles.module.scss';
 
 type Props = {
   address: string | null
@@ -52,7 +54,11 @@ const TransferSend: FC<Props> = ({ address }) => {
     confirmTransfer,
     isTransactionInProgress,
   } = usePrepareTransfer({
-    to, amount, validateForm, clearForm,
+    to,
+    amount,
+    validateForm,
+    clearForm,
+    token: activeOption?.id as TOKEN,
   });
 
   const { decimals } = TOKEN_CONFIG[CONFIG.NETWORK_TYPE][CONFIG.NETWORK][activeOptionId as TOKEN];
@@ -85,8 +91,8 @@ const TransferSend: FC<Props> = ({ address }) => {
           confirmTransfer={confirmTransfer}
           token={FORA_NAME}
           fee={fee.toString()}
-          feeToken="MATIC"
-          network={CONFIG.NETWORK}
+          feeToken={NETWORK_TOKEN_NAME[CONFIG.NETWORK]}
+          network={NETWORK_NAME[CONFIG.NETWORK]}
           from={address}
           to={to as string}
           isTransactionInProgress={isTransactionInProgress}

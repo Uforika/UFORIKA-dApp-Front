@@ -29,7 +29,7 @@ const Wallet: FC = () => {
   return (
     <div className={styles.wrapper}>
       <Header className={styles.title} as="h3">My wallet</Header>
-      <Section>
+      <Section className={styles.section}>
         <div className={styles.grid}>
           <Card color="#00FF44" name={FORA_NAME} logo={ICONS.COIN_FORA} count={balanceFora} usdPrice={balanceForaUsd} />
           <Card color="#B18CEF" name={MATIC_NAME} logo={ICONS.COIN_MATIC} count={balancePolygon} usdPrice={balancePolygonUsd} />
