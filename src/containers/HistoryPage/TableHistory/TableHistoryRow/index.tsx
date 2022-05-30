@@ -66,7 +66,7 @@ const TableHistoryRow: FC<Props> = ({
       <div>
         <div className={styles.cellWrapColumn}>
           <span className={styles.date}>{formatDate(timeStamp, 'MMM D')}</span>
-          <span className={styles.time}>{formatDate(timeStamp, 'HH:hh')}</span>
+          <span className={styles.time}>{formatDate(timeStamp, 'HH:mm')}</span>
         </div>
       </div>
       <div>
