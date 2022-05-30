@@ -18,13 +18,10 @@
       'main main'
       'footer  footer';
   }
-
-  &::-webkit-scrollbar {
-    width: 0;
-  }
 }
 
 .headerWrapper {
+  border-bottom: 0.5px solid rgba($white, 0.3);
   grid-area: header;
   z-index: 2;
 }

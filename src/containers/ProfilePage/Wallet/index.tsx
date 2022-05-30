@@ -1,17 +1,19 @@
 import React, { FC, memo } from 'react';
-import { FORA_NAME, MATIC_NAME } from '@constants/global.constants';
-import { ICONS } from '@components/Icon/constants';
 import Address from '@containers/ProfilePage/Wallet/Address';
+import { ICONS } from '@components/Icon/constants';
 import { useRouter } from 'next/router';
 import Button from '@components/Button';
 import Icon from '@components/Icon';
+import LinkButton from '@components/LinkButton';
+import Section from '@components/Section';
 import { useBalance } from '@hooks/wallet.hooks';
 import { useCurrencyConversion } from '@hooks/currency-conversion.hooks';
+import { FORA_NAME, MATIC_NAME } from '@constants/global.constants';
 import { CURRENCY, TOKEN } from '@constants/token.constants';
 import { PATH_BENEFITS, PATH_HISTORY, PATH_TRANSFER } from '@constants/routes.constants';
-import LinkButton from '@components/LinkButton';
-import styles from './styles.module.scss';
+import Header from '@components/Header';
 import Card from './Card';
+import styles from './styles.module.scss';
 
 const Wallet: FC = () => {
   const router = useRouter();
@@ -26,8 +28,8 @@ const Wallet: FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h3 className={styles.title}>My wallet</h3>
-      <div className={styles.content}>
+      <Header className={styles.title} as="h3">My wallet</Header>
+      <Section>
         <div className={styles.grid}>
           <Card color="#00FF44" name={FORA_NAME} logo={ICONS.COIN_FORA} count={balanceFora} usdPrice={balanceForaUsd} />
           <Card color="#B18CEF" name={MATIC_NAME} logo={ICONS.COIN_MATIC} count={balancePolygon} usdPrice={balancePolygonUsd} />
@@ -51,7 +53,7 @@ const Wallet: FC = () => {
             </a>
           </div>
         </div>
-      </div>
+      </Section>
     </div>
   );
 };

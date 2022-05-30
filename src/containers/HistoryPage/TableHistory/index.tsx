@@ -47,12 +47,11 @@ const TableHistory: FC<Props> = ({
 
     return (
       <List
-        height={height - FOOTER_HEIGHT - HEADER_HEIGHT}
+        height={height - FOOTER_HEIGHT - HEADER_HEIGHT - 1}
         itemCount={searchedAndFilteredTransactions.length}
         itemSize={getItemSize(searchedAndFilteredTransactions.length)}
         onScroll={handleScroll(scrollPanel)}
         width="100%"
-        className={styles.list}
       >
         {({ index, style }) => (
           <div className={styles.rowWrap} style={style}>

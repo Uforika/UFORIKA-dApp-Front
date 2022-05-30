@@ -5,17 +5,7 @@
 }
 
 .title {
-  @include h3();
   margin-bottom: 24px;
-}
-
-.content {
-  background-color: rgba($black, 0.6);
-  border: 0.5px solid rgba($white, 0.3);
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 24, 71, 0.08);
-  min-height: 188px;
-  padding: 20px;
 }
 
 .grid {
@@ -35,7 +25,7 @@
 }
 
 .buttonContainer {
-  &:not(:last-child ) {
+  &:not(:last-child) {
     margin-right: 16px;
   }
 }

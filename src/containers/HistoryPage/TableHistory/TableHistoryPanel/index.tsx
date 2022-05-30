@@ -35,7 +35,6 @@ const TableHistoryPanel: FC<Props> = ({
         options={options}
         onChange={onFilterChange}
         value={filterValue}
-        className={styles.dropdown}
         isInlineView
         fluid={false}
         icon={(
