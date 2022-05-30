@@ -8,5 +8,15 @@
   &:global.ui.label {
     @include overline-label($white);
     padding: 2px 8px;
+
+    &.green {
+      background-color: rgba($malachite, 0.3) !important;
+      border-color: rgba($malachite, 0.3) !important;
+    }
+
+    &.red {
+      background-color: rgba($carnation, 0.3) !important;
+      border-color: rgba($carnation, 0.3) !important;
+    }
   }
 }
