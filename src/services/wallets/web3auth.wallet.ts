@@ -41,8 +41,18 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
 
   const initWeb3 = (provider: SafeEventEmitterProvider | ProviderType) => {
     const web3Instance = new Web3(provider as ProviderType);
-    const web3InstanceWS = new Web3();
-    web3InstanceWS.setProvider(new Web3.providers.WebsocketProvider(CHAIN_CONFIG[CONFIG.NETWORK].rpcWss));
+    const web3WsProvider = new Web3.providers.WebsocketProvider(
+      CHAIN_CONFIG[CONFIG.NETWORK].rpcWss,
+      {
+        reconnect: {
+          auto: true,
+          delay: 5000, // ms
+          maxAttempts: 5,
+          onTimeout: false,
+        },
+      },
+    );
+    const web3InstanceWS = new Web3(web3WsProvider);
     setWeb3(web3Instance);
     setWeb3WS(web3InstanceWS);
   };
