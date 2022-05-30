@@ -73,8 +73,14 @@ const TransferConfirm: FC<Props> = ({
       </div>
 
       <div className={styles.panel}>
-        <Button onClick={confirmTransfer} primary>Confirm</Button>
-        <Button disabled={isTransactionInProgress} onClick={handleCancel} secondary>Cancel</Button>
+        <Button
+          disabled={isTransactionInProgress}
+          onClick={confirmTransfer}
+          primary
+        >
+          Confirm
+        </Button>
+        <Button onClick={handleCancel} secondary>Cancel</Button>
       </div>
     </>
   );

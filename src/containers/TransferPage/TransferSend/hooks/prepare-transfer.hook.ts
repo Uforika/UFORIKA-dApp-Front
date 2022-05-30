@@ -25,7 +25,7 @@ export const usePrepareTransfer = ({
 }: Props) => {
   const { checkIsAddressValid } = useWallet();
   const [isFormStage, setIsFormStage] = useState(true);
-  const [isTransactionInProgress, setIsTransactionInProgress] = useState(true);
+  const [isTransactionInProgress, setIsTransactionInProgress] = useState(false);
   const [fee, setFee] = useState<BigNumber>(new BigNumber(0));
 
   const [sendTransaction, getFee] = useTransfer(TOKEN.FORA, to, prepareAmountToTransaction(amount || '0'));
