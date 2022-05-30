@@ -10,6 +10,8 @@ type SendFormPops = {
   activeOptionId?: string
 }
 
+const MINIMUM_SEND_LIMIT = 1;
+
 export const useSendForm = ({ balanceFora, balancePolygon, activeOptionId }: SendFormPops) => {
   const { checkIsAddressValid } = useWallet();
   const [errors, setErrors] = useState({});
@@ -48,10 +50,10 @@ export const useSendForm = ({ balanceFora, balancePolygon, activeOptionId }: Sen
         ...localErrors,
         amount: FORM_FIELDS_ERRORS.REQUIRED,
       };
-    } else if (Number(amount) < 1) {
+    } else if (Number(amount) < MINIMUM_SEND_LIMIT) {
       localErrors = {
         ...localErrors,
-        amount: `${FORM_FIELDS_ERRORS.MINIMUM_SEND_LIMIT} ${activeOptionId || ''}`,
+        amount: `${FORM_FIELDS_ERRORS.MINIMUM_SEND_LIMIT.replace('[amount]', MINIMUM_SEND_LIMIT.toString())} ${activeOptionId || ''}`,
       };
     } else if (Number(amount) > balance.toNumber()) {
       localErrors = {

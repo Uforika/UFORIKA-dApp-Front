@@ -4,8 +4,8 @@ import styles from './styles.module.scss';
 
 type Props = {
   text: string;
-  onSuccess: () => void;
-  onFailure: () => void;
+  onSuccess?: () => void;
+  onFailure?: () => void;
   onClose: () => void;
 }
 
@@ -13,12 +13,16 @@ const ModalConfirm: FC<Props> = ({
   onClose, onFailure, onSuccess, text, ...props
 }) => {
   const handleCancel = () => {
-    onFailure();
+    if (onFailure) {
+      onFailure();
+    }
     onClose();
   };
 
   const handleConfirm = () => {
-    onSuccess();
+    if (onSuccess) {
+      onSuccess();
+    }
     onClose();
   };
 
@@ -39,6 +43,11 @@ const ModalConfirm: FC<Props> = ({
       </div>
     </Modal>
   );
+};
+
+ModalConfirm.defaultProps = {
+  onSuccess: undefined,
+  onFailure: undefined,
 };
 
 export default memo(ModalConfirm);

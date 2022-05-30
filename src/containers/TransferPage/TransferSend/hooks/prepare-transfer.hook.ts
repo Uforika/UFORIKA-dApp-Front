@@ -7,6 +7,9 @@ import {
 import { logError } from '@helpers/log.helper';
 import { checkIsAmountValid } from '@helpers/transaction.helper';
 import { useFailModal, useSuccessModal } from '@hooks/modals.hooks';
+import { showToast } from '@components/Toast';
+import { TOAST_SUCCESS } from '@constants/toast.constants';
+import { TOAST_MASSAGE_SUCCESS } from '@constants/messages.constants';
 
 type Props = {
   to?: string,
@@ -61,6 +64,7 @@ export const usePrepareTransfer = ({
   const confirmTransfer = useCallback(async () => {
     try {
       setIsTransactionInProgress(true);
+      showToast(TOAST_MASSAGE_SUCCESS.TRANSACTION_PROGRESS, TOAST_SUCCESS);
       await sendTransaction();
       changeFormStage();
       showSuccessModal();

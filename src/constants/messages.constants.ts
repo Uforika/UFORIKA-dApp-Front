@@ -6,7 +6,7 @@ export const FORM_FIELDS_ERRORS: MESSAGES_MAP = {
   INVALID_ADDRESS: 'Invalid address',
   NOT_ENOUGH_BALANCE: 'Insufficient funds in the wallet balance',
   NOT_ENOUGH_FEE: 'Insufficient funds in the wallet balance to pay the fee',
-  MINIMUM_SEND_LIMIT: 'The minimum amount should not be less than 100',
+  MINIMUM_SEND_LIMIT: 'The minimum amount should not be less than [amount]',
 };
 
 export const TOAST_MASSAGE_ERRORS: MESSAGES_MAP = {
@@ -17,4 +17,5 @@ export const TOAST_MASSAGE_ERRORS: MESSAGES_MAP = {
 
 export const TOAST_MASSAGE_SUCCESS: MESSAGES_MAP = {
   COPY: 'Address copied to clipboard',
+  TRANSACTION_PROGRESS: 'Transaction in progress',
 };
