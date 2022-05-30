@@ -46,7 +46,7 @@ const useWalletService: () => WalletType = () => {
     if (!web3 || !from) {
       return undefined;
     }
-    const token = TOKEN_CONFIG[CONFIG.NETWORK][tokenName];
+    const token = TOKEN_CONFIG[CONFIG.NETWORK_TYPE][CONFIG.NETWORK][tokenName];
     const contract = new web3.eth.Contract(erc20AbiJson as AbiItem[], token.address, { gasPrice: GAS_PRICE });
     const transaction = (await contract.methods.transfer(...data)[method]({ from }) as T);
     return transaction;
@@ -75,7 +75,7 @@ const useWalletService: () => WalletType = () => {
           'tokentx',
           address,
           startBlock,
-          TOKEN_CONFIG[CONFIG.NETWORK][tokenName].address,
+          TOKEN_CONFIG[CONFIG.NETWORK_TYPE][CONFIG.NETWORK][tokenName].address,
         )),
     ]);
 
@@ -91,7 +91,7 @@ const useWalletService: () => WalletType = () => {
       setBalance(undefined);
       return;
     }
-    const token = TOKEN_CONFIG[CONFIG.NETWORK][tokenName];
+    const token = TOKEN_CONFIG[CONFIG.NETWORK_TYPE][CONFIG.NETWORK][tokenName];
     const contract = new web3WS.eth.Contract(erc20AbiJson as AbiItem[], token.address);
 
     const updateBalance = async () => {

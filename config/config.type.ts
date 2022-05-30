@@ -1,4 +1,4 @@
-import { NETWORK } from '@constants/network.constants';
+import { NETWORK, NETWORK_TYPE } from '@constants/network.constants';
 
 export type ConfigType = {
   API_URL: string;
@@ -9,4 +9,5 @@ export type ConfigType = {
   POLYGON_SCAN_API_URL: string;
   API_POLYGON_SCAN_KEY: string;
   NETWORK: NETWORK;
+  NETWORK_TYPE: NETWORK_TYPE;
 }

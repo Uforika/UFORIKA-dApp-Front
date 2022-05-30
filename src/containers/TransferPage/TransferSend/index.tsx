@@ -55,7 +55,7 @@ const TransferSend: FC<Props> = ({ address }) => {
     to, amount, validateForm, clearForm,
   });
 
-  const { decimals } = TOKEN_CONFIG[CONFIG.NETWORK][activeOptionId as TOKEN];
+  const { decimals } = TOKEN_CONFIG[CONFIG.NETWORK_TYPE][CONFIG.NETWORK][activeOptionId as TOKEN];
 
   const totalAmount = useTotalAmount({
     amount, decimals, fee, activeOptionId,

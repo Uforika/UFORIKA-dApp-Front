@@ -42,7 +42,7 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
   const initWeb3 = (provider: SafeEventEmitterProvider | ProviderType) => {
     const web3Instance = new Web3(provider as ProviderType);
     const web3WsProvider = new Web3.providers.WebsocketProvider(
-      CHAIN_CONFIG[CONFIG.NETWORK].rpcWss,
+      CHAIN_CONFIG[CONFIG.NETWORK_TYPE][CONFIG.NETWORK].rpcWss,
       {
         reconnect: {
           auto: true,
@@ -98,9 +98,9 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
 
       const web3AuthInstance = new Web3AuthCore({
         chainConfig: {
-          chainNamespace: CHAIN_CONFIG[CONFIG.NETWORK].chainNamespace,
-          rpcTarget: CHAIN_CONFIG[CONFIG.NETWORK].rpcTarget,
-          chainId: CHAIN_CONFIG[CONFIG.NETWORK].chainId,
+          chainNamespace: CHAIN_CONFIG[CONFIG.NETWORK_TYPE][CONFIG.NETWORK].chainNamespace,
+          rpcTarget: CHAIN_CONFIG[CONFIG.NETWORK_TYPE][CONFIG.NETWORK].rpcTarget,
+          chainId: CHAIN_CONFIG[CONFIG.NETWORK_TYPE][CONFIG.NETWORK].chainId,
         },
         storageKey: 'local',
       });
@@ -109,9 +109,8 @@ const useWeb3Auth: () => Web3AuthWalletType = () => {
       const metamaskAdapter = new MetamaskAdapter();
       const openLoginAdapter = new OpenloginAdapter({
         adapterSettings: {
-          network: 'testnet',
-          clientId:
-          CONFIG.CLIENT_ID,
+          network: CONFIG.NETWORK_TYPE,
+          clientId: CONFIG.CLIENT_ID,
           uxMode: UX_MODE.REDIRECT,
         },
       });

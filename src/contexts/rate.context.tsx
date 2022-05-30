@@ -33,7 +33,7 @@ const RateProvider: FC = ({ children }) => {
     if (savedSavedCurrencyPrice) currencyPrice = savedSavedCurrencyPrice[tokenName]?.[currency];
 
     if (!currencyPrice) {
-      const token = TOKEN_CONFIG[CONFIG.NETWORK][tokenName];
+      const token = TOKEN_CONFIG[CONFIG.NETWORK_TYPE][CONFIG.NETWORK][tokenName];
 
       currencyPrice = await getCurrencyPriceFromApi(token.tokenId, currency);
 

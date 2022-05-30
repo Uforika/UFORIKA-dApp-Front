@@ -42,7 +42,7 @@ const TableHistoryRow: FC<Props> = ({
     isNetworkCurrencyTransaction,
   } = transaction;
 
-  const createLink = TRX_LINK_CONSTRUCTOR[CONFIG.NETWORK];
+  const createLink = TRX_LINK_CONSTRUCTOR[CONFIG.NETWORK_TYPE][CONFIG.NETWORK];
   const isSendTransactionType = address?.toLocaleLowerCase() === from.toLocaleLowerCase();
 
   const transactionStatus = getTransactionStatus(txReceiptStatus, isError);
