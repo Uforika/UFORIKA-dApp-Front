@@ -20,10 +20,10 @@ type SendFormErrorsType = {
 type Props = {
   errors: SendFormErrorsType,
   currencyOptions: DropdownCurrencyItemType[],
-  amount?: string,
+  amount: string,
   onChangeAmount: (value: string) => void,
   onSubmit: (value?: boolean) => void,
-  to?: string,
+  to: string,
   changeTo: (value: string) => void,
   fee: string,
   onSelectOption: (id: TOKEN) => void
@@ -104,11 +104,6 @@ const TransferForm: FC<Props> = ({
       </div>
     </>
   );
-};
-
-TransferForm.defaultProps = {
-  amount: undefined,
-  to: undefined,
 };
 
 export default memo(TransferForm);

@@ -15,8 +15,8 @@ const MINIMUM_SEND_LIMIT = 1;
 export const useSendForm = ({ balanceFora, balancePolygon, activeOptionId }: SendFormPops) => {
   const { checkIsAddressValid } = useWallet();
   const [errors, setErrors] = useState({});
-  const [amount, setAmount] = useState<string | undefined>();
-  const [to, setTo] = useState<string | undefined>();
+  const [amount, setAmount] = useState<string>('');
+  const [to, setTo] = useState<string>('');
 
   const changeTo = (value: string) => {
     setErrors((prev) => ({ ...prev, to: '' }));
@@ -30,8 +30,8 @@ export const useSendForm = ({ balanceFora, balancePolygon, activeOptionId }: Sen
 
   const clearForm = useCallback(() => {
     setErrors({});
-    setTo(undefined);
-    setAmount(undefined);
+    setTo('');
+    setAmount('');
   }, []);
 
   const validateForm = useCallback((fee) => {

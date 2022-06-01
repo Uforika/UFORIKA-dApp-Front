@@ -40,7 +40,7 @@ const TableHistoryPanel: FC<Props> = ({
         icon={(
           <Icon
             className="dropdownIcon"
-            type={ICONS.DROPDOWN_CHEVRON}
+            type={ICONS.CHEVRON}
             width={16}
             isActive
           />

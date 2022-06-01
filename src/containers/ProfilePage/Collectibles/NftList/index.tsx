@@ -32,8 +32,9 @@ const NftList: FC<Props> = ({ nftList, typeNftOptionList }) => {
             icon={(
               <Icon
                 className="dropdownIcon"
-                type={ICONS.DROPDOWN_CHEVRON_WHITE}
+                type={ICONS.CHEVRON}
                 width={16}
+                isActive
               />
             )}
           />

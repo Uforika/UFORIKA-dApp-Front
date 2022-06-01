@@ -78,7 +78,7 @@ const SocialLogin: FC = () => {
         {hidden.length && (
           <div>
             <button className={cn(styles.buttonMore, { [styles.isActive]: isShowMore })} type="button" onClick={handleShowMore}>
-              <Icon width={24} type={ICONS.DROPDOWN_CHEVRON} />
+              <Icon width={24} type={ICONS.CHEVRON} />
             </button>
           </div>
         )}

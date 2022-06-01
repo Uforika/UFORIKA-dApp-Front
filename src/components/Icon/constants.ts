@@ -1,6 +1,5 @@
 export enum ICONS {
-  DROPDOWN_CHEVRON = 'dropdownChevron',
-  DROPDOWN_CHEVRON_WHITE = 'dropdownChevronWhite',
+  CHEVRON = 'Chevron',
   FAIL = 'fail',
   SUCCESS = 'success',
   LOGIN_METAMASK = 'loginMetamask',

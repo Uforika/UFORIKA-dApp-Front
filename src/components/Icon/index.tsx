@@ -58,7 +58,7 @@ const Icon: FC<Props> = ({
         return <IconModalFail />;
       case ICONS.SUCCESS:
         return <IconModalSuccess />;
-      case ICONS.DROPDOWN_CHEVRON:
+      case ICONS.CHEVRON:
         return <IconChevron />;
       case ICONS.LOGIN_METAMASK:
         return <IconLoginMetamask />;

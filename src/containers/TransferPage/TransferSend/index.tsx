@@ -94,7 +94,7 @@ const TransferSend: FC<Props> = ({ address }) => {
           feeToken={NETWORK_TOKEN_NAME[CONFIG.NETWORK]}
           network={NETWORK_NAME[CONFIG.NETWORK]}
           from={address}
-          to={to as string}
+          to={to}
           isTransactionInProgress={isTransactionInProgress}
         />
       )}
