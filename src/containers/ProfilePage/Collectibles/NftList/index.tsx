@@ -3,7 +3,7 @@ import Dropdown from '@components/Dropdown';
 import Icon from '@components/Icon';
 import { ICONS } from '@components/Icon/constants';
 import { useDropdownFilter } from '@hooks/dropdown-filter.hooks';
-import EmptyCard from './EmptyCard';
+import SectionEmpty from '@components/SectionEmpty';
 import NftCard from './NftCard';
 import styles from './styles.module.scss';
 
@@ -17,7 +17,13 @@ const NftList: FC<Props> = ({ nftList, typeNftOptionList }) => {
 
   return (
     <div className={styles.root}>
-      {!nftList.length ? <EmptyCard /> : (
+      {!nftList.length ? (
+        <SectionEmpty
+          title="You do not have NFT yet"
+          text="Coming Soon —
+          Uforika Marketplace: Buy & Trade assets with $FORA to enhance your Uforika experience"
+        />
+      ) : (
         <>
           <Dropdown
             label="Filter:"
@@ -42,7 +48,9 @@ const NftList: FC<Props> = ({ nftList, typeNftOptionList }) => {
             <ul className={styles.list}>
               {filteredNftOptions.map((option) => <NftCard key={option.name} {...option} />)}
             </ul>
-          ) : <EmptyCard />}
+          ) : (
+            <SectionEmpty title="You do not have NFT yet" />
+          )}
 
         </>
       )}

@@ -8,12 +8,12 @@ import { useDropdownFilter } from '@hooks/dropdown-filter.hooks';
 import { useSearch } from '@hooks/search-input.hook';
 import Header from '@components/Header';
 import Loader from '@components/Loader';
+import SectionEmpty from '@components/SectionEmpty';
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from '@constants/ui.constants';
 import { useWallet } from '@hooks/wallet.hooks';
 import { SORT_OPTIONS } from '../constants/history.constants';
 import TableRow from './TableHistoryRow';
 import TableHistoryPanel from './TableHistoryPanel';
-import TransactionEmptyHistory from './TransactionEmptyHistory';
 import { filterTransactionByType, getItemSize, handleScroll } from './helpers';
 import styles from './styles.module.scss';
 import { TRANSACTION_FILER_TYPES } from '../types';
@@ -89,12 +89,17 @@ const TableHistory: FC<Props> = ({
     );
   }
 
+  const transactionsLength = transactions.length;
+
   return (
     <div className={className}>
       {renderHead()}
       {isEmptyHistory ? (
         <div className={styles.emptyTable}>
-          <TransactionEmptyHistory withoutTransactions={!transactions.length} />
+          <SectionEmpty
+            title={!transactionsLength ? 'You have no transactions to display yet' : 'No transactions found'}
+            text={transactions.length ? 'Please change the data, your filters or try different keywords.' : ''}
+          />
         </div>
       ) : renderList }
     </div>

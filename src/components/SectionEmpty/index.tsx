@@ -1,24 +1,30 @@
 import Icon from '@components/Icon';
 import { ICONS } from '@components/Icon/constants';
+import Section from '@components/Section';
 import React, { FC, memo } from 'react';
 import styles from './styles.module.scss';
 
 type Props = {
-  withoutTransactions: boolean
+  title: string,
+  text?: string
 }
 
-const TransactionEmptyHistory: FC<Props> = ({ withoutTransactions }) => (
-  <div className={styles.root}>
+const SectionEmpty: FC<Props> = ({ title, text }) => (
+  <Section className={styles.root}>
     <Icon width={32} type={ICONS.UFO_SHIP} />
     <h4 className={styles.title}>
-      {withoutTransactions ? 'You have no transactions to display yet' : 'No transactions found'}
+      {title}
     </h4>
-    {!withoutTransactions && (
+    {text ? (
       <p className={styles.text}>
         Please change the data, your filters or try different keywords.
       </p>
-    )}
-  </div>
+    ) : null}
+  </Section>
 );
 
-export default memo(TransactionEmptyHistory);
+SectionEmpty.defaultProps = {
+  text: undefined,
+};
+
+export default memo(SectionEmpty);
