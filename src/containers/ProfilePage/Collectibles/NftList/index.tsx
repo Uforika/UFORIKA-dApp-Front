@@ -49,7 +49,7 @@ const NftList: FC<Props> = ({ nftList, typeNftOptionList }) => {
               {filteredNftOptions.map((option) => <NftCard key={option.name} {...option} />)}
             </ul>
           ) : (
-            <SectionEmpty title="You do not have NFT yet" />
+            <SectionEmpty title="No NFTs found" />
           )}
 
         </>
