@@ -23,7 +23,7 @@ export const CHAIN_CONFIG = {
     [NETWORK.POLYGON]: {
       chainNamespace: CHAIN_NAMESPACES.EIP155,
       chainId: hexValue(80001),
-      rpcTarget: 'https://matic-mumbai.chainstacklabs.com',
+      rpcTarget: 'https://polygon-mumbai.infura.io/v3/8df95131825941ab93d07a677692603a',
       rpcWss: 'wss://ws-matic-mumbai.chainstacklabs.com',
     },
   },

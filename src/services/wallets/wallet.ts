@@ -47,8 +47,11 @@ const useWalletService: () => WalletType = () => {
       return undefined;
     }
     const token = TOKEN_CONFIG[CONFIG.NETWORK_TYPE][CONFIG.NETWORK][tokenName];
+
+    const transactionCount = await web3.eth.getTransactionCount(from, 'pending');
+
     const contract = new web3.eth.Contract(erc20AbiJson as AbiItem[], token.address, { gasPrice: GAS_PRICE });
-    const transaction = (await contract.methods.transfer(...data)[method]({ from }) as T);
+    const transaction = (await contract.methods.transfer(...data)[method]({ from, nonce: transactionCount }) as T);
     return transaction;
   }, [web3]);
 
