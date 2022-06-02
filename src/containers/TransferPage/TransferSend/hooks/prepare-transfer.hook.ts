@@ -4,7 +4,7 @@ import { TOKEN, TOKEN_CONFIG } from '@constants/token.constants';
 import { CONFIG } from '@constants/config.constants';
 import { useTransfer, useWallet } from '@hooks/wallet.hooks';
 import {
-  useCallback, useEffect, useState,
+  useCallback, useEffect, useRef, useState,
 } from 'react';
 import { logError } from '@helpers/log.helper';
 import { checkIsAmountValid } from '@helpers/transaction.helper';
@@ -34,6 +34,7 @@ export const usePrepareTransfer = ({
   const [isFormStage, setIsFormStage] = useState(true);
   const [isTransactionInProgress, setIsTransactionInProgress] = useState(false);
   const [fee, setFee] = useState<BigNumber>(new BigNumber(0));
+  const toastId = useRef<string | number | undefined>(undefined);
 
   const [sendTransaction, getFee] = useTransfer(token, to, prepareAmountToTransaction(amount || '0', token));
 
@@ -71,7 +72,7 @@ export const usePrepareTransfer = ({
   const confirmTransfer = useCallback(async () => {
     try {
       setIsTransactionInProgress(true);
-      showToast(TOAST_MASSAGE_SUCCESS.TRANSACTION_PROGRESS, TOAST_SUCCESS);
+      toastId.current = showToast(TOAST_MASSAGE_SUCCESS.TRANSACTION_PROGRESS, TOAST_SUCCESS);
       await sendTransaction();
       changeFormStage();
       showSuccessModal();
@@ -79,7 +80,7 @@ export const usePrepareTransfer = ({
     } catch (error) {
       logError(error);
       showFailModal();
-      toast.dismiss();
+      toast.dismiss(toastId.current);
     } finally {
       setIsTransactionInProgress(false);
     }

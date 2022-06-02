@@ -8,7 +8,7 @@ export const showToast = (
   message: string,
   type: 'success' | 'error'| 'warning',
   handleAction?: () => void,
-): void => {
+): React.ReactText => {
   const options: ToastOptions = {
     position: 'top-right',
     autoClose: 3500,
@@ -43,5 +43,5 @@ export const showToast = (
     </>
   );
 
-  toast(toastContent(), options);
+  return toast(toastContent(), options);
 };
