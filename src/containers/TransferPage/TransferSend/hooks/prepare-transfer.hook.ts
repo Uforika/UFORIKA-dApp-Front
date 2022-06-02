@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js';
+import { toast } from 'react-toastify';
 import { TOKEN, TOKEN_CONFIG } from '@constants/token.constants';
 import { CONFIG } from '@constants/config.constants';
 import { useTransfer, useWallet } from '@hooks/wallet.hooks';
@@ -78,6 +79,7 @@ export const usePrepareTransfer = ({
     } catch (error) {
       logError(error);
       showFailModal();
+      toast.dismiss();
     } finally {
       setIsTransactionInProgress(false);
     }
