@@ -8,6 +8,7 @@ import { TOKEN } from '@constants/token.constants';
 import DropdownCurrencyTrigger from './DropdownCurrencyTrigger';
 import DropdownCurrencyMenu from './DropdownCurrencyMenu';
 import { DropdownCurrencyItemType } from './types';
+import { useInputOffset } from './hooks/input-offset.hook';
 import styles from './styles.module.scss';
 
 type Props = Omit<StrictDropdownProps, 'onChange' | 'value' | 'options'> & {
@@ -29,6 +30,7 @@ const DropdownCurrency: FC<Props> = ({
   onChange, panelText, size, pattern, errorMessage, onSelectOption,
 }) => {
   const activeOption = options.find(({ id }) => id === activeOptionId);
+  const { triggerRef, inputOffset } = useInputOffset(activeOptionId);
 
   const activeTrigger = useMemo(() => {
     if (!activeOption) {
@@ -37,11 +39,12 @@ const DropdownCurrency: FC<Props> = ({
 
     return (
       <DropdownCurrencyTrigger
+        ref={triggerRef}
         text={activeOption.text}
         image={activeOption.image}
       />
     );
-  }, [activeOption]);
+  }, [activeOption, triggerRef]);
 
   const handleChangeCurrencyValue = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     onChange?.(event.target.validity.valid ? event.target.value : value?.toString() || '');
@@ -77,11 +80,13 @@ const DropdownCurrency: FC<Props> = ({
         <input
           pattern={pattern}
           placeholder={placeholder}
+          style={{ paddingRight: inputOffset }}
           className={cn(styles.input, styles[size || ''])}
           value={value}
           name={name}
           id={name}
           onChange={handleChangeCurrencyValue}
+          autoComplete="off"
         />
         <Dropdown
           error={!!errorMessage}

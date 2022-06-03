@@ -1,4 +1,6 @@
-import React, { FC, ReactNode, memo } from 'react';
+import React, {
+  ReactNode, memo, forwardRef,
+} from 'react';
 import Icon from '@components/Icon';
 import { ICONS } from '@components/Icon/constants';
 import styles from './styles.module.scss';
@@ -8,8 +10,8 @@ type Props = {
   image: ICONS
 }
 
-const DropdownCurrencyTrigger: FC<Props> = ({ image, text }) => (
-  <div className={styles.wrap}>
+const DropdownCurrencyTrigger = forwardRef<HTMLDivElement, Props>(({ image, text }, ref) => (
+  <div ref={ref} className={styles.wrap}>
     <div className={styles.panel}>
       {image && (
         <span className={styles.image}>
@@ -19,6 +21,6 @@ const DropdownCurrencyTrigger: FC<Props> = ({ image, text }) => (
       <span className={styles.text}>{text}</span>
     </div>
   </div>
-);
+));
 
 export default memo(DropdownCurrencyTrigger);

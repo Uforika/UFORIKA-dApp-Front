@@ -1,5 +1,5 @@
 import { ICONS } from '@components/Icon/constants';
-import { FORA_NAME, MATIC_NAME } from '@constants/global.constants';
+import { FORA_NAME, MATIC_TOKEN_NAME } from '@constants/global.constants';
 import { TOKEN } from '@constants/token.constants';
 
 type CurrencyOptionsPops = {
@@ -15,7 +15,7 @@ export const getCurrencyOptions = ({ balanceFora, balancePolygon }: CurrencyOpti
     id: TOKEN.FORA,
   },
   {
-    text: MATIC_NAME,
+    text: MATIC_TOKEN_NAME,
     value: balancePolygon.toString(),
     image: ICONS.COIN_MATIC,
     id: TOKEN.POLYGON,
